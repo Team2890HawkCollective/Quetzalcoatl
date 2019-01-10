@@ -1,0 +1,9 @@
+[
+  {
+    "name": "Quetzalcoatl",
+    "file": "C:\\Users\\2890\\vscode-workspace\\Quetzalcoatl\\build\\libs\\Quetzalcoatl.jar",
+    "extensions": [],
+    "librarydir": "C:\\Users\\2890\\vscode-workspace\\Quetzalcoatl\\build\\tmp\\jniExtractDir",
+    "mainclass": "frc.robot.Main"
+  }
+]
