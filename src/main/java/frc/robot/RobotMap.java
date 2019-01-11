@@ -52,9 +52,11 @@ public class RobotMap {
   public static WPI_TalonSRX rightBackTalon;
   public static WPI_TalonSRX centralTalon;
 
+  //Controllers
   public static XboxController driverController;
   public static XboxController assistantDriverController;
 
+  //Subsystems
   public static DriveTrainSubsystem driveTrainSubsystem;
 
 
@@ -72,7 +74,4 @@ public class RobotMap {
     centralTalon = new WPI_TalonSRX(CENTRAL_TALON_ID);
 
   }
-
-
-  
 }

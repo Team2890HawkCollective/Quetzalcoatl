@@ -94,10 +94,5 @@ public class DriveTrainSubsystem extends Subsystem {
         RobotMap.rightBackTalon.set(-RobotMap.driverController.getX(Hand.kRight));
         RobotMap.centralTalon.set(-RobotMap.driverController.getX(Hand.kRight));
       }
-  
-
-
-      
 	}
-	
 }
