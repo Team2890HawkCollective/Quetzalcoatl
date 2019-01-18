@@ -62,7 +62,6 @@ public class DriveTrainSubsystem extends Subsystem {
         RobotMap.rightFrontTalon.set(RobotMap.driverController.getTriggerAxis(Hand.kLeft));
         RobotMap.leftBackTalon.set(-RobotMap.driverController.getTriggerAxis(Hand.kLeft));
         RobotMap.rightBackTalon.set(RobotMap.driverController.getTriggerAxis(Hand.kLeft));
-      
       }
       
       //rotate right
