@@ -106,17 +106,7 @@ public class DriveTrainSubsystem extends Subsystem {
       RobotMap.centralTalon.set(0);
   }
 
-
-
-
-
-
-
-
-
-
-
-
+  //Sets right talons negative
   public void rightTalonsNegative()
   {
     RobotMap.leftFrontTalon.set(RobotMap.DRIVETRAIN_FULL_SPEED * RobotMap.DRIVETRAIN_SPEED_MODIFIER);
@@ -125,6 +115,7 @@ public class DriveTrainSubsystem extends Subsystem {
     RobotMap.rightBackTalon.set(RobotMap.DRIVETRAIN_FULL_SPEED * RobotMap.DRIVETRAIN_SPEED_MODIFIER * RobotMap.DRIVETRAIN_REVERSE_MODIFIER);
   }
 
+  //sets left talons negative
   public void leftTalonsNegative()
   {
     RobotMap.leftFrontTalon.set(RobotMap.DRIVETRAIN_FULL_SPEED * RobotMap.DRIVETRAIN_SPEED_MODIFIER * RobotMap.DRIVETRAIN_REVERSE_MODIFIER);
@@ -133,18 +124,21 @@ public class DriveTrainSubsystem extends Subsystem {
     RobotMap.rightBackTalon.set(RobotMap.DRIVETRAIN_FULL_SPEED * RobotMap.DRIVETRAIN_SPEED_MODIFIER);
   }
 
+  //tank drive for joysticks
   public void joyTank(Joystick x, WPI_TalonSRX y, WPI_TalonSRX z)
   {
     y.set(x.getY() * RobotMap.DRIVETRAIN_SPEED_MODIFIER);
     z.set(x.getY() * RobotMap.DRIVETRAIN_SPEED_MODIFIER);
   }
 
+  //tank drive for xbox
   public void xboxTank(XboxController x, WPI_TalonSRX y, WPI_TalonSRX z, Hand h)
   {
     y.set(x.getY(h) * RobotMap.DRIVETRAIN_SPEED_MODIFIER);
     z.set(x.getY(h) * RobotMap.DRIVETRAIN_SPEED_MODIFIER);
   }
 
+  //forwards && backwards for arcade xbox
   public void xboxArcadeForwardBackwards()
   {
     RobotMap.leftFrontTalon.set(RobotMap.driverController.getY(Hand.kLeft) * RobotMap.DRIVETRAIN_SPEED_MODIFIER);
@@ -153,6 +147,7 @@ public class DriveTrainSubsystem extends Subsystem {
     RobotMap.rightBackTalon.set(RobotMap.driverController.getY(Hand.kLeft) * RobotMap.DRIVETRAIN_SPEED_MODIFIER);
   }
 
+  //forwards & backwards
   public void joystickForwardsBackwards(Joystick stick)
   {
     RobotMap.leftFrontTalon.set(stick.getY() * RobotMap.DRIVETRAIN_SPEED_MODIFIER);
