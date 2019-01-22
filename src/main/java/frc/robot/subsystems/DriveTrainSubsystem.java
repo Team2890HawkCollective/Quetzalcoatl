@@ -6,15 +6,15 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.subsystems;
-import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.RobotMap;
-import frc.robot.commands.*;
+
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.GenericHID.Hand;
-import edu.wpi.first.wpilibj.Joystick.ButtonType;
-import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  * Add your docs here.
@@ -27,177 +27,138 @@ public class DriveTrainSubsystem extends Subsystem {
   public void initDefaultCommand() 
   {
     // Set the default command for a subsystem here.
-       setDefaultCommand(new XboxDriveCommand());
+       //setDefaultCommand(new XboxDriveCommand());
   }
   
   public void xboxArcadeDrive()
 	{
-    //RobotMap.driveTrainSubsystem.tankDrive(RobotMap.fron.getY(Hand.kLeft), RobotMap.driverController.getY(Hand.kRight));
-    //forwards
-    //all motors go forward ()getY(Hand.kLeft)
+    //Forwards/Backwards
+    xboxArcadeForwardBackwards();
 
-    //forwards
-    if(RobotMap.driverController.getY(Hand.kLeft) > 10)
+    //Strafe left/right
+    RobotMap.centralTalon.set(RobotMap.driverController.getX(Hand.kRight) * RobotMap.DRIVETRAIN_SPEED_MODIFIER);
+
+    //Rotate right
+    if(RobotMap.driverController.getTriggerAxis(Hand.kRight) > 0.05)
     {
-      RobotMap.leftFrontTalon.set(RobotMap.driverController.getY(Hand.kLeft));
-      RobotMap.rightFrontTalon.set(RobotMap.driverController.getY(Hand.kLeft));
-      RobotMap.leftBackTalon.set(RobotMap.driverController.getY(Hand.kLeft));
-      RobotMap.rightBackTalon.set(RobotMap.driverController.getY(Hand.kLeft));
-      
+      leftTalonsNegative();
     }
-
-    //backwards
-    if(RobotMap.driverController.getY(Hand.kLeft) < -10)
+      
+    //Rotate left
+    if(RobotMap.driverController.getTriggerAxis(Hand.kLeft) > 0.05)
     {
-      RobotMap.leftFrontTalon.set(-RobotMap.driverController.getY(Hand.kLeft));
-      RobotMap.rightFrontTalon.set(-RobotMap.driverController.getY(Hand.kLeft));
-      RobotMap.leftBackTalon.set(-RobotMap.driverController.getY(Hand.kLeft));
-      RobotMap.rightBackTalon.set(-RobotMap.driverController.getY(Hand.kLeft));
-      
+      rightTalonsNegative();
     }
-
-      //rotate left
-      if(RobotMap.driverController.getTriggerAxis(Hand.kLeft) > 10)
-      {
-        RobotMap.leftFrontTalon.set(-RobotMap.driverController.getTriggerAxis(Hand.kLeft));
-        RobotMap.rightFrontTalon.set(RobotMap.driverController.getTriggerAxis(Hand.kLeft));
-        RobotMap.leftBackTalon.set(-RobotMap.driverController.getTriggerAxis(Hand.kLeft));
-        RobotMap.rightBackTalon.set(RobotMap.driverController.getTriggerAxis(Hand.kLeft));
-      }
-      
-      //rotate right
-      if(RobotMap.driverController.getTriggerAxis(Hand.kRight) > 10)
-      {
-        RobotMap.leftFrontTalon.set(RobotMap.driverController.getTriggerAxis(Hand.kRight));
-        RobotMap.rightFrontTalon.set(-RobotMap.driverController.getTriggerAxis(Hand.kRight));
-        RobotMap.leftBackTalon.set(RobotMap.driverController.getTriggerAxis(Hand.kRight));
-        RobotMap.rightBackTalon.set(-RobotMap.driverController.getTriggerAxis(Hand.kRight));
-      
-      }
-
-      //Strafe left
-      if(RobotMap.driverController.getX(Hand.kRight) < -10)
-      {
-        RobotMap.leftFrontTalon.set(RobotMap.driverController.getX(Hand.kRight));
-        RobotMap.rightFrontTalon.set(RobotMap.driverController.getX(Hand.kRight));
-        RobotMap.leftBackTalon.set(RobotMap.driverController.getX(Hand.kRight));
-        RobotMap.rightBackTalon.set(RobotMap.driverController.getX(Hand.kRight));
-      
-      }
-
-      //strafe right
-      if(RobotMap.driverController.getX(Hand.kRight) > 10)
-      {
-        RobotMap.leftFrontTalon.set(-RobotMap.driverController.getX(Hand.kRight));
-        RobotMap.rightFrontTalon.set(-RobotMap.driverController.getX(Hand.kRight));
-        RobotMap.leftBackTalon.set(-RobotMap.driverController.getX(Hand.kRight));
-        RobotMap.rightBackTalon.set(-RobotMap.driverController.getX(Hand.kRight));
-        RobotMap.centralTalon.set(-RobotMap.driverController.getX(Hand.kRight));
-      }
   }
 
   public void xboxTankDrive()
   {
-    //Left Joystick
-    RobotMap.leftFrontTalon.set(RobotMap.driverController.getY(Hand.kLeft));
-    RobotMap.rightFrontTalon.set(RobotMap.driverController.getY(Hand.kLeft));
-    RobotMap.leftBackTalon.set(RobotMap.driverController.getX(Hand.kLeft));
-    RobotMap.rightBackTalon.set(RobotMap.driverController.getX(Hand.kLeft));
+    //Left side
+    xboxTank(RobotMap.driverController, RobotMap.leftFrontTalon, RobotMap.leftBackTalon, Hand.kLeft);
+    //Right side
+    xboxTank(RobotMap.driverController, RobotMap.rightFrontTalon, RobotMap.rightBackTalon, Hand.kRight);
 
-    //Right Joystick
-    RobotMap.leftFrontTalon.set(RobotMap.driverController.getY(Hand.kRight));
-    RobotMap.rightFrontTalon.set(RobotMap.driverController.getY(Hand.kRight));
-    RobotMap.leftBackTalon.set(RobotMap.driverController.getX(Hand.kRight));
-    RobotMap.rightBackTalon.set(RobotMap.driverController.getX(Hand.kRight));
-
-    //Strafe Left
-    RobotMap.centralTalon.set(RobotMap.driverController.getTriggerAxis(Hand.kLeft));
-    
-    //Strafe Right
-    RobotMap.centralTalon.set(RobotMap.driverController.getTriggerAxis(Hand.kRight));
-
-
+    //Strafe left/right
+    if (RobotMap.driverController.getTriggerAxis(Hand.kLeft) > 0.05)
+      RobotMap.centralTalon.set(RobotMap.driverController.getTriggerAxis(Hand.kLeft) * RobotMap.DRIVETRAIN_SPEED_MODIFIER);
+    else if (RobotMap.driverController.getTriggerAxis(Hand.kRight) > 0.05)
+      RobotMap.centralTalon.set(RobotMap.driverController.getTriggerAxis(Hand.kRight) * RobotMap.DRIVETRAIN_SPEED_MODIFIER * RobotMap.DRIVETRAIN_REVERSE_MODIFIER);
+    else
+      RobotMap.centralTalon.set(0);
   }
 
 
   
   public void JoystickArcadeDrive()
   {
-    if (RobotMap.leftJoystick.getY() > 0.15)
+    //Forwards/backwards
+    joystickForwardsBackwards(RobotMap.leftDriverJoystick);
+
+    //Strafe left/right
+    RobotMap.centralTalon.set(RobotMap.rightDriverJoystick.getX() * RobotMap.DRIVETRAIN_SPEED_MODIFIER);
+
+    //Rotate left
+    if (RobotMap.leftDriverJoystick.getTrigger())
     {
-      RobotMap.leftFrontTalon.set(RobotMap.leftJoystick.getY());
-      RobotMap.rightFrontTalon.set(-RobotMap.leftJoystick.getY());
-      RobotMap.leftBackTalon.set(RobotMap.leftJoystick.getY());
-      RobotMap.rightBackTalon.set(-RobotMap.leftJoystick.getY());
+      leftTalonsNegative();
     }
 
-    //Forwards
-    if (RobotMap.leftJoystick.getY() < -0.15)
+    //Rotate right
+    if (RobotMap.rightDriverJoystick.getTrigger())
     {
-      RobotMap.leftFrontTalon.set(RobotMap.leftJoystick.getY());
-      RobotMap.rightFrontTalon.set(-RobotMap.leftJoystick.getY());
-      RobotMap.leftBackTalon.set(RobotMap.leftJoystick.getY());
-      RobotMap.rightBackTalon.set(-RobotMap.leftJoystick.getY());
-    }
-
-    //Right
-    if (RobotMap.rightJoystick.getX() > 0.15)
-    {
-      RobotMap.leftFrontTalon.set(RobotMap.rightJoystick.getX());
-      RobotMap.rightFrontTalon.set(RobotMap.rightJoystick.getX());
-      RobotMap.leftBackTalon.set(RobotMap.rightJoystick.getX());
-      RobotMap.rightBackTalon.set(RobotMap.rightJoystick.getX());
-    }
-
-    //Left
-    if (RobotMap.rightJoystick.getX() < -0.15)
-    {
-        RobotMap.leftFrontTalon.set(-RobotMap.rightJoystick.getX());
-        RobotMap.rightFrontTalon.set(-RobotMap.rightJoystick.getX());
-        RobotMap.leftBackTalon.set(-RobotMap.rightJoystick.getX());
-        RobotMap.rightBackTalon.set(-RobotMap.rightJoystick.getX());
-    }
-
-    //Middle
-    if (RobotMap.leftJoystick.getX() < -.15 || RobotMap.leftJoystick.getX() > .15)
-    {
-      RobotMap.centralTalon.set(RobotMap.leftJoystick.getX());
-    }
-
-    //Stops movement when either middle button is pressed
-    if (RobotMap.triggerLeft.get() == true)
-    {
-      RobotMap.leftFrontTalon.set(-1);
-      RobotMap.rightFrontTalon.set(1);
-      RobotMap.leftBackTalon.set(-1);
-      RobotMap.rightBackTalon.set(1);
-    }
-    if (RobotMap.triggerRight.get() == true)
-    {
-      RobotMap.leftFrontTalon.set(0);
-      RobotMap.rightFrontTalon.set(0);
-      RobotMap.leftBackTalon.set(0);
-      RobotMap.rightBackTalon.set(0);
+      rightTalonsNegative();
     }
   }
 
   public void joystickTankDrive()
   {
-    RobotMap.leftFrontTalon.set(RobotMap.leftJoystick.getY());
-    RobotMap.leftBackTalon.set(RobotMap.leftJoystick.getY());
-    RobotMap.rightFrontTalon.set(-RobotMap.rightJoystick.getY());
-    RobotMap.rightBackTalon.set(-RobotMap.rightJoystick.getY());
+    //Left side
+    joyTank(RobotMap.leftDriverJoystick, RobotMap.leftFrontTalon, RobotMap.leftBackTalon);
+    //Right side
+    joyTank(RobotMap.rightDriverJoystick, RobotMap.rightFrontTalon, RobotMap.rightBackTalon);
 
-    //strafe
-    if(RobotMap.triggerLeft.get());
-    {
-      RobotMap.centralTalon.set(RobotMap.rightJoystick.getX());
-    }
-    
-    if(RobotMap.triggerRight.get())
-    {
-      RobotMap.centralTalon.set(RobotMap.leftJoystick.getX());
-    }
+    //Strafe right/left
+    if (RobotMap.rightDriverJoystick.getTrigger())
+      RobotMap.centralTalon.set(RobotMap.DRIVETRAIN_FULL_SPEED * RobotMap.DRIVETRAIN_SPEED_MODIFIER);
+    else if (RobotMap.leftDriverJoystick.getTrigger())
+      RobotMap.centralTalon.set(RobotMap.DRIVETRAIN_FULL_SPEED * RobotMap.DRIVETRAIN_SPEED_MODIFIER * RobotMap.DRIVETRAIN_REVERSE_MODIFIER);
+    else
+      RobotMap.centralTalon.set(0);
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+  public void rightTalonsNegative()
+  {
+    RobotMap.leftFrontTalon.set(RobotMap.DRIVETRAIN_FULL_SPEED * RobotMap.DRIVETRAIN_SPEED_MODIFIER);
+    RobotMap.rightFrontTalon.set(RobotMap.DRIVETRAIN_FULL_SPEED * RobotMap.DRIVETRAIN_SPEED_MODIFIER * RobotMap.DRIVETRAIN_REVERSE_MODIFIER);
+    RobotMap.leftBackTalon.set(RobotMap.DRIVETRAIN_FULL_SPEED * RobotMap.DRIVETRAIN_SPEED_MODIFIER);
+    RobotMap.rightBackTalon.set(RobotMap.DRIVETRAIN_FULL_SPEED * RobotMap.DRIVETRAIN_SPEED_MODIFIER * RobotMap.DRIVETRAIN_REVERSE_MODIFIER);
+  }
+
+  public void leftTalonsNegative()
+  {
+    RobotMap.leftFrontTalon.set(RobotMap.DRIVETRAIN_FULL_SPEED * RobotMap.DRIVETRAIN_SPEED_MODIFIER * RobotMap.DRIVETRAIN_REVERSE_MODIFIER);
+    RobotMap.rightFrontTalon.set(RobotMap.DRIVETRAIN_FULL_SPEED * RobotMap.DRIVETRAIN_SPEED_MODIFIER);
+    RobotMap.leftBackTalon.set(RobotMap.DRIVETRAIN_FULL_SPEED * RobotMap.DRIVETRAIN_SPEED_MODIFIER * RobotMap.DRIVETRAIN_REVERSE_MODIFIER);
+    RobotMap.rightBackTalon.set(RobotMap.DRIVETRAIN_FULL_SPEED * RobotMap.DRIVETRAIN_SPEED_MODIFIER);
+  }
+
+  public void joyTank(Joystick x, WPI_TalonSRX y, WPI_TalonSRX z)
+  {
+    y.set(x.getY() * RobotMap.DRIVETRAIN_SPEED_MODIFIER);
+    z.set(x.getY() * RobotMap.DRIVETRAIN_SPEED_MODIFIER);
+  }
+
+  public void xboxTank(XboxController x, WPI_TalonSRX y, WPI_TalonSRX z, Hand h)
+  {
+    y.set(x.getY(h) * RobotMap.DRIVETRAIN_SPEED_MODIFIER);
+    z.set(x.getY(h) * RobotMap.DRIVETRAIN_SPEED_MODIFIER);
+  }
+
+  public void xboxArcadeForwardBackwards()
+  {
+    RobotMap.leftFrontTalon.set(RobotMap.driverController.getY(Hand.kLeft) * RobotMap.DRIVETRAIN_SPEED_MODIFIER);
+    RobotMap.rightFrontTalon.set(RobotMap.driverController.getY(Hand.kLeft) * RobotMap.DRIVETRAIN_SPEED_MODIFIER);
+    RobotMap.leftBackTalon.set(RobotMap.driverController.getY(Hand.kLeft) * RobotMap.DRIVETRAIN_SPEED_MODIFIER);
+    RobotMap.rightBackTalon.set(RobotMap.driverController.getY(Hand.kLeft) * RobotMap.DRIVETRAIN_SPEED_MODIFIER);
+  }
+
+  public void joystickForwardsBackwards(Joystick stick)
+  {
+    RobotMap.leftFrontTalon.set(stick.getY() * RobotMap.DRIVETRAIN_SPEED_MODIFIER);
+    RobotMap.rightFrontTalon.set(stick.getY() * RobotMap.DRIVETRAIN_SPEED_MODIFIER);
+    RobotMap.leftBackTalon.set(stick.getY() * RobotMap.DRIVETRAIN_SPEED_MODIFIER);
+    RobotMap.rightBackTalon.set(stick.getY() * RobotMap.DRIVETRAIN_SPEED_MODIFIER);
   }
 }
 

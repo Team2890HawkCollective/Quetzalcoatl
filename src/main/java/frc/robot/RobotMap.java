@@ -39,12 +39,19 @@ public class RobotMap {
 
   //PORT IDS
   public static final int DRIVER_CONTROLLER_PORT = 0;
-	public static final int ASSISTANT_DRIVER_CONTROLLER_PORT = 1;
+  public static final int ASSISTANT_DRIVER_CONTROLLER_PORT = 1;
+  public static final int LEFT_DRIVER_JOYSTICK_PORT = 0;
+  public static final int RIGHT_DRIVER_JOYSTICK_PORT = 1;
   public static final int LEFT_FRONT_TALON_ID = 1;
   public static final int RIGHT_FRONT_TALON_ID = 2;
   public static final int LEFT_BACK_TALON_ID = 3;
   public static final int RIGHT_BACK_TALON_ID = 4;
   public static final int CENTER_TALON_ID = 5;
+
+  public static final double DRIVETRAIN_SPEED_MODIFIER = 0.5;
+  public static final double DRIVETRAIN_FULL_SPEED = 1.0;
+  public static final double DRIVETRAIN_FULL_STOP = 0.0;
+  public static final double DRIVETRAIN_REVERSE_MODIFIER = -1.0;
 
   //Talons
   public static WPI_TalonSRX leftFrontTalon;
@@ -53,21 +60,11 @@ public class RobotMap {
   public static WPI_TalonSRX rightBackTalon;
   public static WPI_TalonSRX centralTalon;
 
-  public static Joystick leftJoystick;
-  public static Joystick rightJoystick;
+  public static Joystick leftDriverJoystick;
+  public static Joystick rightDriverJoystick;
 
   public static JoystickButton triggerLeft;
   public static JoystickButton triggerRight;
-
-   //Port Ids
-   public static int leftFrontTalonId = 4;
-   public static int rightFrontTalonId = 5;
-   public static int leftBackTalonId = 3;
-   public static int rightBackTalonId = 2; 
- 
-   public static int leftJoystickPort = 0;
-   public static int rightJoystickPort = 1;
-   public static int middleButtonPort = 1;
 
   //Controllers
   public static XboxController driverController;
@@ -90,10 +87,11 @@ public class RobotMap {
     rightBackTalon = new WPI_TalonSRX(RIGHT_BACK_TALON_ID);
     centralTalon = new WPI_TalonSRX(CENTER_TALON_ID);
 
-    leftJoystick = new Joystick(leftJoystickPort);
-    rightJoystick = new Joystick(rightJoystickPort);
-    triggerLeft = new JoystickButton(leftJoystick, middleButtonPort);
-    triggerRight = new JoystickButton(rightJoystick, middleButtonPort);
+    leftDriverJoystick = new Joystick(LEFT_DRIVER_JOYSTICK_PORT);
+    rightDriverJoystick = new Joystick(RIGHT_DRIVER_JOYSTICK_PORT);
 
+    leftFrontTalon.setInverted(true);
+    leftBackTalon.setInverted(true);
+    centralTalon.setInverted(true);
   }
 }
