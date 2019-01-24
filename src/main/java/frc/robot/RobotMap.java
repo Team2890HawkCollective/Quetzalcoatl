@@ -47,6 +47,7 @@ public class RobotMap {
   public static final int LEFT_BACK_TALON_ID = 3;
   public static final int RIGHT_BACK_TALON_ID = 4;
   public static final int CENTER_TALON_ID = 5;
+  public static final int LIFT_TALON_ID = 1;
 
   public static final double DRIVETRAIN_SPEED_MODIFIER = 0.5;
   public static final double DRIVETRAIN_FULL_SPEED = 1.0;
@@ -59,6 +60,7 @@ public class RobotMap {
   public static WPI_TalonSRX leftBackTalon;
   public static WPI_TalonSRX rightBackTalon;
   public static WPI_TalonSRX centralTalon;
+  public static Spark liftTalon;
 
   public static Joystick leftDriverJoystick;
   public static Joystick rightDriverJoystick;
@@ -72,12 +74,14 @@ public class RobotMap {
 
   //Subsystems
   public static DriveTrainSubsystem driveTrainSubsystem;
+  public static ManipulatorSubsystem manipulatorSubsystem;
 
 
   public static void init()
   {
   
     driveTrainSubsystem = new DriveTrainSubsystem();
+    manipulatorSubsystem = new ManipulatorSubsystem();
     driverController = new XboxController(DRIVER_CONTROLLER_PORT);
 		assistantDriverController = new XboxController(ASSISTANT_DRIVER_CONTROLLER_PORT);
 
@@ -86,6 +90,7 @@ public class RobotMap {
     leftBackTalon = new WPI_TalonSRX(LEFT_BACK_TALON_ID);
     rightBackTalon = new WPI_TalonSRX(RIGHT_BACK_TALON_ID);
     centralTalon = new WPI_TalonSRX(CENTER_TALON_ID);
+    liftTalon = new Spark(LIFT_TALON_ID);
 
     leftDriverJoystick = new Joystick(LEFT_DRIVER_JOYSTICK_PORT);
     rightDriverJoystick = new Joystick(RIGHT_DRIVER_JOYSTICK_PORT);
