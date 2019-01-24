@@ -93,5 +93,8 @@ public class RobotMap {
     leftFrontTalon.setInverted(true);
     leftBackTalon.setInverted(true);
     centralTalon.setInverted(true);
+
+    leftBackTalon.follow(leftFrontTalon);
+    rightBackTalon.follow(rightFrontTalon);
   }
 }
