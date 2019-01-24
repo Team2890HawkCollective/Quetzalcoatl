@@ -98,7 +98,7 @@ public class DriveTrainSubsystem extends Subsystem
   /**
    * Runs the drivetrain using the ArcadeMode drive-scheme using Joysticks
    */
-  public void JoystickArcadeDrive()
+  public void joystickArcadeDrive()
   {
     /*//Forwards/backwards
     joystickForwardsBackwards(RobotMap.leftDriverJoystick);
