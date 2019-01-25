@@ -118,6 +118,8 @@ public class DriveTrainSubsystem extends Subsystem
   {
     tankDrive(forwardsSpeed, forwardsSpeed, strafeSpeed);
     if (turningSpeed >= 0.05)
+      tankDrive(-turningSpeed, turningSpeed, strafeSpeed);
+    else if (turningSpeed <= -0.05)
       tankDrive(turningSpeed, -turningSpeed, strafeSpeed);
   }
 }

@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.JoystickDriveCommand;
 import frc.robot.commands.XboxDriveCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 
@@ -116,7 +117,7 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
 
-    (new XboxDriveCommand()).start();
+    (new JoystickDriveCommand()).start();
   }
 
   /**
