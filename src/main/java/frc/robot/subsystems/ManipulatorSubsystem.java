@@ -36,11 +36,11 @@ public class ManipulatorSubsystem extends Subsystem {
 
   public void liftUp()
   {
-    RobotMap.liftTalon.set(RobotMap.assistantDriverController.getTriggerAxis(Hand.kLeft));
+    RobotMap.liftTalon.set(RobotMap.assistantDriverController.getTriggerAxis(Hand.kLeft) - 0.5);
   }
 
   public void liftDown()
   {
-    RobotMap.liftTalon.set(RobotMap.assistantDriverController.getTriggerAxis(Hand.kRight));
+    RobotMap.liftTalon.set(-RobotMap.assistantDriverController.getTriggerAxis(Hand.kRight) + 0.5);
   }
 }
