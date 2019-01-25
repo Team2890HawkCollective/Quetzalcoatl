@@ -54,6 +54,8 @@ public class RobotMap {
   public static final double DRIVETRAIN_FULL_STOP = 0.0;
   public static final double DRIVETRAIN_REVERSE_MODIFIER = -1.0;
 
+  public static final double DRIVETRAIN_RAMP_TIME = 0.1;
+
   public static final double MANIPULATOR_GRABBER_OPEN = 1.0;
   public static final double MANIPULATOR_GRABBER_CLOSE = -1.0;
 
@@ -107,5 +109,8 @@ public class RobotMap {
 
     leftBackTalon.follow(leftFrontTalon);
     rightBackTalon.follow(rightFrontTalon);
+
+    leftFrontTalon.configOpenloopRamp(DRIVETRAIN_RAMP_TIME);
+    rightFrontTalon.configOpenloopRamp(DRIVETRAIN_RAMP_TIME);
   }
 }

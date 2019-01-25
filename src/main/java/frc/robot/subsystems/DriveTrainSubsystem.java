@@ -40,9 +40,9 @@ public class DriveTrainSubsystem extends Subsystem
 
     //A negative strafe speed value means that we want to strafe left.
     if (RobotMap.driverController.getTriggerAxis(Hand.kLeft) > 0.05)
-      strafeSpeed = -RobotMap.driverController.getTriggerAxis(Hand.kLeft) * RobotMap.DRIVETRAIN_SPEED_MODIFIER;
+      strafeSpeed = -RobotMap.driverController.getTriggerAxis(Hand.kLeft);
     else if (RobotMap.driverController.getTriggerAxis(Hand.kRight) > 0.05)
-      strafeSpeed = RobotMap.driverController.getTriggerAxis(Hand.kRight) * RobotMap.DRIVETRAIN_SPEED_MODIFIER;
+      strafeSpeed = RobotMap.driverController.getTriggerAxis(Hand.kRight);
 
     arcadeDrive(RobotMap.driverController.getY(Hand.kLeft) * RobotMap.DRIVETRAIN_SPEED_MODIFIER, RobotMap.driverController.getX(Hand.kRight) * RobotMap.DRIVETRAIN_SPEED_MODIFIER, strafeSpeed);
   }
@@ -56,11 +56,11 @@ public class DriveTrainSubsystem extends Subsystem
 
     //A negative strafe speed means we want to strafe left
     if (RobotMap.driverController.getTriggerAxis(Hand.kLeft) > 0.05)
-      strafeSpeed = -RobotMap.driverController.getTriggerAxis(Hand.kLeft) * RobotMap.DRIVETRAIN_SPEED_MODIFIER;
+      strafeSpeed = -RobotMap.driverController.getTriggerAxis(Hand.kLeft);
     else if (RobotMap.driverController.getTriggerAxis(Hand.kRight) > 0.05)
-      strafeSpeed = RobotMap.driverController.getTriggerAxis(Hand.kRight) * RobotMap.DRIVETRAIN_SPEED_MODIFIER;
+      strafeSpeed = RobotMap.driverController.getTriggerAxis(Hand.kRight);
 
-    tankDrive(RobotMap.driverController.getY(Hand.kLeft), RobotMap.driverController.getY(Hand.kLeft), strafeSpeed);
+    tankDrive(RobotMap.driverController.getY(Hand.kLeft) * RobotMap.DRIVETRAIN_SPEED_MODIFIER, RobotMap.driverController.getY(Hand.kLeft) * RobotMap.DRIVETRAIN_SPEED_MODIFIER, strafeSpeed);
   }
 
   /**
@@ -72,11 +72,11 @@ public class DriveTrainSubsystem extends Subsystem
 
     //A negative turning speed value means that we want to rotate left.
     if (RobotMap.leftDriverJoystick.getTrigger())
-      strafeSpeed = -RobotMap.DRIVETRAIN_FULL_SPEED * RobotMap.DRIVETRAIN_SPEED_MODIFIER;
+      strafeSpeed = -RobotMap.DRIVETRAIN_FULL_SPEED;
     else if (RobotMap.rightDriverJoystick.getTrigger())
-      strafeSpeed = RobotMap.DRIVETRAIN_FULL_SPEED * RobotMap.DRIVETRAIN_SPEED_MODIFIER;
+      strafeSpeed = RobotMap.DRIVETRAIN_FULL_SPEED;
 
-    arcadeDrive(RobotMap.leftDriverJoystick.getY(),  RobotMap.rightDriverJoystick.getX(), strafeSpeed);
+    arcadeDrive(RobotMap.leftDriverJoystick.getY() * RobotMap.DRIVETRAIN_SPEED_MODIFIER,  RobotMap.rightDriverJoystick.getX() * RobotMap.DRIVETRAIN_SPEED_MODIFIER, strafeSpeed);
   }
 
   /**
@@ -88,11 +88,11 @@ public class DriveTrainSubsystem extends Subsystem
 
     //A negative strafe speed means we want to strafe left
     if (RobotMap.leftDriverJoystick.getTrigger())
-      strafeSpeed = -RobotMap.DRIVETRAIN_FULL_SPEED * RobotMap.DRIVETRAIN_SPEED_MODIFIER;
+      strafeSpeed = -RobotMap.DRIVETRAIN_FULL_SPEED;
     else if (RobotMap.rightDriverJoystick.getTrigger())
-      strafeSpeed = RobotMap.DRIVETRAIN_FULL_SPEED * RobotMap.DRIVETRAIN_SPEED_MODIFIER;
+      strafeSpeed = RobotMap.DRIVETRAIN_FULL_SPEED;
 
-    tankDrive(RobotMap.driverController.getY(Hand.kLeft), RobotMap.driverController.getY(Hand.kLeft), strafeSpeed);
+    tankDrive(RobotMap.leftDriverJoystick.getY() * RobotMap.DRIVETRAIN_SPEED_MODIFIER, RobotMap.rightDriverJoystick.getY() * RobotMap.DRIVETRAIN_SPEED_MODIFIER, strafeSpeed);
   }
 
   /**
@@ -117,10 +117,8 @@ public class DriveTrainSubsystem extends Subsystem
   public void arcadeDrive(double forwardsSpeed, double turningSpeed, double strafeSpeed)
   {
     tankDrive(forwardsSpeed, forwardsSpeed, strafeSpeed);
-    if (turningSpeed >= 0.05)
+    if (turningSpeed >= 0.05 || turningSpeed <= -0.05)
       tankDrive(-turningSpeed, turningSpeed, strafeSpeed);
-    else if (turningSpeed <= -0.05)
-      tankDrive(turningSpeed, -turningSpeed, strafeSpeed);
   }
 }
 
