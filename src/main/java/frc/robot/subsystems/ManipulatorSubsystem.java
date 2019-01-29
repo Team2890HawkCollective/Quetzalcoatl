@@ -36,17 +36,12 @@ public class ManipulatorSubsystem extends Subsystem
   public void xboxControl()
   {
     if (RobotMap.assistantDriverController.getAButton())
-    {
-      if (RobotMap.grabberFlag)
-      {
-        actuateGrabber(RobotMap.MANIPULATOR_GRABBER_CLOSE);
-        RobotMap.grabberFlag = false;
-      }
-      else
-      {
-        actuateGrabber(RobotMap.MANIPULATOR_GRABBER_OPEN);
-        RobotMap.grabberFlag = true;
-      }
-    }
+      actuateGrabber(RobotMap.MANIPULATOR_GRABBER_CLOSE);
+
+    if (RobotMap.assistantDriverController.getBButton())
+      actuateGrabber(RobotMap.MANIPULATOR_GRABBER_OPEN);
+
+    if (!RobotMap.assistantDriverController.getAButton() && !RobotMap.assistantDriverController.getBButton())
+      actuateGrabber(RobotMap.DRIVETRAIN_FULL_STOP);
   }
 }

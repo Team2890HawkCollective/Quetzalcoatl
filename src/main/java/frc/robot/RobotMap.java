@@ -7,18 +7,15 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Talon;
-
-import frc.robot.commands.*;
-import frc.robot.subsystems.*;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import edu.wpi.first.wpilibj.*;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.CommandGroup;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.subsystems.DriveTrainSubsystem;
+import frc.robot.subsystems.ManipulatorSubsystem;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -49,12 +46,14 @@ public class RobotMap {
   public static final int CENTER_TALON_ID = 5;
   public static final int GRABBER_TALON_ID = 6;
 
-  public static final double DRIVETRAIN_SPEED_MODIFIER = 0.5;
+  public static final double DRIVETRAIN_SPEED_MODIFIER = 1.0;
   public static final double DRIVETRAIN_FULL_SPEED = 1.0;
   public static final double DRIVETRAIN_FULL_STOP = 0.0;
   public static final double DRIVETRAIN_REVERSE_MODIFIER = -1.0;
+  public static final double DRIVETRAIN_STRAFE_SPEED_MODIFIER = 0.3;
 
-  public static final double DRIVETRAIN_RAMP_TIME = 0.1;
+  public static final double DRIVETRAIN_RAMP_TIME = 0.0;
+  public static final double DRIVETRAIN_STRAFE_RAMP_TIME = 1.0;
 
   public static final double MANIPULATOR_GRABBER_OPEN = 1.0;
   public static final double MANIPULATOR_GRABBER_CLOSE = -1.0;
@@ -66,7 +65,7 @@ public class RobotMap {
   public static WPI_TalonSRX rightFrontTalon;
   public static WPI_TalonSRX leftBackTalon;
   public static WPI_TalonSRX rightBackTalon;
-  public static WPI_TalonSRX centralTalon;
+  public static CANSparkMax centralTalon;
 
   public static WPI_TalonSRX grabberTalon;
 
@@ -96,7 +95,7 @@ public class RobotMap {
     rightFrontTalon = new WPI_TalonSRX(RIGHT_FRONT_TALON_ID);
     leftBackTalon = new WPI_TalonSRX(LEFT_BACK_TALON_ID);
     rightBackTalon = new WPI_TalonSRX(RIGHT_BACK_TALON_ID);
-    centralTalon = new WPI_TalonSRX(CENTER_TALON_ID);
+    centralTalon = new CANSparkMax(CENTER_TALON_ID, MotorType.kBrushless);
 
     grabberTalon = new WPI_TalonSRX(GRABBER_TALON_ID);
 
@@ -105,12 +104,13 @@ public class RobotMap {
 
     leftFrontTalon.setInverted(true);
     leftBackTalon.setInverted(true);
-    centralTalon.setInverted(true);
 
     leftBackTalon.follow(leftFrontTalon);
     rightBackTalon.follow(rightFrontTalon);
 
     leftFrontTalon.configOpenloopRamp(DRIVETRAIN_RAMP_TIME);
     rightFrontTalon.configOpenloopRamp(DRIVETRAIN_RAMP_TIME);
+
+    centralTalon.setRampRate(DRIVETRAIN_STRAFE_RAMP_TIME);
   }
 }
