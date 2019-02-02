@@ -13,19 +13,35 @@ import frc.robot.RobotMap;
 /**
  * Add your docs here.
  */
-public class ManipulatorSubsystem extends Subsystem {
+public class ManipulatorSubsystem extends Subsystem 
+{
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
   @Override
-  public void initDefaultCommand() {
+  public void initDefaultCommand() 
+  {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
   }
 
-  public void xboxOpenGrabber()
+  /**
+   * @param speed Negative for close, positive for open
+   */
+  public void actuateGrabber(double speed)
   {
-    RobotMap.rightGrabberTalon.set(-0.25);
-    RobotMap.leftGrabberTalon.set(0.25);
+    RobotMap.grabberTalon.set(speed);
+  }
+
+  public void xboxControl()
+  {
+    if (RobotMap.assistantDriverController.getAButton())
+      actuateGrabber(RobotMap.MANIPULATOR_GRABBER_CLOSE);
+
+    if (RobotMap.assistantDriverController.getBButton())
+      actuateGrabber(RobotMap.MANIPULATOR_GRABBER_OPEN);
+
+    if (!RobotMap.assistantDriverController.getAButton() && !RobotMap.assistantDriverController.getBButton())
+      actuateGrabber(RobotMap.DRIVETRAIN_FULL_STOP);
   }
 }
