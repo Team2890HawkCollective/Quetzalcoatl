@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Talon;
 
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -38,12 +39,19 @@ public class RobotMap {
 
   //PORT IDS
   public static final int DRIVER_CONTROLLER_PORT = 0;
-	public static final int ASSISTANT_DRIVER_CONTROLLER_PORT = 1;
+  public static final int ASSISTANT_DRIVER_CONTROLLER_PORT = 1;
+  public static final int LEFT_DRIVER_JOYSTICK_PORT = 0;
+  public static final int RIGHT_DRIVER_JOYSTICK_PORT = 1;
   public static final int LEFT_FRONT_TALON_ID = 1;
   public static final int RIGHT_FRONT_TALON_ID = 2;
   public static final int LEFT_BACK_TALON_ID = 3;
   public static final int RIGHT_BACK_TALON_ID = 4;
-  public static final int CENTRAL_TALON_ID = 5;
+  public static final int CENTER_TALON_ID = 5;
+
+  public static final double DRIVETRAIN_SPEED_MODIFIER = 0.5;
+  public static final double DRIVETRAIN_FULL_SPEED = 1.0;
+  public static final double DRIVETRAIN_FULL_STOP = 0.0;
+  public static final double DRIVETRAIN_REVERSE_MODIFIER = -1.0;
 
   //Talons
   public static WPI_TalonSRX leftFrontTalon;
@@ -51,6 +59,12 @@ public class RobotMap {
   public static WPI_TalonSRX leftBackTalon;
   public static WPI_TalonSRX rightBackTalon;
   public static WPI_TalonSRX centralTalon;
+
+  public static Joystick leftDriverJoystick;
+  public static Joystick rightDriverJoystick;
+
+  public static JoystickButton triggerLeft;
+  public static JoystickButton triggerRight;
 
   //Controllers
   public static XboxController driverController;
@@ -71,7 +85,16 @@ public class RobotMap {
     rightFrontTalon = new WPI_TalonSRX(RIGHT_FRONT_TALON_ID);
     leftBackTalon = new WPI_TalonSRX(LEFT_BACK_TALON_ID);
     rightBackTalon = new WPI_TalonSRX(RIGHT_BACK_TALON_ID);
-    centralTalon = new WPI_TalonSRX(CENTRAL_TALON_ID);
+    centralTalon = new WPI_TalonSRX(CENTER_TALON_ID);
 
+    leftDriverJoystick = new Joystick(LEFT_DRIVER_JOYSTICK_PORT);
+    rightDriverJoystick = new Joystick(RIGHT_DRIVER_JOYSTICK_PORT);
+
+    leftFrontTalon.setInverted(true);
+    leftBackTalon.setInverted(true);
+    centralTalon.setInverted(true);
+
+    leftBackTalon.follow(leftFrontTalon);
+    rightBackTalon.follow(rightFrontTalon);
   }
 }

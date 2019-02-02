@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.XboxDriveCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 
 /**
@@ -39,6 +40,8 @@ public class Robot extends TimedRobot {
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
+
+    RobotMap.init();
   }
 
   /**
@@ -112,6 +115,8 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+
+    (new XboxDriveCommand()).start();
   }
 
   /**
@@ -119,6 +124,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+    //RobotMap.centralTalon.set(1.0);
     Scheduler.getInstance().run();
   }
 
