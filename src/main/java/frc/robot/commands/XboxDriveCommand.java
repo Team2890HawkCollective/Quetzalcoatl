@@ -26,13 +26,8 @@ public class XboxDriveCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-<<<<<<< HEAD
-    RobotMap.driveTrainSubsystem.joystickTankDrive();
-    RobotMap.manipulatorSubsystem.xboxLift();
-=======
     RobotMap.driveTrainSubsystem.xboxArcadeDrive();
     RobotMap.manipulatorSubsystem.xboxControl();
->>>>>>> GrabberTesting
   }
 
   // Make this return true when this Command no longer needs to run execute()

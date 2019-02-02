@@ -7,56 +7,24 @@
 
 package frc.robot.subsystems;
 
-<<<<<<< HEAD
-import edu.wpi.first.wpilibj.GenericHID.Hand;
-=======
->>>>>>> GrabberTesting
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
 /**
  * Add your docs here.
  */
-<<<<<<< HEAD
-public class ManipulatorSubsystem extends Subsystem {
-=======
 public class ManipulatorSubsystem extends Subsystem 
 {
->>>>>>> GrabberTesting
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
   @Override
-<<<<<<< HEAD
-  public void initDefaultCommand() {
-=======
   public void initDefaultCommand() 
   {
->>>>>>> GrabberTesting
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
   }
 
-<<<<<<< HEAD
-  public void xboxLift()
-  {
-    if (RobotMap.assistantDriverController.getTriggerAxis(Hand.kLeft) > 0.05)
-      liftUp();
-    else if (RobotMap.assistantDriverController.getTriggerAxis(Hand.kRight) > 0.05)
-      liftDown();
-    else
-      RobotMap.liftTalon.set(0);
-  }
-
-  public void liftUp()
-  {
-    RobotMap.liftTalon.set(RobotMap.assistantDriverController.getTriggerAxis(Hand.kLeft) - 0.5);
-  }
-
-  public void liftDown()
-  {
-    RobotMap.liftTalon.set(-RobotMap.assistantDriverController.getTriggerAxis(Hand.kRight) + 0.5);
-=======
   /**
    * @param speed Negative for close, positive for open
    */
@@ -75,6 +43,5 @@ public class ManipulatorSubsystem extends Subsystem
 
     if (!RobotMap.assistantDriverController.getAButton() && !RobotMap.assistantDriverController.getBButton())
       actuateGrabber(RobotMap.DRIVETRAIN_FULL_STOP);
->>>>>>> GrabberTesting
   }
 }

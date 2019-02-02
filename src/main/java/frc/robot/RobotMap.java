@@ -47,11 +47,7 @@ public class RobotMap {
   public static final int LEFT_BACK_TALON_ID = 3;
   public static final int RIGHT_BACK_TALON_ID = 4;
   public static final int CENTER_TALON_ID = 5;
-<<<<<<< HEAD
-  public static final int LIFT_TALON_ID = 6;
-=======
   public static final int GRABBER_TALON_ID = 6;
->>>>>>> GrabberTesting
 
   public static final double DRIVETRAIN_SPEED_MODIFIER = 1.0;
   public static final double DRIVETRAIN_FULL_SPEED = 1.0;
@@ -72,17 +68,12 @@ public class RobotMap {
   public static WPI_TalonSRX rightFrontTalon;
   public static WPI_TalonSRX leftBackTalon;
   public static WPI_TalonSRX rightBackTalon;
-<<<<<<< HEAD
-  public static WPI_TalonSRX centralTalon;
-  public static CANSparkMax liftTalon;
-=======
   public static CANSparkMax centralTalon;
 
   public static WPI_TalonSRX grabberTalon;
 
   public static WPI_TalonSRX leftGrabberTalon;
   public static WPI_TalonSRX rightGrabberTalon;
->>>>>>> GrabberTesting
 
   public static Joystick leftDriverJoystick;
   public static Joystick rightDriverJoystick;
@@ -97,19 +88,11 @@ public class RobotMap {
   //Subsystems
   public static DriveTrainSubsystem driveTrainSubsystem;
   public static ManipulatorSubsystem manipulatorSubsystem;
-<<<<<<< HEAD
-
-=======
->>>>>>> GrabberTesting
 
   public static void init()
   {
     driveTrainSubsystem = new DriveTrainSubsystem();
     manipulatorSubsystem = new ManipulatorSubsystem();
-<<<<<<< HEAD
-=======
-
->>>>>>> GrabberTesting
     driverController = new XboxController(DRIVER_CONTROLLER_PORT);
 		assistantDriverController = new XboxController(ASSISTANT_DRIVER_CONTROLLER_PORT);
 
@@ -117,14 +100,9 @@ public class RobotMap {
     rightFrontTalon = new WPI_TalonSRX(RIGHT_FRONT_TALON_ID);
     leftBackTalon = new WPI_TalonSRX(LEFT_BACK_TALON_ID);
     rightBackTalon = new WPI_TalonSRX(RIGHT_BACK_TALON_ID);
-<<<<<<< HEAD
-    centralTalon = new WPI_TalonSRX(CENTER_TALON_ID);
-    liftTalon = new CANSparkMax(LIFT_TALON_ID, MotorType.kBrushless);
-=======
     centralTalon = new CANSparkMax(CENTER_TALON_ID, MotorType.kBrushless);
 
     grabberTalon = new WPI_TalonSRX(GRABBER_TALON_ID);
->>>>>>> GrabberTesting
 
     leftDriverJoystick = new Joystick(LEFT_DRIVER_JOYSTICK_PORT);
     rightDriverJoystick = new Joystick(RIGHT_DRIVER_JOYSTICK_PORT);
