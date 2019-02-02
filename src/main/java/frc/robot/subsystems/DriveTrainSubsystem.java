@@ -7,18 +7,20 @@
 
 package frc.robot.subsystems;
 
-
 import edu.wpi.first.wpilibj.command.Subsystem;
-
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.RobotMap;
-import frc.robot.commands.*;
+
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.GenericHID.Hand;
-import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  * Add your docs here.
  */
-public class DriveTrainSubsystem extends Subsystem {
+public class DriveTrainSubsystem extends Subsystem 
+{
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
@@ -26,73 +28,97 @@ public class DriveTrainSubsystem extends Subsystem {
   public void initDefaultCommand() 
   {
     // Set the default command for a subsystem here.
-       setDefaultCommand(new XboxDriveCommand());
+       //setDefaultCommand(new XboxDriveCommand());
   }
   
+  /**
+   * Runs the drivetrain using the ArcadeMode drive-scheme using Xbox Controllers
+   */
   public void xboxArcadeDrive()
 	{
-    //RobotMap.driveTrainSubsystem.tankDrive(RobotMap.fron.getY(Hand.kLeft), RobotMap.driverController.getY(Hand.kRight));
-    //forwards
-    //all motors go forward ()getY(Hand.kLeft)
+    double strafeSpeed = 0.0;
 
-    //forwards
-    if(RobotMap.driverController.getY(Hand.kLeft) > 10)
-    {
-      RobotMap.leftFrontTalon.set(RobotMap.driverController.getY(Hand.kLeft));
-      RobotMap.rightFrontTalon.set(RobotMap.driverController.getY(Hand.kLeft));
-      RobotMap.leftBackTalon.set(RobotMap.driverController.getY(Hand.kLeft));
-      RobotMap.rightBackTalon.set(RobotMap.driverController.getY(Hand.kLeft));
-      
-    }
+    //A negative strafe speed value means that we want to strafe left.
+    if (RobotMap.driverController.getTriggerAxis(Hand.kLeft) > 0.05)
+      strafeSpeed = -RobotMap.driverController.getTriggerAxis(Hand.kLeft);
+    else if (RobotMap.driverController.getTriggerAxis(Hand.kRight) > 0.05)
+      strafeSpeed = RobotMap.driverController.getTriggerAxis(Hand.kRight);
 
-    //backwards
-    if(RobotMap.driverController.getY(Hand.kLeft) < -10)
-    {
-      RobotMap.leftFrontTalon.set(-RobotMap.driverController.getY(Hand.kLeft));
-      RobotMap.rightFrontTalon.set(-RobotMap.driverController.getY(Hand.kLeft));
-      RobotMap.leftBackTalon.set(-RobotMap.driverController.getY(Hand.kLeft));
-      RobotMap.rightBackTalon.set(-RobotMap.driverController.getY(Hand.kLeft));
-      
-    }
+    arcadeDrive(RobotMap.driverController.getY(Hand.kLeft) * RobotMap.DRIVETRAIN_SPEED_MODIFIER, RobotMap.driverController.getX(Hand.kRight) * RobotMap.DRIVETRAIN_SPEED_MODIFIER, strafeSpeed);
+  }
 
-      //rotate left
-      if(RobotMap.driverController.getTriggerAxis(Hand.kLeft) > 10)
-      {
-        RobotMap.leftFrontTalon.set(-RobotMap.driverController.getTriggerAxis(Hand.kLeft));
-        RobotMap.rightFrontTalon.set(RobotMap.driverController.getTriggerAxis(Hand.kLeft));
-        RobotMap.leftBackTalon.set(-RobotMap.driverController.getTriggerAxis(Hand.kLeft));
-        RobotMap.rightBackTalon.set(RobotMap.driverController.getTriggerAxis(Hand.kLeft));
-      
-      }
-      
-      //rotate right
-      if(RobotMap.driverController.getTriggerAxis(Hand.kRight) > 10)
-      {
-        RobotMap.leftFrontTalon.set(RobotMap.driverController.getTriggerAxis(Hand.kRight));
-        RobotMap.rightFrontTalon.set(-RobotMap.driverController.getTriggerAxis(Hand.kRight));
-        RobotMap.leftBackTalon.set(RobotMap.driverController.getTriggerAxis(Hand.kRight));
-        RobotMap.rightBackTalon.set(-RobotMap.driverController.getTriggerAxis(Hand.kRight));
-      
-      }
+  /**
+   * Runs the drivetrain using the TankMode drive-scheme using Xbox Controllers
+   */
+  public void xboxTankDrive()
+  {
+    double strafeSpeed = 0.0;
 
-      //Strafe left
-      if(RobotMap.driverController.getX(Hand.kRight) < -10)
-      {
-        RobotMap.leftFrontTalon.set(RobotMap.driverController.getX(Hand.kRight));
-        RobotMap.rightFrontTalon.set(RobotMap.driverController.getX(Hand.kRight));
-        RobotMap.leftBackTalon.set(RobotMap.driverController.getX(Hand.kRight));
-        RobotMap.rightBackTalon.set(RobotMap.driverController.getX(Hand.kRight));
-      
-      }
+    //A negative strafe speed means we want to strafe left
+    if (RobotMap.driverController.getTriggerAxis(Hand.kLeft) > 0.05)
+      strafeSpeed = -RobotMap.driverController.getTriggerAxis(Hand.kLeft);
+    else if (RobotMap.driverController.getTriggerAxis(Hand.kRight) > 0.05)
+      strafeSpeed = RobotMap.driverController.getTriggerAxis(Hand.kRight);
 
-      //strafe right
-      if(RobotMap.driverController.getX(Hand.kRight) > 10)
-      {
-        RobotMap.leftFrontTalon.set(-RobotMap.driverController.getX(Hand.kRight));
-        RobotMap.rightFrontTalon.set(-RobotMap.driverController.getX(Hand.kRight));
-        RobotMap.leftBackTalon.set(-RobotMap.driverController.getX(Hand.kRight));
-        RobotMap.rightBackTalon.set(-RobotMap.driverController.getX(Hand.kRight));
-        RobotMap.centralTalon.set(-RobotMap.driverController.getX(Hand.kRight));
-      }
-	}
+    tankDrive(RobotMap.driverController.getY(Hand.kLeft) * RobotMap.DRIVETRAIN_SPEED_MODIFIER, RobotMap.driverController.getY(Hand.kLeft) * RobotMap.DRIVETRAIN_SPEED_MODIFIER, strafeSpeed);
+  }
+
+  /**
+   * Runs the drivetrain using the ArcadeMode drive-scheme using Joysticks
+   */
+  public void joystickArcadeDrive()
+  {
+    double strafeSpeed = 0.0;
+
+    //A negative turning speed value means that we want to rotate left.
+    if (RobotMap.leftDriverJoystick.getTrigger())
+      strafeSpeed = -RobotMap.DRIVETRAIN_FULL_SPEED * RobotMap.DRIVETRAIN_STRAFE_SPEED_MODIFIER;
+    else if (RobotMap.rightDriverJoystick.getTrigger())
+      strafeSpeed = RobotMap.DRIVETRAIN_FULL_SPEED * RobotMap.DRIVETRAIN_STRAFE_SPEED_MODIFIER;
+
+    arcadeDrive(RobotMap.leftDriverJoystick.getY() * RobotMap.DRIVETRAIN_SPEED_MODIFIER,  RobotMap.rightDriverJoystick.getX() * RobotMap.DRIVETRAIN_SPEED_MODIFIER, strafeSpeed);
+  }
+
+  /**
+   * Runs the drivetrain using the TankMode drive-scheme using Joysticks
+   */
+  public void joystickTankDrive()
+  {
+    double strafeSpeed = 0.0;
+
+    //A negative strafe speed means we want to strafe left
+    if (RobotMap.leftDriverJoystick.getTrigger())
+      strafeSpeed = -RobotMap.DRIVETRAIN_FULL_SPEED * RobotMap.DRIVETRAIN_STRAFE_SPEED_MODIFIER;
+    else if (RobotMap.rightDriverJoystick.getTrigger())
+      strafeSpeed = RobotMap.DRIVETRAIN_FULL_SPEED * RobotMap.DRIVETRAIN_STRAFE_SPEED_MODIFIER;
+
+    tankDrive(RobotMap.leftDriverJoystick.getY() * RobotMap.DRIVETRAIN_SPEED_MODIFIER, RobotMap.rightDriverJoystick.getY() * RobotMap.DRIVETRAIN_SPEED_MODIFIER, strafeSpeed);
+  }
+
+  /**
+   * Runs the robot using a tank drive scheme
+   * @param leftSpeed Speed of left-side of robot. Positive for forward, negative for reverse
+   * @param rightSpeed Speed of right-side of robot. Positive for forward, negative for reverse
+   * @param strafeSpeed The speed at which the robot will strafe. Positive for right strafe, negative for left strafe
+   */
+  public void tankDrive(double leftSpeed, double rightSpeed, double strafeSpeed)
+  {
+    RobotMap.leftFrontTalon.set(leftSpeed);
+    RobotMap.rightFrontTalon.set(rightSpeed);
+    RobotMap.centralTalon.set(strafeSpeed);
+  }
+
+  /**
+   * Runs the robot using an arcade drive scheme
+   * @param forwardsSpeed The speed the robot will go in the forwards direction. Positive for forward, negative for reverse
+   * @param turningSpeed The speed at which the robot will rotate. Positive for right-rotation, negative for left-rotation
+   * @param strafeSpeed The speed at which the robot will strafe. Positive for right strafe, negative for left strafe
+   */
+  public void arcadeDrive(double forwardsSpeed, double turningSpeed, double strafeSpeed)
+  {
+    tankDrive(forwardsSpeed, forwardsSpeed, strafeSpeed);
+    if (turningSpeed >= 0.05 || turningSpeed <= -0.05)
+      tankDrive(-turningSpeed + forwardsSpeed, turningSpeed + forwardsSpeed, strafeSpeed);
+  }
 }
+

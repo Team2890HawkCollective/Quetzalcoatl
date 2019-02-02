@@ -10,6 +10,5 @@
     ".classpath": true,
     ".project": true
   },
-  "wpilib.online": true,
-  "git.ignoreLimitWarning": true
+  "wpilib.online": true
 }
