@@ -48,10 +48,6 @@
 .mtj.tmp/
 
 # Package Files #
-<<<<<<< HEAD
-*.jar
-=======
->>>>>>> PixyCam
 *.war
 *.nar
 *.ear

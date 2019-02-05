@@ -1,8 +1,4 @@
 {
-<<<<<<< HEAD
-    "java.configuration.updateBuildConfiguration": "automatic"
-}
-=======
   "java.configuration.updateBuildConfiguration": "automatic",
   "files.exclude": {
     "**/.git": true,
@@ -16,4 +12,3 @@
   },
   "wpilib.online": true
 }
->>>>>>> master
