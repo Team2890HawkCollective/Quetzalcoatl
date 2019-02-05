@@ -7,46 +7,48 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
+import edu.wpi.first.wpilibj.command.TimedCommand;
 import frc.robot.RobotMap;
 
-public class XboxDriveCommand extends Command {
-  public XboxDriveCommand() {
+/**
+ * Add your docs here.
+ */
+public class ReleaseBallCommand extends TimedCommand 
+{
+  /**
+   * Add your docs here.
+   */
+  public ReleaseBallCommand(double timeout) 
+  {
+    super(timeout);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(RobotMap.driveTrainSubsystem);
+    requires(RobotMap.manipulatorSubsystem);
   }
 
   // Called just before this Command runs the first time
   @Override
-  protected void initialize() {
+  protected void initialize() 
+  {
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() {
-<<<<<<< HEAD
-    RobotMap.driveTrainSubsystem.joystickTankDrive();
-=======
-    RobotMap.driveTrainSubsystem.xboxArcadeDrive();
->>>>>>> master
+  protected void execute() 
+  {
+    RobotMap.manipulatorSubsystem.spinIntake(RobotMap.MANIPULATOR_DEFAULT_SPEED);
   }
 
-  // Make this return true when this Command no longer needs to run execute()
+  // Called once after timeout
   @Override
-  protected boolean isFinished() {
-    return false;
-  }
-
-  // Called once after isFinished returns true
-  @Override
-  protected void end() {
+  protected void end() 
+  {
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
-  protected void interrupted() {
+  protected void interrupted() 
+  {
   }
 }

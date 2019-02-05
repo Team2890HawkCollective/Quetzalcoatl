@@ -7,13 +7,24 @@
 
 package frc.robot;
 
+<<<<<<< HEAD
+=======
+import java.awt.Color;
+
+import edu.wpi.first.wpilibj.SerialPort;
+>>>>>>> master
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+<<<<<<< HEAD
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.XboxDriveCommand;
+=======
+import frc.robot.commandgroups.TargetingCommandGroup;
+import frc.robot.commands.ExampleCommand;
+>>>>>>> master
 import frc.robot.subsystems.ExampleSubsystem;
 
 /**
@@ -23,7 +34,13 @@ import frc.robot.subsystems.ExampleSubsystem;
  * creating this project, you must also update the build.gradle file in the
  * project.
  */
+<<<<<<< HEAD
 public class Robot extends TimedRobot {
+=======
+public class Robot extends TimedRobot 
+{
+  public static final String programName = "DestinationDeepSpace";
+>>>>>>> master
   public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
   public static OI m_oi;
 
@@ -102,12 +119,22 @@ public class Robot extends TimedRobot {
    * This function is called periodically during autonomous.
    */
   @Override
+<<<<<<< HEAD
   public void autonomousPeriodic() {
+=======
+  public void autonomousPeriodic() 
+  {
+>>>>>>> master
     Scheduler.getInstance().run();
   }
 
   @Override
+<<<<<<< HEAD
   public void teleopInit() {
+=======
+  public void teleopInit() 
+  {
+>>>>>>> master
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
@@ -116,15 +143,28 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
 
+<<<<<<< HEAD
     (new XboxDriveCommand()).start();
+=======
+    RobotMap.arduino = new SerialPort(115200, SerialPort.Port.kUSB);
+
+    RobotMap.arduino.enableTermination();
+
+    new TargetingCommandGroup(1, true).start();
+>>>>>>> master
   }
 
   /**
    * This function is called periodically during operator control.
    */
   @Override
+<<<<<<< HEAD
   public void teleopPeriodic() {
     //RobotMap.centralTalon.set(1.0);
+=======
+  public void teleopPeriodic() 
+  {  
+>>>>>>> master
     Scheduler.getInstance().run();
   }
 
@@ -132,6 +172,11 @@ public class Robot extends TimedRobot {
    * This function is called periodically during test mode.
    */
   @Override
+<<<<<<< HEAD
   public void testPeriodic() {
+=======
+  public void testPeriodic() 
+  {
+>>>>>>> master
   }
 }

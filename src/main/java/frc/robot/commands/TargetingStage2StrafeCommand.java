@@ -7,46 +7,61 @@
 
 package frc.robot.commands;
 
+import components.utilities.FormatChecker;
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
 import frc.robot.RobotMap;
 
-public class XboxDriveCommand extends Command {
-  public XboxDriveCommand() {
+public class TargetingStage2StrafeCommand extends Command 
+{
+  private String data;
+
+  public TargetingStage2StrafeCommand() 
+  {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(RobotMap.driveTrainSubsystem);
+
+    data = "";
   }
 
   // Called just before this Command runs the first time
   @Override
-  protected void initialize() {
+  protected void initialize() 
+  {
+    data = RobotMap.arduino.readString();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() {
-<<<<<<< HEAD
-    RobotMap.driveTrainSubsystem.joystickTankDrive();
-=======
-    RobotMap.driveTrainSubsystem.xboxArcadeDrive();
->>>>>>> master
+  protected void execute() 
+  {
+    if (data.length() > 0)
+      if (FormatChecker.canParseDouble(data))
+        RobotMap.driveTrainSubsystem.arcadeDrive(RobotMap.DRIVETRAIN_FULL_STOP, RobotMap.DRIVETRAIN_FULL_STOP, -Double.parseDouble(data) / RobotMap.DRIVETRAIN_CAMERA_TARGETING_STRAFE_SPEED_MODIFIER);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
-  protected boolean isFinished() {
+  protected boolean isFinished() 
+  {
+    data = RobotMap.arduino.readString();
+    if (data.length() > 0)
+      if (data.substring(0, 1).equals("D"))
+        return true;
     return false;
   }
 
   // Called once after isFinished returns true
   @Override
-  protected void end() {
+  protected void end() 
+  {
+    RobotMap.driveTrainSubsystem.arcadeDrive(RobotMap.DRIVETRAIN_FULL_STOP, RobotMap.DRIVETRAIN_FULL_STOP, RobotMap.DRIVETRAIN_FULL_STOP);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
-  protected void interrupted() {
+  protected void interrupted() 
+  {
   }
 }
