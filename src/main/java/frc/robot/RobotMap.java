@@ -68,7 +68,7 @@ public class RobotMap {
   public static final double MANIPULATOR_DEFAULT_SPEED = 1.0; 
   public static final double MANIPULATOR_TIME_TO_RELEASE_CARGO = 1.0;
   public static final double MANIPULATOR_STOP_SPEED = 0.0;
-  public static final double MANIPULATOR_SPEED_MODIFER = 0.1;
+  public static final double MANIPULATOR_SPEED_MODIFER = 0.5;
 
   public static final double HATCH_HOLDER_SERVO_RELEASE = 0.5;
   public static final double HATCH_FOLDER_SERVO_GRAB = 0.0;
@@ -139,6 +139,7 @@ public class RobotMap {
     leftFrontTalon.setInverted(true);
     leftBackTalon.setInverted(true);
     centralTalon.setInverted(true);
+    intakeTalon.setInverted(true);
 
     leftBackTalon.follow(leftFrontTalon);
     rightBackTalon.follow(rightFrontTalon);
