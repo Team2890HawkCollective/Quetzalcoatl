@@ -102,6 +102,12 @@ public class Robot extends TimedRobot
     if (m_autonomousCommand != null) {
       m_autonomousCommand.start();
     }
+
+    RobotMap.arduino = new SerialPort(115200, SerialPort.Port.kUSB);
+
+    RobotMap.arduino.enableTermination();
+
+    new TargetingCommandGroup(1, true).start();
   }
 
   /**
@@ -124,11 +130,6 @@ public class Robot extends TimedRobot
       m_autonomousCommand.cancel();
     }
 
-    RobotMap.arduino = new SerialPort(115200, SerialPort.Port.kUSB);
-
-    RobotMap.arduino.enableTermination();
-
-    //new TargetingCommandGroup(1, true).start();
     new JoystickDriveCommand().start();
   }
 
