@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commandgroups.TargetingCommandGroup;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.JoystickDriveCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 
 /**
@@ -127,7 +128,8 @@ public class Robot extends TimedRobot
 
     RobotMap.arduino.enableTermination();
 
-    new TargetingCommandGroup(1, true).start();
+    //new TargetingCommandGroup(1, true).start();
+    new JoystickDriveCommand().start();
   }
 
   /**
