@@ -42,11 +42,37 @@ public class ManipulatorSubsystem extends Subsystem
     RobotMap.hatchHolder.set(RobotMap.HATCH_HOLDER_SERVO_RELEASE);
   }
 
+  /**
+   * Rotates the servo that tensions the net on the manipulator mechanism. Determines if ball will be shot out.
+   * True to tension, false to detension
+   * @param tension
+   */
+  public void tensionBallIntake(boolean tension)
+  {
+    if (tension)
+      RobotMap.ballIntakeTensioner.set(RobotMap.BALL_INTAKE_TENSION_ON);
+    else
+      RobotMap.ballIntakeTensioner.set(RobotMap.BALL_INTAKE_TENSION_OFF);
+  }
+
+  /**
+   * Controls the manipulator using an xbox controller. X-button intakes and outtakes
+   */
   public void xboxIntakeOuttake()
   {
-    if (RobotMap.assistantDriverController.getXButton())
-      spinIntake(RobotMap.MANIPULATOR_FULL_SPEED * RobotMap.MANIPULATOR_SPEED_MODIFER);
+    if (RobotMap.assistantDriverController.getXButtonPressed())
+    {
+      //We are intaking
+      if (RobotMap.intakeMode)
+        tensionBallIntake(false);
+      //We are shooting
+      else
+        tensionBallIntake(true);
+      
+      spinIntake(RobotMap.MANIPULATOR_FULL_SPEED * RobotMap.MANIPULATOR_SPEED_MODIFER); //Spin the intake
+      RobotMap.intakeMode = !RobotMap.intakeMode; //Change to either intake mode or not intake mode
+    }
     else
-      spinIntake(RobotMap.MANIPULATOR_STOP_SPEED);
+      spinIntake(RobotMap.MANIPULATOR_STOP_SPEED); //Stop the intake from spinning
   }
 }

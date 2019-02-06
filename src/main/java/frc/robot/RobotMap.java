@@ -48,6 +48,7 @@ public class RobotMap {
   public static final int INATKE_TALON_ID = 6;
 
   public static final int HATCH_HOLDER_PORT = 0;
+  public static final int BALL_INTAKE_TENSIONER_PORT = 1;
 
   public static final int DRIVETRAIN_ENCODER_TICKS_PER_REVOLUTION = 42;
   public static final int DRIVETRAIN_WHEEL_DIAMETER = 4;
@@ -73,10 +74,15 @@ public class RobotMap {
   public static final double HATCH_HOLDER_SERVO_RELEASE = 0.5;
   public static final double HATCH_FOLDER_SERVO_GRAB = 0.0;
 
+  public static final double BALL_INTAKE_TENSION_ON = 0.5;
+  public static final double BALL_INTAKE_TENSION_OFF = 0.0;
+
   public static final double MOTOR_STOP_VALUE = 0.0;
 
   public static final double MAX_VELOCITY = 17.5;
   public static final double kV = 1.0 / MAX_VELOCITY;
+
+  public static boolean intakeMode = true;
 
   //Talons
   public static WPI_TalonSRX leftFrontTalon;
@@ -92,6 +98,7 @@ public class RobotMap {
   public static CANEncoder elevatorEncoder;
 
   public static Servo hatchHolder;
+  public static Servo ballIntakeTensioner;
 
   public static AHRS navX;
 
