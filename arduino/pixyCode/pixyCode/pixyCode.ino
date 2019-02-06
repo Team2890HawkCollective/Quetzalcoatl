@@ -25,67 +25,72 @@
 #include "Adafruit_VL6180X.h"
 #include "Adafruit_NeoPixel.h"
 
-#define PIN 6
+#define driverNotifierPin 6
+#define cameraLightPin 5
+
+#define numberOfDriverNotifierLeds 12
+#define numberOfCameraLeds 12
 
 Adafruit_VL6180X vl = Adafruit_VL6180X();
-Adafruit_NeoPixel driverNotifier = Adafruit_NeoPixel(12, 6);
-Adafruit_NeoPixel cameraLight = Adafruit_NeoPixel(12, 5);
+Adafruit_NeoPixel driverNotifier = Adafruit_NeoPixel(numberOfDriverNotifierLeds, driverNotifierPin);
+Adafruit_NeoPixel cameraLight = Adafruit_NeoPixel(numberOfCameraLeds, cameraLightPin);
 
 // This is the main Pixy object
 Pixy2 pixy;
-int count = 0;
+
+//Booleans for when each stage is done
 bool stage1Done = false;
 bool stage2Done = false;
 bool stage3Done = false;
 
-int middlePoint = 150;
-int rangefinder = 150;
+int cameraMiddlePoint = 150; //The middle value of the Pixy cam video feed. Used for strafing
+int rangefinderStopPoint = 150; //The stopping point for the rangefinder. This is when the robot will stop
 
-uint32_t pink = driverNotifier.Color(255, 20, 147);
-uint32_t teal = driverNotifier.Color(0, 128, 128);
-uint32_t white = cameraLight.Color(255, 255, 255);
+uint8_t rangefinderValue; //The distance returned by the rangefinder
+
+uint32_t pink = driverNotifier.Color(255, 20, 147); //The color pink
+uint32_t teal = driverNotifier.Color(0, 128, 128); //The color teal
+uint32_t white = cameraLight.Color(255, 255, 255); //The color white
 
 void setup()
 {
-  Serial.begin(115200);
-
+  Serial.begin(115200); //Begin serial comms
+  
+  //initialise objects
   pixy.init();
-
   vl.begin();
-
   driverNotifier.begin();
   cameraLight.begin();
-  
-  driverNotifier.show();
-  cameraLight.show();
 
+  //Set the lights to their initial colors
   for (int i = 0; i < 12; i++)
     driverNotifier.setPixelColor(i, pink);
-
   for (int i = 0; i < 12; i++)
     cameraLight.setPixelColor(i, white);
+  
+  //Set the lights to show. This must be done whenever the colour is changed
+  driverNotifier.show();
   cameraLight.show();
 }
 
 void loop()
 {
-  driverNotifier.show();
-
-  float lux = vl.readLux(VL6180X_ALS_GAIN_5);
-
-  uint8_t range = vl.readRange();
-  uint8_t status = vl.readRangeStatus();
+  //Grab the value from the rangefinder
+  rangefinderValue = vl.readRange();
 
   // grab blocks!
   pixy.ccc.getBlocks();
 
-  // If there are detect blocks, print them!
+  // If there are 2 detected blocks, we're good to go
   if (pixy.ccc.numBlocks >= 2)
   {
+    //Set the driverNotifierCamera to teal to notify the driver we are ready
     for (int i = 0; i < 12; i++)
       driverNotifier.setPixelColor(i, teal);
     driverNotifier.show();
     
+    //Add a stop so this only starts running when a button is pushed by the driver.
+    //If we haven't done stage1, lets do it
     if (!stage1Done)
       stage1();
     else if (!stage2Done)
@@ -97,39 +102,47 @@ void loop()
 
 void stage1()
 {
+  //If the heights are equals, we don't need to rotate
   if ((int)pixy.ccc.blocks[0].m_height - (int)pixy.ccc.blocks[1].m_height == 0)
   {
+    //Set this stage as done and print "Done" to let the robot code know
     stage1Done == true;
     Serial.println("Done");
   }
+  //This checks to see which Block is on the left as the pixy doesn't order them
   else if ((int)pixy.ccc.blocks[0].m_x > (int)pixy.ccc.blocks[1].m_x
     Serial.println((int)pixy.ccc.blocks[0].m_height - (int)pixy.ccc.blocks[1].m_height);
   else
     Serial.println((int)pixy.ccc.blocks[1].m_height - (int)pixy.ccc.blocks[0].m_height);
 }
-
+           
 void stage2()
 {
-  if (average() - middlePoint) == 0)
+  //If the average of the x-values is equal to the mid-point, we dont need to strafe more
+  if (average() == cameraMiddlePoint)
   {
+    //Set this stage as done and print "Done" to let the robot code know
     stage2Done == true;
     Serial.println("Done");
   }
   else
-    Serial.println(average() - middlePoint);
+    Serial.println(average() - middlePoint); //Print out how far we have to go until we are in the middle
 }
 
 void stage3()
 {
-  if (range - rangefinder <= 0)
+  //If We are <= the target value, we don't need to move forward
+  if (rangefinderValue <= rangefinderStopPoint)
   {
+    //Set this stage as done and print "Done" to let the robot code know
     stage3Done = true;
     Serial.println("Done");
   }
   else
-    Serial.println(range - rangfinder);
+    Serial.println(rangefinderValue - rangfinderStopPoint); //Print out how far we have to go until we are at the stop point
 }
-
+           
+//Returns the average of the x-values of the two blocks
 int average()
 {
   return ((int)pixy.ccc.blocks[0].m_x + (int)pixy.ccc.blocks[1].m_x) / 2;
