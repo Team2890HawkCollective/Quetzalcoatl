@@ -41,4 +41,12 @@ public class ManipulatorSubsystem extends Subsystem
   {
     RobotMap.hatchHolder.set(RobotMap.HATCH_HOLDER_SERVO_RELEASE);
   }
+
+  public void xboxIntakeOuttake()
+  {
+    if (RobotMap.assistantDriverController.getXButton())
+      spinIntake(RobotMap.MANIPULATOR_FULL_SPEED * RobotMap.MANIPULATOR_SPEED_MODIFER);
+    else
+      spinIntake(RobotMap.MANIPULATOR_STOP_SPEED);
+  }
 }
