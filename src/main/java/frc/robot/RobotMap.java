@@ -143,5 +143,19 @@ public class RobotMap {
 
     leftBackTalon.follow(leftFrontTalon);
     rightBackTalon.follow(rightFrontTalon);
+
+    //Set names and subsystems
+    driveTrainSubsystem.setName(driveTrainSubsystem.getSubsystem(), "DriveTrainSubsystem");
+    manipulatorSubsystem.setName(manipulatorSubsystem.getSubsystem(), "ManipulatorSubsystem");
+    elevatorSubsystem.setName(elevatorSubsystem.getSubsystem(), "ElevatorSubsystem");
+
+    leftFrontTalon.setName(driveTrainSubsystem.getSubsystem(), "LeftFrontTalon");
+    rightFrontTalon.setName(driveTrainSubsystem.getSubsystem(), "RightFrontTalon");
+    leftBackTalon.setName(driveTrainSubsystem.getSubsystem(), "LeftBackTalon");
+    rightBackTalon.setName(driveTrainSubsystem.getSubsystem(), "RightBackTalon");
+    centralTalon.setName(driveTrainSubsystem.getSubsystem(), "CentralTalon");
+
+    intakeTalon.setName(manipulatorSubsystem.getSubsystem(), "IntakeTalon");
+    hatchHolder.setName(manipulatorSubsystem.getSubsystem(), "HatchHolder");
   }
 }
