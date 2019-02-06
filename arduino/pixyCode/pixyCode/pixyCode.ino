@@ -38,6 +38,9 @@ bool stage1Done = false;
 bool stage2Done = false;
 bool stage3Done = false;
 
+int middlePoint = 150;
+int rangefinder = 150;
+
 uint32_t pink = driverNotifier.Color(255, 20, 147);
 uint32_t teal = driverNotifier.Color(0, 128, 128);
 uint32_t white = cameraLight.Color(255, 255, 255);
@@ -57,14 +60,10 @@ void setup()
   cameraLight.show();
 
   for (int i = 0; i < 12; i++)
-  {
     driverNotifier.setPixelColor(i, pink);
-  }
 
   for (int i = 0; i < 12; i++)
-  {
     cameraLight.setPixelColor(i, white);
-  }
   cameraLight.show();
 }
 
@@ -84,51 +83,54 @@ void loop()
   if (pixy.ccc.numBlocks >= 2)
   {
     for (int i = 0; i < 12; i++)
-    {
       driverNotifier.setPixelColor(i, teal);
-      driverNotifier.show();
-    }
+    driverNotifier.show();
+    
+    if (!stage1Done)
+      stage1();
+    else if (!stage2Done)
+      stage2();
+    else if (!stage3Done)
+      stage3();
+  }
+}
 
-    if ((int)pixy.ccc.blocks[0].m_height - (int)pixy.ccc.blocks[1].m_height == 0|| stage1Done)
-    {
-      if (!stage1Done)
-      {
-        Serial.println("Done");
-        stage1Done = true;
-      }
-      
-      if (((((int)pixy.ccc.blocks[0].m_x + (int)pixy.ccc.blocks[1].m_x) / 2) - 150) == 0 || stage2Done)
-      {
-        if (!stage2Done)
-        {
-          Serial.println("Done");
-          stage2Done = true;
-        }
-        if (range - 150 >= 0 && !stage3Done)
-          Serial.println(range - 100);
-        else
-        {
-          if (!stage3Done)
-          {
-            Serial.println("Done");
-            stage3Done = true;
-          }
-        }
-      }
-      else
-        Serial.println((((int)pixy.ccc.blocks[0].m_x + (int)pixy.ccc.blocks[1].m_x) / 2) - 150);
-    }
-    else if (pixy.ccc.blocks[0].m_x > pixy.ccc.blocks[1].m_x)
-      Serial.println((int)pixy.ccc.blocks[0].m_width - (int)pixy.ccc.blocks[1].m_width);
-    else if (pixy.ccc.blocks[1].m_x > pixy.ccc.blocks[0].m_x)
-      Serial.println((int)pixy.ccc.blocks[1].m_width - (int)pixy.ccc.blocks[0].m_width);
+void stage1()
+{
+  if ((int)pixy.ccc.blocks[0].m_height - (int)pixy.ccc.blocks[1].m_height == 0)
+  {
+    stage1Done == true;
+    Serial.println("Done");
+  }
+  else if ((int)pixy.ccc.blocks[0].m_x > (int)pixy.ccc.blocks[1].m_x
+    Serial.println((int)pixy.ccc.blocks[0].m_height - (int)pixy.ccc.blocks[1].m_height);
+  else
+    Serial.println((int)pixy.ccc.blocks[1].m_height - (int)pixy.ccc.blocks[0].m_height);
+}
+
+void stage2()
+{
+  if (average() - middlePoint) == 0)
+  {
+    stage2Done == true;
+    Serial.println("Done");
   }
   else
+    Serial.println(average() - middlePoint);
+}
+
+void stage3()
+{
+  if (range - rangefinder <= 0)
   {
-    for (int i = 0; i < 12; i++)
-    {
-      driverNotifier.setPixelColor(i, pink);
-    }
-    driverNotifier.show();
+    stage3Done = true;
+    Serial.println("Done");
   }
+  else
+    Serial.println(range - rangfinder);
+}
+
+int average()
+{
+  return ((int)pixy.ccc.blocks[0].m_x + (int)pixy.ccc.blocks[1].m_x) / 2;
 }
