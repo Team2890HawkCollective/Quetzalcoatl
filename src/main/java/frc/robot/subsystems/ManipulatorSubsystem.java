@@ -34,11 +34,28 @@ public class ManipulatorSubsystem extends Subsystem
     RobotMap.intakeTalon.set(speed);
   }
 
+  public void stopIntake()
+  {
+    RobotMap.intakeTalon.set(0);
+  }
+
   /**
    * Releases any grabbed Hatches
    */
   public void releaseHatch()
   {
     RobotMap.hatchHolder.set(RobotMap.HATCH_HOLDER_SERVO_RELEASE);
+  }
+
+  //Makes wheels on intake/outtake spin to move ball up and out
+  public void xboxIntakeOuttake()
+  {
+    if (RobotMap.assistantDriverController().getYButton())
+    {
+      spinIntake(RobotMap.MANIPULATOR_FULL_SPEED);
+    }
+    else
+      stopIntake();
+
   }
 }
