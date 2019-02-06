@@ -7,8 +7,6 @@
 
 package frc.robot;
 
-import java.awt.Color;
-
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
