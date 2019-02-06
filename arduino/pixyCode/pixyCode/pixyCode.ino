@@ -61,6 +61,7 @@ void setup()
 
   for (int i = 0; i < 12; i++)
     driverNotifier.setPixelColor(i, pink);
+  }
 
   for (int i = 0; i < 12; i++)
     cameraLight.setPixelColor(i, white);
