@@ -25,24 +25,29 @@ public class ElevatorSubsystem extends Subsystem
     // setDefaultCommand(new MySpecialCommand());
   }
 
+  /**
+   * Moves the elevator up at *full* speed
+   */
   public void elevatorUp()
   {
-    elevatorUp(RobotMap.ELEVATOR_FULL_SPEED * RobotMap.ELEVATOR_SPEED_MODIFIER);
+    moveElevator(RobotMap.ELEVATOR_FULL_SPEED * RobotMap.ELEVATOR_SPEED_MODIFIER);
   }
 
-  public void elevatorUp(double speed)
-  {
-    RobotMap.elevatorSparkMax.set(speed * RobotMap.ELEVATOR_SPEED_MODIFIER);
-  }
-
+  /**
+   * Moves the elevator down at *full* speed
+   */
   public void elevatorDown()
   {
-    elevatorUp(-RobotMap.ELEVATOR_FULL_SPEED * RobotMap.ELEVATOR_SPEED_MODIFIER);
+    moveElevator(-RobotMap.ELEVATOR_FULL_SPEED * RobotMap.ELEVATOR_SPEED_MODIFIER);
   }
 
-  public void elevatorDown(double speed)
+  /**
+   * Moves the elevator up/down at the given speed. Positive for up, Negative for down
+   * @param speed
+   */
+  public void moveElevator(double speed)
   {
-    elevatorUp(-speed);
+    RobotMap.elevatorSparkMax.set(speed * RobotMap.ELEVATOR_SPEED_MODIFIER);
   }
 
   public double getEncoderPosition()

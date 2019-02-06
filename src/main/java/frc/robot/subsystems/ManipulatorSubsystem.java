@@ -60,6 +60,7 @@ public class ManipulatorSubsystem extends Subsystem
    */
   public void xboxIntakeOuttake()
   {
+    //Spins the motors when the button is pressed. THIS IS ONLY RUN ONCE UNTIL THE BUTTON IS RELEASED AND PRESSED AGAIN
     if (RobotMap.assistantDriverController.getXButtonPressed())
     {
       //We are intaking
@@ -72,7 +73,8 @@ public class ManipulatorSubsystem extends Subsystem
       spinIntake(RobotMap.MANIPULATOR_FULL_SPEED * RobotMap.MANIPULATOR_SPEED_MODIFER); //Spin the intake
       RobotMap.intakeMode = !RobotMap.intakeMode; //Change to either intake mode or not intake mode
     }
-    else
+    //Only stop the motors when the button is released
+    else if (RobotMap.assistantDriverController.getXButtonReleased())
       spinIntake(RobotMap.MANIPULATOR_STOP_SPEED); //Stop the intake from spinning
   }
 }

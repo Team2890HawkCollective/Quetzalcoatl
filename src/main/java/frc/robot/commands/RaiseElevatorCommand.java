@@ -59,7 +59,7 @@ public class RaiseElevatorCommand extends Command
   @Override
   protected void execute() 
   {
-    RobotMap.elevatorSubsystem.elevatorUp((encoderTarget - RobotMap.elevatorSubsystem.getEncoderPosition()) / 100.0);
+    RobotMap.elevatorSubsystem.moveElevator((encoderTarget - RobotMap.elevatorSubsystem.getEncoderPosition()) / 100.0);
   }
 
   // Make this return true when this Command no longer needs to run execute()
