@@ -55,7 +55,9 @@ public class RobotMap {
 
       //Manipulator Servos
       public static final int HATCH_HOLDER_PORT = 0;
-      public static final int BALL_INTAKE_TENSIONER_PORT = 1;
+
+      //Manipulator Micro Switch
+      public static final int BALL_INTAKE_STOP_PORT = 0;
 
   //Constants//
     //Drivetrain Misc Constants//
@@ -87,16 +89,12 @@ public class RobotMap {
     public static final double HATCH_HOLDER_SERVO_RELEASE = 0.5;
     public static final double HATCH_FOLDER_SERVO_GRAB = 0.0;
 
-    //Ball Intake Constants//
-    public static final double BALL_INTAKE_TENSION_ON = 1.0;
-    public static final double BALL_INTAKE_TENSION_OFF = 0.0;
-
     //Misc Constants//
     public static final double MAX_VELOCITY = 17.5;
     public static final double kV = 1.0 / MAX_VELOCITY;
 
   //Flags
-  public static boolean ballOuttake = true;
+  public static boolean ballInIntake = true;
 
   //Objects//
     //Drivetrain//
@@ -115,7 +113,9 @@ public class RobotMap {
 
     //Servos//
     public static Servo hatchHolder;
-    public static Servo ballIntakeTensioner;
+
+    //Micro Switches
+    public static DigitalInput ballIntakeStop;
 
     //Sensors//
     public static AHRS navX; //Gyro. The purple thingy on the rio
@@ -157,7 +157,8 @@ public class RobotMap {
     elevatorEncoder = elevatorSparkMax.getEncoder();
 
     hatchHolder = new Servo(HATCH_HOLDER_PORT);
-    ballIntakeTensioner = new Servo(BALL_INTAKE_TENSIONER_PORT);
+
+    ballIntakeStop = new DigitalInput(BALL_INTAKE_STOP_PORT);
 
     leftDriverJoystick = new Joystick(LEFT_DRIVER_JOYSTICK_PORT);
     rightDriverJoystick = new Joystick(RIGHT_DRIVER_JOYSTICK_PORT);
