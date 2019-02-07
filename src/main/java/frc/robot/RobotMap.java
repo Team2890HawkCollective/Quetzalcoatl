@@ -77,12 +77,10 @@ public class RobotMap {
   public static final double BALL_INTAKE_TENSION_ON = 0.5;
   public static final double BALL_INTAKE_TENSION_OFF = 0.0;
 
-  public static final double MOTOR_STOP_VALUE = 0.0;
-
   public static final double MAX_VELOCITY = 17.5;
   public static final double kV = 1.0 / MAX_VELOCITY;
 
-  public static boolean intakeMode = true;
+  public static boolean ballOuttake = true;
 
   //Talons
   public static WPI_TalonSRX leftFrontTalon;

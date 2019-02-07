@@ -63,15 +63,9 @@ public class ManipulatorSubsystem extends Subsystem
     //Spins the motors when the button is pressed. THIS IS ONLY RUN ONCE UNTIL THE BUTTON IS RELEASED AND PRESSED AGAIN
     if (RobotMap.assistantDriverController.getXButtonPressed())
     {
-      //We are intaking
-      if (RobotMap.intakeMode)
-        tensionBallIntake(false);
-      //We are shooting
-      else
-        tensionBallIntake(true);
-      
+      tensionBallIntake(RobotMap.ballOuttake);
       spinIntake(RobotMap.MANIPULATOR_FULL_SPEED * RobotMap.MANIPULATOR_SPEED_MODIFER); //Spin the intake
-      RobotMap.intakeMode = !RobotMap.intakeMode; //Change to either intake mode or not intake mode
+      RobotMap.ballOuttake = !RobotMap.ballOuttake; //Change to either intake mode or not intake mode
     }
     //Only stop the motors when the button is released
     else if (RobotMap.assistantDriverController.getXButtonReleased())
