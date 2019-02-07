@@ -88,7 +88,7 @@ public class RobotMap {
     public static final double HATCH_FOLDER_SERVO_GRAB = 0.0;
 
     //Ball Intake Constants//
-    public static final double BALL_INTAKE_TENSION_ON = 0.5;
+    public static final double BALL_INTAKE_TENSION_ON = 1.0;
     public static final double BALL_INTAKE_TENSION_OFF = 0.0;
 
     //Misc Constants//
@@ -157,6 +157,7 @@ public class RobotMap {
     elevatorEncoder = elevatorSparkMax.getEncoder();
 
     hatchHolder = new Servo(HATCH_HOLDER_PORT);
+    ballIntakeTensioner = new Servo(BALL_INTAKE_TENSIONER_PORT);
 
     leftDriverJoystick = new Joystick(LEFT_DRIVER_JOYSTICK_PORT);
     rightDriverJoystick = new Joystick(RIGHT_DRIVER_JOYSTICK_PORT);
