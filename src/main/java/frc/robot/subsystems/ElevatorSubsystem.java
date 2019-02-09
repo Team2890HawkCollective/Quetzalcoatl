@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
@@ -54,5 +55,20 @@ public class ElevatorSubsystem extends Subsystem
   public double getEncoderPosition()
   {
     return RobotMap.elevatorEncoder.getPosition();
+  }
+
+  public void xboxElevatorControl()
+  {
+    //Left Trigger goes down
+    if (RobotMap.assistantDriverController.getTriggerAxis(Hand.kLeft) > 0.1)
+    {
+      elevatorDown();
+    }
+
+    //Right Trigger goes up
+    if (RobotMap.assistantDriverController.getTriggerAxis(Hand.kRight) > 0.1)
+    {
+      elevatorUp();
+    }
   }
 }
