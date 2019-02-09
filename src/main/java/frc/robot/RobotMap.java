@@ -47,7 +47,7 @@ public class RobotMap {
     public static final int CENTER_TALON_ID = 5;
 
     //Elevator//
-    public static final int ELEVATOR_SPARK_MAX_ID = 99;
+    public static final int ELEVATOR_SPARK_MAX_ID = 6;
 
     //Manipulator//
       //Manipulator Talon
@@ -77,6 +77,7 @@ public class RobotMap {
     public static final double ELEVATOR_SPEED_MODIFIER = 1.0;
     public static final double ELEVATOR_FULL_SPEED = 1.0;
     public static final double ELEVATOR_ENCODER_TARGET_SPEED_MODIFIER = 100.0; //What the difference between the elevator target and current elevator position will be divided by to determine speed
+    public static final double ELEVATOR_STOP_SPEED = 0.0;
 
     //Manipulator Constants//
     public static final double MANIPULATOR_FULL_SPEED = 1.0;

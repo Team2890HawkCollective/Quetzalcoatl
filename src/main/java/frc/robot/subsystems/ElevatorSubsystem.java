@@ -7,6 +7,8 @@
 
 package frc.robot.subsystems;
 
+import javax.lang.model.util.ElementScanner6;
+
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
@@ -60,15 +62,16 @@ public class ElevatorSubsystem extends Subsystem
   public void xboxElevatorControl()
   {
     //Left Trigger goes down
-    if (RobotMap.assistantDriverController.getTriggerAxis(Hand.kLeft) > 0.1)
+    if (RobotMap.assistantDriverController.getTriggerAxis(Hand.kLeft) > 0.01)
     {
-      elevatorDown();
+      moveElevator(-RobotMap.assistantDriverController.getTriggerAxis(Hand.kLeft));
     }
-
     //Right Trigger goes up
-    if (RobotMap.assistantDriverController.getTriggerAxis(Hand.kRight) > 0.1)
+    else if (RobotMap.assistantDriverController.getTriggerAxis(Hand.kRight) > 0.01)
     {
-      elevatorUp();
+      moveElevator(RobotMap.assistantDriverController.getTriggerAxis(Hand.kRight));
     }
+    else 
+      moveElevator(RobotMap.ELEVATOR_STOP_SPEED);
   }
 }
