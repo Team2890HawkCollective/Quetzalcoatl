@@ -68,7 +68,7 @@ public class RobotMap {
     public static final double DRIVETRAIN_SPEED_MODIFIER = 1.0;
     public static final double DRIVETRAIN_FULL_SPEED = 1.0;
     public static final double DRIVETRAIN_FULL_STOP = 0.0;
-    public static final double DRIVETRAIN_STRAFE_SPEED_MODIFIER = 0.3;
+    public static final double DRIVETRAIN_STRAFE_SPEED_MODIFIER = 0.75;
     public static final double DRIVETRAIN_CAMERA_TARGETING_SPEED_MODIFIER = 10.0; //What the value returned by the arduino will be divided by to determine speed
     public static final double DRIVETRAIN_CAMERA_TARGETING_STRAFE_SPEED_MODIFIER = 100.0;
     public static final double DRIVETRAIN_RANGEFINDER_TARGETING_SPEED_MODIFIER = 100.0; //The modifier that the rangefinder value will be divided by to determine speed
@@ -115,7 +115,7 @@ public class RobotMap {
     public static Servo hatchHolder;
 
     //Micro Switches
-    public static DigitalInput ballIntakeStop;
+    public static DigitalInput ballIntakeStopSwitch;
 
     //Sensors//
     public static AHRS navX; //Gyro. The purple thingy on the rio
@@ -158,7 +158,7 @@ public class RobotMap {
 
     hatchHolder = new Servo(HATCH_HOLDER_PORT);
 
-    ballIntakeStop = new DigitalInput(BALL_INTAKE_STOP_PORT);
+    ballIntakeStopSwitch = new DigitalInput(BALL_INTAKE_STOP_PORT);
 
     leftDriverJoystick = new Joystick(LEFT_DRIVER_JOYSTICK_PORT);
     rightDriverJoystick = new Joystick(RIGHT_DRIVER_JOYSTICK_PORT);
