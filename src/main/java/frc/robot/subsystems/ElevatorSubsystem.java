@@ -11,7 +11,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
 /**
- * Add your docs here.
+ * Implements the methods to move the elevator and get the current position
+ * of the elevator.
  */
 public class ElevatorSubsystem extends Subsystem 
 {

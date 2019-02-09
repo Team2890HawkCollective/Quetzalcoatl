@@ -11,6 +11,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
+/**
+ * Implements methods to run xbox methods and can end which works like a return
+ */
 public class XboxDriveCommand extends Command {
   public XboxDriveCommand() {
     // Use requires() here to declare subsystem dependencies
@@ -20,7 +23,9 @@ public class XboxDriveCommand extends Command {
 
   // Called just before this Command runs the first time
   @Override
-  protected void initialize() {
+  protected void initialize() 
+  {
+
   }
 
   // Called repeatedly when this Command is scheduled to run

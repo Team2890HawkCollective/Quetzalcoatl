@@ -11,6 +11,9 @@ import components.utilities.FormatChecker;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.RobotMap;
 
+/**
+ * 
+ */
 public class TargetingStage3RangefinderCommand extends Command 
 {
   private String data;

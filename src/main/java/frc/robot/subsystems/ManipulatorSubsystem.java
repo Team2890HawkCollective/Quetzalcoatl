@@ -11,7 +11,11 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
 /**
- * Add your docs here.
+ * Actions the bot can do other than driving. 
+ * Implements methods for the ball intake and the hatch.
+ * Intake and Outtake will roll a ball up from below and release it 
+ * to the docking.
+ * 
  */
 public class ManipulatorSubsystem extends Subsystem 
 {
@@ -56,7 +60,7 @@ public class ManipulatorSubsystem extends Subsystem
     //Only stop the motors when the button is released
     else if (RobotMap.assistantDriverController.getXButtonReleased())
       spinIntake(RobotMap.MANIPULATOR_STOP_SPEED); //Stop the intake from spinning
-    else if (!RobotMap.ballIntakeStop.get() && RobotMap.ballInIntake)
+    else if (RobotMap.ballIntakeStop.get() && RobotMap.ballInIntake)
     {
       spinIntake(RobotMap.MANIPULATOR_STOP_SPEED); //Stop the intake from spinning when the ball is inside
     }

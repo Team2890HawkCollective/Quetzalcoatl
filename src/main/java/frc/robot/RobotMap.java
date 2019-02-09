@@ -51,7 +51,7 @@ public class RobotMap {
 
     //Manipulator//
       //Manipulator Talon
-      public static final int INATKE_TALON_ID = 6;
+      public static final int INATKE_TALON_ID = 7;
 
       //Manipulator Servos
       public static final int HATCH_HOLDER_PORT = 0;
@@ -83,7 +83,7 @@ public class RobotMap {
     public static final double MANIPULATOR_DEFAULT_SPEED = 1.0; 
     public static final double MANIPULATOR_TIME_TO_RELEASE_CARGO = 1.0;
     public static final double MANIPULATOR_STOP_SPEED = 0.0;
-    public static final double MANIPULATOR_SPEED_MODIFER = 0.5;
+    public static final double MANIPULATOR_SPEED_MODIFER = 0.375;
 
     //Hatch Holder Constants//
     public static final double HATCH_HOLDER_SERVO_RELEASE = 0.5;

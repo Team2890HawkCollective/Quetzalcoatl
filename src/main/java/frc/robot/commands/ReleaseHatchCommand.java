@@ -7,51 +7,27 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.RobotMap;
 
-public class ReleaseHatchCommand extends Command 
-{
-  private boolean done = false;
-
-  public ReleaseHatchCommand() 
-  {
+/**
+ * Add your docs here.
+ */
+public class ReleaseHatchCommand extends InstantCommand {
+  /**
+   * Add your docs here.
+   */
+  public ReleaseHatchCommand() {
+    super();
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(RobotMap.manipulatorSubsystem);
   }
 
-  // Called just before this Command runs the first time
+  // Called once when the command executes
   @Override
   protected void initialize() 
   {
-  }
-
-  // Called repeatedly when this Command is scheduled to run
-  @Override
-  protected void execute() 
-  {
     RobotMap.manipulatorSubsystem.releaseHatch();
-    done = true;
   }
 
-  // Make this return true when this Command no longer needs to run execute()
-  @Override
-  protected boolean isFinished() 
-  {
-    return done;
-  }
-
-  // Called once after isFinished returns true
-  @Override
-  protected void end() 
-  {
-  }
-
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
-  @Override
-  protected void interrupted() 
-  {
-  }
 }
