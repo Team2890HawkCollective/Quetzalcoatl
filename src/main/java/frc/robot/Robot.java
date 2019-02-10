@@ -123,6 +123,8 @@ public class Robot extends TimedRobot
       m_autonomousCommand.cancel();
     }
 
+    Scheduler.getInstance().removeAll();
+
     new JoystickDriveCommand().start();
   }
 

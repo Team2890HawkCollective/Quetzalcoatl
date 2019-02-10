@@ -32,82 +32,110 @@ public class RobotMap {
   // public static int rangefinderPort = 1;
   // public static int rangefinderModule = 1;
 
-  //PORT IDS
-  public static final int DRIVER_CONTROLLER_PORT = 0;
-  public static final int ASSISTANT_DRIVER_CONTROLLER_PORT = 2;
-  public static final int LEFT_DRIVER_JOYSTICK_PORT = 0;
-  public static final int RIGHT_DRIVER_JOYSTICK_PORT = 1;
-  public static final int LEFT_FRONT_TALON_ID = 1;
-  public static final int RIGHT_FRONT_TALON_ID = 2;
-  public static final int LEFT_BACK_TALON_ID = 3;
-  public static final int RIGHT_BACK_TALON_ID = 4;
-  public static final int CENTER_TALON_ID = 5;
+  //Hardware IDs//
+    //Controllers
+    public static final int DRIVER_CONTROLLER_PORT = 0; 
+    public static final int ASSISTANT_DRIVER_CONTROLLER_PORT = 2;
+    public static final int LEFT_DRIVER_JOYSTICK_PORT = 0;
+    public static final int RIGHT_DRIVER_JOYSTICK_PORT = 1;
 
-  public static final int ELEVATOR_SPARK_MAX_ID = 99;
+    //Drivetrain//
+    public static final int LEFT_FRONT_TALON_ID = 1;
+    public static final int RIGHT_FRONT_TALON_ID = 2;
+    public static final int LEFT_BACK_TALON_ID = 3;
+    public static final int RIGHT_BACK_TALON_ID = 4;
+    public static final int CENTER_TALON_ID = 5;
 
-  public static final int INATKE_TALON_ID = 6;
+    //Elevator//
+    public static final int ELEVATOR_SPARK_MAX_ID = 6;
 
-  public static final int HATCH_HOLDER_PORT = 0;
+    //Manipulator//
+      //Manipulator Talon
+      public static final int INATKE_TALON_ID = 7;
 
-  public static final int DRIVETRAIN_ENCODER_TICKS_PER_REVOLUTION = 42;
-  public static final int DRIVETRAIN_WHEEL_DIAMETER = 4;
+      //Manipulator Servos
+      public static final int HATCH_HOLDER_PORT = 0;
 
-  public static final double DRIVETRAIN_SPEED_MODIFIER = 1.0;
-  public static final double DRIVETRAIN_FULL_SPEED = 1.0;
-  public static final double DRIVETRAIN_FULL_STOP = 0.0;
-  public static final double DRIVETRAIN_STRAFE_SPEED_MODIFIER = 0.3;
-  public static final double DRIVETRAIN_CAMERA_TARGETING_SPEED_MODIFIER = 10.0; //What the value returned by the arduino will be divided by to determine speed
-  public static final double DRIVETRAIN_CAMERA_TARGETING_STRAFE_SPEED_MODIFIER = 100.0;
-  public static final double DRIVETRAIN_RANGEFINDER_TARGETING_SPEED_MODIFIER = 100.0; //The modifier that the rangefinder value will be divided by to determine speed
+      //Manipulator Micro Switch
+      public static final int BALL_INTAKE_STOP_PORT = 0;
 
-  public static final double ELEVATOR_SPEED_MODIFIER = 1.0;
-  public static final double ELEVATOR_FULL_SPEED = 1.0;
-  public static final double ELEVATOR_ENCODER_TARGET_SPEED_MODIFIER = 100.0; //What the difference between the elevator target and current elevator position will be divided by to determine speed
+  //Constants//
+    //Drivetrain Misc Constants//
+    public static final int DRIVETRAIN_ENCODER_TICKS_PER_REVOLUTION = 42;
+    public static final int DRIVETRAIN_WHEEL_DIAMETER = 4;
 
-  public static final double MANIPULATOR_FULL_SPEED = 1.0;
-  public static final double MANIPULATOR_DEFAULT_SPEED = 1.0; 
-  public static final double MANIPULATOR_TIME_TO_RELEASE_CARGO = 1.0;
-  public static final double MANIPULATOR_STOP_SPEED = 0.0;
-  public static final double MANIPULATOR_SPEED_MODIFER = 0.5;
+    //Drivetrain Speed Constants//
+    public static final double DRIVETRAIN_SPEED_MODIFIER = 1.0;
+    public static final double DRIVETRAIN_FULL_SPEED = 1.0;
+    public static final double DRIVETRAIN_FULL_STOP = 0.0;
+    public static final double DRIVETRAIN_STRAFE_SPEED_MODIFIER = 0.5;
+    public static final double DRIVETRAIN_CAMERA_TARGETING_SPEED_MODIFIER = 10.0; //What the value returned by the arduino will be divided by to determine speed
+    public static final double DRIVETRAIN_CAMERA_TARGETING_STRAFE_SPEED_MODIFIER = 100.0;
+    public static final double DRIVETRAIN_RANGEFINDER_TARGETING_SPEED_MODIFIER = 100.0; //The modifier that the rangefinder value will be divided by to determine speed
 
-  public static final double HATCH_HOLDER_SERVO_RELEASE = 0.5;
-  public static final double HATCH_FOLDER_SERVO_GRAB = 0.0;
+    //Elevator Constants//
+    public static final double ELEVATOR_SPEED_MODIFIER = 1.0;
+    public static final double ELEVATOR_FULL_SPEED = 1.0;
+    public static final double ELEVATOR_ENCODER_TARGET_SPEED_MODIFIER = 100.0; //What the difference between the elevator target and current elevator position will be divided by to determine speed
+    public static final double ELEVATOR_STOP_SPEED = 0.0;
 
-  public static final double MOTOR_STOP_VALUE = 0.0;
+    //Manipulator Constants//
+    public static final double MANIPULATOR_FULL_SPEED = 1.0;
+    public static final double MANIPULATOR_DEFAULT_SPEED = 1.0; 
+    public static final double MANIPULATOR_TIME_TO_RELEASE_CARGO = 1.0;
+    public static final double MANIPULATOR_STOP_SPEED = 0.0;
+    public static final double MANIPULATOR_SPEED_MODIFER = 0.375;
 
-  public static final double MAX_VELOCITY = 17.5;
-  public static final double kV = 1.0 / MAX_VELOCITY;
+    //Hatch Holder Constants//
+    public static final double HATCH_HOLDER_SERVO_RELEASE = 0.5;
+    public static final double HATCH_FOLDER_SERVO_GRAB = 0.0;
 
-  //Talons
-  public static WPI_TalonSRX leftFrontTalon;
-  public static WPI_TalonSRX rightFrontTalon;
-  public static WPI_TalonSRX leftBackTalon;
-  public static WPI_TalonSRX rightBackTalon;
-  public static WPI_TalonSRX centralTalon;
+    //Misc Constants//
+    public static final double MAX_VELOCITY = 17.5;
+    public static final double kV = 1.0 / MAX_VELOCITY;
 
-  public static WPI_TalonSRX intakeTalon;
+  //Flags
+  public static boolean ballInIntake = true;
 
-  public static CANSparkMax elevatorSparkMax;
-  
-  public static CANEncoder elevatorEncoder;
+  //Objects//
+    //Drivetrain//
+    public static WPI_TalonSRX leftFrontTalon;
+    public static WPI_TalonSRX rightFrontTalon;
+    public static WPI_TalonSRX leftBackTalon;
+    public static WPI_TalonSRX rightBackTalon;
+    public static WPI_TalonSRX centralTalon;
 
-  public static Servo hatchHolder;
+    //Intake//
+    public static WPI_TalonSRX intakeTalon;
 
-  public static AHRS navX;
+    //Elevator//
+    public static CANSparkMax elevatorSparkMax;
+    public static CANEncoder elevatorEncoder;
 
-  public static Joystick leftDriverJoystick;
-  public static Joystick rightDriverJoystick;
+    //Servos//
+    public static Servo hatchHolder;
 
-  //Controllers
-  public static XboxController driverController;
-  public static XboxController assistantDriverController;
+    //Micro Switches
+    public static DigitalInput ballIntakeStopSwitch;
 
-  //Subsystems
-  public static DriveTrainSubsystem driveTrainSubsystem;
-  public static ElevatorSubsystem elevatorSubsystem;
-  public static ManipulatorSubsystem manipulatorSubsystem;
+    //Sensors//
+    public static AHRS navX; //Gyro. The purple thingy on the rio
 
-  public static SerialPort arduino;
+    //Joysticks//
+    public static Joystick leftDriverJoystick;
+    public static Joystick rightDriverJoystick;
+
+    //Controllers//
+    public static XboxController driverController;
+    public static XboxController assistantDriverController;
+
+    //Subsystems//
+    public static DriveTrainSubsystem driveTrainSubsystem;
+    public static ElevatorSubsystem elevatorSubsystem;
+    public static ManipulatorSubsystem manipulatorSubsystem;
+
+    //Arduino//
+    public static SerialPort arduino;
 
   public static void init()
   {
@@ -130,6 +158,8 @@ public class RobotMap {
     elevatorEncoder = elevatorSparkMax.getEncoder();
 
     hatchHolder = new Servo(HATCH_HOLDER_PORT);
+
+    ballIntakeStopSwitch = new DigitalInput(BALL_INTAKE_STOP_PORT);
 
     leftDriverJoystick = new Joystick(LEFT_DRIVER_JOYSTICK_PORT);
     rightDriverJoystick = new Joystick(RIGHT_DRIVER_JOYSTICK_PORT);

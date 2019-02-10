@@ -17,7 +17,10 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 
 /**
- * Add your docs here.
+ * Bot driving. Includes methods for xbox and joystick with tank drive and arcade drive.
+ * Arcade drive is driving with one joystick. 
+ * Tank drive has joystick for forward and back and
+ * the other has left and right.
  */
 public class DriveTrainSubsystem extends Subsystem 
 {

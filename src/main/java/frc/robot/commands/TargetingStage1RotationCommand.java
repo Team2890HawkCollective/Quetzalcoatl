@@ -43,9 +43,9 @@ public class TargetingStage1RotationCommand extends Command
       {
         System.out.println("newData");
         if (Double.parseDouble(data) < 0)
-          RobotMap.driveTrainSubsystem.arcadeDrive(RobotMap.MOTOR_STOP_VALUE, -Math.sqrt(Math.abs(Double.parseDouble(data))) / RobotMap.DRIVETRAIN_CAMERA_TARGETING_SPEED_MODIFIER, RobotMap.MOTOR_STOP_VALUE);
+          RobotMap.driveTrainSubsystem.arcadeDrive(RobotMap.DRIVETRAIN_FULL_STOP, -Math.sqrt(Math.abs(Double.parseDouble(data))) / RobotMap.DRIVETRAIN_CAMERA_TARGETING_SPEED_MODIFIER, RobotMap.DRIVETRAIN_FULL_STOP);
         else
-          RobotMap.driveTrainSubsystem.arcadeDrive(RobotMap.MOTOR_STOP_VALUE, Math.sqrt(Math.abs(Double.parseDouble(data))) / RobotMap.DRIVETRAIN_CAMERA_TARGETING_SPEED_MODIFIER, RobotMap.MOTOR_STOP_VALUE);
+          RobotMap.driveTrainSubsystem.arcadeDrive(RobotMap.DRIVETRAIN_FULL_STOP, Math.sqrt(Math.abs(Double.parseDouble(data))) / RobotMap.DRIVETRAIN_CAMERA_TARGETING_SPEED_MODIFIER, RobotMap.DRIVETRAIN_FULL_STOP);
       }
     }
     //System.out.println("Data: " + data + "\tnewData: " + newData);

@@ -7,11 +7,16 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
 /**
- * Add your docs here.
+ * Actions the bot can do other than driving. 
+ * Implements methods for the ball intake and the hatch.
+ * Intake and Outtake will roll a ball up from below and release it 
+ * to the docking.
+ * 
  */
 public class ManipulatorSubsystem extends Subsystem 
 {
@@ -42,11 +47,26 @@ public class ManipulatorSubsystem extends Subsystem
     RobotMap.hatchHolder.set(RobotMap.HATCH_HOLDER_SERVO_RELEASE);
   }
 
+  /**
+   * Controls the manipulator using an xbox controller. X-button intakes and outtakes
+   */
   public void xboxIntakeOuttake()
   {
-    if (RobotMap.assistantDriverController.getXButton())
-      spinIntake(RobotMap.MANIPULATOR_FULL_SPEED * RobotMap.MANIPULATOR_SPEED_MODIFER);
-    else
-      spinIntake(RobotMap.MANIPULATOR_STOP_SPEED);
+    //Whether or not we are intaking from the bottom or front. If from front, value is negative.
+    double intakeDirection = 1.0;
+    if (RobotMap.assistantDriverController.getBumper(Hand.kRight))
+      intakeDirection = -1.0;
+
+    //Spins the motors when the button is pressed. THIS IS ONLY RUN ONCE UNTIL THE BUTTON IS RELEASED AND PRESSED AGAIN
+    if (RobotMap.assistantDriverController.getXButtonPressed())
+    {
+      spinIntake(RobotMap.MANIPULATOR_FULL_SPEED * RobotMap.MANIPULATOR_SPEED_MODIFER * intakeDirection); //Spin the intake
+      RobotMap.ballInIntake = !RobotMap.ballInIntake;
+    }
+    //Only stop the motors when the button is released
+    else if (RobotMap.assistantDriverController.getXButtonReleased())
+      spinIntake(RobotMap.MANIPULATOR_STOP_SPEED); //Stop the intake from spinning
+    else if (!RobotMap.ballIntakeStopSwitch.get() && RobotMap.ballInIntake)
+      spinIntake(RobotMap.MANIPULATOR_STOP_SPEED); //Stop the intake from spinning when the ball is inside
   }
 }

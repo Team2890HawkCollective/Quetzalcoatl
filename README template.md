@@ -1,7 +1,7 @@
 
 # Robot name
 
-This is the codebase for FRC Team 2890 in the 2019 competition, Destination: Deep Space
+This is the codebase for FRC Team 2890 in the 20xx competition, Name of Game
 
 ## What is FRC
 
