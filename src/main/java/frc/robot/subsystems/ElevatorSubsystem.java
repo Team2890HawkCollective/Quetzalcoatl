@@ -54,24 +54,27 @@ public class ElevatorSubsystem extends Subsystem
     RobotMap.elevatorSparkMax.set(speed * RobotMap.ELEVATOR_SPEED_MODIFIER);
   }
 
+  public void xboxElevatorControl()
+  {
+    //Ensure we don't go too low or too high
+    if (RobotMap.elevatorEncoder.getPosition() >= RobotMap.ELEVATOR_LOWER_ENCODER_LIMIT)
+    {
+      //Left Trigger goes down
+      if (RobotMap.assistantDriverController.getTriggerAxis(Hand.kLeft) > RobotMap.ELEVATOR_CONTROLLER_DEADZONE)
+        moveElevator(-RobotMap.assistantDriverController.getTriggerAxis(Hand.kLeft));
+      //Right Trigger goes up
+      else if (RobotMap.assistantDriverController.getTriggerAxis(Hand.kRight) > RobotMap.ELEVATOR_CONTROLLER_DEADZONE)
+        moveElevator(RobotMap.assistantDriverController.getTriggerAxis(Hand.kRight));
+      //If we aren't pressing anything, stop
+      else 
+        moveElevator(RobotMap.ELEVATOR_STOP_SPEED);
+    }
+    else
+      moveElevator(RobotMap.ELEVATOR_STOP_SPEED);  
+  }
+
   public double getEncoderPosition()
   {
     return RobotMap.elevatorEncoder.getPosition();
-  }
-
-  public void xboxElevatorControl()
-  {
-    //Left Trigger goes down
-    if (RobotMap.assistantDriverController.getTriggerAxis(Hand.kLeft) > 0.01)
-    {
-      moveElevator(-RobotMap.assistantDriverController.getTriggerAxis(Hand.kLeft));
-    }
-    //Right Trigger goes up
-    else if (RobotMap.assistantDriverController.getTriggerAxis(Hand.kRight) > 0.01)
-    {
-      moveElevator(RobotMap.assistantDriverController.getTriggerAxis(Hand.kRight));
-    }
-    else 
-      moveElevator(RobotMap.ELEVATOR_STOP_SPEED);
   }
 }

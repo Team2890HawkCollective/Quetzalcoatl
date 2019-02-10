@@ -74,10 +74,24 @@ public class RobotMap {
     public static final double DRIVETRAIN_RANGEFINDER_TARGETING_SPEED_MODIFIER = 100.0; //The modifier that the rangefinder value will be divided by to determine speed
 
     //Elevator Constants//
-    public static final double ELEVATOR_SPEED_MODIFIER = 1.0;
-    public static final double ELEVATOR_FULL_SPEED = 1.0;
-    public static final double ELEVATOR_ENCODER_TARGET_SPEED_MODIFIER = 100.0; //What the difference between the elevator target and current elevator position will be divided by to determine speed
-    public static final double ELEVATOR_STOP_SPEED = 0.0;
+      //Speed modifers
+      public static final double ELEVATOR_SPEED_MODIFIER = 1.0;
+      public static final double ELEVATOR_FULL_SPEED = 1.0;
+      public static final double ELEVATOR_ENCODER_TARGET_SPEED_MODIFIER = 100.0; //What the difference between the elevator target and current elevator position will be divided by to determine speed
+      public static final double ELEVATOR_STOP_SPEED = 0.0;
+      public static final double ELEVATOR_CONTROLLER_DEADZONE = 0.01;
+
+      //Elevator limits
+      public static final double ELEVATOR_LOWER_ENCODER_LIMIT = 1.0; //The lower limit of the elevator in encoder ticks
+      public static final double ELEVATOR_UPPER_ENCODER_LIMIT = 10000.0; //The upper limit of the elevator in encoder ticks
+
+      //Encoder values for the different rocket levels
+      public static final double ELEVATOR_LEVEL_1_HATCH_VALUE = 0.0;
+      public static final double ELEVATOR_LEVEL_2_HATCH_VALUE = 0.0;
+      public static final double ELEVATOR_LEVEL_3_HATCH_VALUE = 0.0;
+      public static final double ELEVATOR_LEVEL_1_CARGO_VALUE = 0.0;
+      public static final double ELEVATOR_LEVEL_2_CARGO_VALUE = 0.0;
+      public static final double ELEVATOR_LEVEL_3_CARGO_VALUE = 0.0;
 
     //Manipulator Constants//
     public static final double MANIPULATOR_FULL_SPEED = 1.0;
@@ -170,6 +184,7 @@ public class RobotMap {
     leftBackTalon.setInverted(true);
     centralTalon.setInverted(true);
     intakeTalon.setInverted(true);
+    elevatorSparkMax.setInverted(true);
 
     leftBackTalon.follow(leftFrontTalon);
     rightBackTalon.follow(rightFrontTalon);
