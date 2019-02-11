@@ -82,7 +82,7 @@ public class RobotMap {
       public static final double ELEVATOR_STOP_SPEED = 0.0;
       public static final double ELEVATOR_CONTROLLER_DEADZONE = 0.01;
       public static final double ELEVATOR_RAMP_TIME = 0.2;
-      public static final double ELEVATOR_AUTONOMOUS_SPEED = 0.5; 
+      public static final double ELEVATOR_AUTONOMOUS_SPEED = 0.75; 
 
       //Elevator limits
       public static final double ELEVATOR_LOWER_ENCODER_LIMIT = 5.0; //The lower limit of the elevator in encoder ticks
@@ -93,7 +93,7 @@ public class RobotMap {
       public static final double ELEVATOR_LEVEL_2_HATCH_VALUE = 0.0;
       public static final double ELEVATOR_LEVEL_3_HATCH_VALUE = 0.0;
       public static final double ELEVATOR_LEVEL_1_CARGO_VALUE = 54.0;
-      public static final double ELEVATOR_LEVEL_2_CARGO_VALUE = 0.0;
+      public static final double ELEVATOR_LEVEL_2_CARGO_VALUE = 122.0;
       public static final double ELEVATOR_LEVEL_3_CARGO_VALUE = 0.0;
 
     //Manipulator Constants//
@@ -115,7 +115,7 @@ public class RobotMap {
   public static boolean ballInIntake = true;
 
   //Non-constant speed modifiers//
-  public static double ELEVATOR_SPEED_MODIFIER = 0.25;
+  public static double ELEVATOR_SPEED_MODIFIER = 1.0;
 
   //Objects//
     //Drivetrain//
