@@ -195,7 +195,7 @@ public class RobotMap {
     rightBackTalon.follow(rightFrontTalon);
 
     elevatorSparkMax.setClosedLoopRampRate(ELEVATOR_RAMP_TIME);
-    elevatorSparkMax.setIdleMode(IdleMode.kCoast);
+    elevatorSparkMax.setIdleMode(IdleMode.kBrake);
 
     //Set names and subsystems
     driveTrainSubsystem.setName(driveTrainSubsystem.getSubsystem(), "DriveTrainSubsystem");
