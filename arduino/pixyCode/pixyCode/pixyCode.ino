@@ -91,7 +91,7 @@ void loop()
       stage1();
     else if (!stage2Done)
       stage2();
-    else if (!stage3Done)
+    else
       stage3();
   }
 }
@@ -124,8 +124,9 @@ void stage3()
 {
   if (range - rangefinder <= 0)
   {
-    stage3Done = true;
     Serial.println("Done");
+    stage1Done = false;
+    stage2Done = false;
   }
   else
     Serial.println(range - rangfinder);
