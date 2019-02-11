@@ -82,7 +82,7 @@ public class RobotMap {
       public static final double ELEVATOR_STOP_SPEED = 0.0;
       public static final double ELEVATOR_CONTROLLER_DEADZONE = 0.01;
       public static final double ELEVATOR_RAMP_TIME = 0.2;
-      public static final double ELEVATOR_AUTONOMOUS_SPEED = 0.75; 
+      public static final double ELEVATOR_AUTONOMOUS_SPEED = 0.5; 
 
       //Elevator limits
       public static final double ELEVATOR_LOWER_ENCODER_LIMIT = 5.0; //The lower limit of the elevator in encoder ticks

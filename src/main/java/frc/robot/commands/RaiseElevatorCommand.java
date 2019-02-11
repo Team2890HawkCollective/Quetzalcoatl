@@ -77,6 +77,7 @@ public class RaiseElevatorCommand extends Command
   @Override
   protected void end() 
   {
+    RobotMap.elevatorEncoder.setPosition(encoderTarget);
     RobotMap.elevatorSparkMax.stopMotor();
   }
 
