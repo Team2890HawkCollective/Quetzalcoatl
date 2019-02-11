@@ -10,6 +10,7 @@ package frc.robot;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.*;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.*;
@@ -80,9 +81,10 @@ public class RobotMap {
       public static final double ELEVATOR_ENCODER_TARGET_SPEED_MODIFIER = 100.0; //What the difference between the elevator target and current elevator position will be divided by to determine speed
       public static final double ELEVATOR_STOP_SPEED = 0.0;
       public static final double ELEVATOR_CONTROLLER_DEADZONE = 0.01;
+      public static final double ELEVATOR_RAMP_TIME = 0.2;
 
       //Elevator limits
-      public static final double ELEVATOR_LOWER_ENCODER_LIMIT = 0.0; //The lower limit of the elevator in encoder ticks
+      public static final double ELEVATOR_LOWER_ENCODER_LIMIT = 5.0; //The lower limit of the elevator in encoder ticks
       public static final double ELEVATOR_UPPER_ENCODER_LIMIT = 10000.0; //The upper limit of the elevator in encoder ticks
 
       //Encoder values for the different rocket levels
@@ -189,6 +191,9 @@ public class RobotMap {
     leftBackTalon.follow(leftFrontTalon);
     rightBackTalon.follow(rightFrontTalon);
 
+    elevatorSparkMax.setClosedLoopRampRate(ELEVATOR_RAMP_TIME);
+    elevatorSparkMax.setIdleMode(IdleMode.kCoast);
+    
     //Set names and subsystems
     driveTrainSubsystem.setName(driveTrainSubsystem.getSubsystem(), "DriveTrainSubsystem");
     manipulatorSubsystem.setName(manipulatorSubsystem.getSubsystem(), "ManipulatorSubsystem");

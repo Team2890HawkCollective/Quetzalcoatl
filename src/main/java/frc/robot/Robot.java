@@ -124,7 +124,7 @@ public class Robot extends TimedRobot
     }
     Scheduler.getInstance().removeAll();
 
-    RobotMap.elevatorEncoder.setPosition(0);
+    System.out.println(RobotMap.elevatorSparkMax.clearFaults());
 
     new JoystickDriveCommand().start();
   }
