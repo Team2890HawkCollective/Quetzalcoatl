@@ -82,7 +82,7 @@ public class RobotMap {
       public static final double ELEVATOR_CONTROLLER_DEADZONE = 0.01;
 
       //Elevator limits
-      public static final double ELEVATOR_LOWER_ENCODER_LIMIT = 1.0; //The lower limit of the elevator in encoder ticks
+      public static final double ELEVATOR_LOWER_ENCODER_LIMIT = 0.0; //The lower limit of the elevator in encoder ticks
       public static final double ELEVATOR_UPPER_ENCODER_LIMIT = 10000.0; //The upper limit of the elevator in encoder ticks
 
       //Encoder values for the different rocket levels

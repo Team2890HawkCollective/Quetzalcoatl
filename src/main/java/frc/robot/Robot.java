@@ -122,8 +122,9 @@ public class Robot extends TimedRobot
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-
     Scheduler.getInstance().removeAll();
+
+    RobotMap.elevatorEncoder.setPosition(0);
 
     new JoystickDriveCommand().start();
   }
@@ -134,6 +135,7 @@ public class Robot extends TimedRobot
   @Override
   public void teleopPeriodic() 
   {  
+    System.out.println(RobotMap.elevatorEncoder.getPosition());
     Scheduler.getInstance().run();
   }
 
