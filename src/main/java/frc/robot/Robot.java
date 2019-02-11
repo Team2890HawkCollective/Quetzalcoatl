@@ -98,9 +98,11 @@ public class Robot extends TimedRobot
       m_autonomousCommand.start();
     }
 
-    RobotMap.arduino = new SerialPort(115200, SerialPort.Port.kUSB);
+    //RobotMap.arduino = new SerialPort(115200, SerialPort.Port.kUSB);
 
-    RobotMap.arduino.enableTermination();
+    //RobotMap.arduino.enableTermination();
+
+    //RobotMap.elevatorEncoder.setPosition(RobotMap.ELEVATOR_LOWER_ENCODER_LIMIT);
 
     new TargetingCommandGroup(1, true).start();
   }

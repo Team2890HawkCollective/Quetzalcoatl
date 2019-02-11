@@ -35,7 +35,7 @@ public class ElevatorSubsystem extends Subsystem
    */
   public void elevatorUp()
   {
-    moveElevator(RobotMap.ELEVATOR_FULL_SPEED * RobotMap.ELEVATOR_SPEED_MODIFIER);
+    moveElevator(RobotMap.ELEVATOR_AUTONOMOUS_SPEED);
   }
 
   /**
@@ -43,7 +43,7 @@ public class ElevatorSubsystem extends Subsystem
    */
   public void elevatorDown()
   {
-    moveElevator(-RobotMap.ELEVATOR_FULL_SPEED * RobotMap.ELEVATOR_SPEED_MODIFIER);
+    moveElevator(-RobotMap.ELEVATOR_AUTONOMOUS_SPEED);
   }
 
   /**

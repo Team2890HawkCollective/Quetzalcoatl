@@ -30,19 +30,21 @@ public class LowerElevatorCommand extends Command
   protected void execute() 
   {
     RobotMap.elevatorSubsystem.elevatorDown();
+    System.out.println(RobotMap.elevatorEncoder.getPosition());
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() 
   {
-    return RobotMap.elevatorSubsystem.getEncoderPosition() == RobotMap.ELEVATOR_LOWER_ENCODER_LIMIT;
+    return RobotMap.elevatorSubsystem.getEncoderPosition() <= RobotMap.ELEVATOR_LOWER_ENCODER_LIMIT;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() 
   {
+    RobotMap.elevatorSparkMax.stopMotor();
   }
 
   // Called when another command which requires one or more of the same

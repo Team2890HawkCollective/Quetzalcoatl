@@ -40,15 +40,14 @@ public class TargetingCommandGroup extends CommandGroup
     addSequential(new TargetingStage2StrafeCommand());
     addSequential(new TargetingStage3RangefinderCommand());*/
     addSequential(new LowerElevatorCommand());
-    RobotMap.elevatorEncoder.setPosition(RobotMap.ELEVATOR_LOWER_ENCODER_LIMIT);
     addSequential(new RaiseElevatorCommand(level, cargo));
 
     /*
     if (cargo)
       addSequential(new ReleaseBallCommand(RobotMap.MANIPULATOR_TIME_TO_RELEASE_CARGO));
     else
-      addSequential(new ReleaseHatchCommand());
+      addSequential(new ReleaseHatchCommand());*/
 
-    addSequential(new LowerElevatorCommand());*/
+    addSequential(new LowerElevatorCommand());
   }
 }

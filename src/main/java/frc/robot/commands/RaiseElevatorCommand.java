@@ -62,20 +62,22 @@ public class RaiseElevatorCommand extends Command
   @Override
   protected void execute() 
   {
-    RobotMap.elevatorSubsystem.moveElevator((encoderTarget - RobotMap.elevatorSubsystem.getEncoderPosition()) / 100.0);
+    RobotMap.elevatorSubsystem.elevatorUp();
+    System.out.println(RobotMap.elevatorEncoder.getPosition());
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() 
   {
-    return RobotMap.elevatorSubsystem.getEncoderPosition() == encoderTarget;
+    return RobotMap.elevatorSubsystem.getEncoderPosition() >= encoderTarget;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() 
   {
+    RobotMap.elevatorSparkMax.stopMotor();
   }
 
   // Called when another command which requires one or more of the same
