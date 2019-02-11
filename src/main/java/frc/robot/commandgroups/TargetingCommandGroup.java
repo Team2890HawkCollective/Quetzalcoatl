@@ -39,7 +39,7 @@ public class TargetingCommandGroup extends CommandGroup
     /*addSequential(new TargetingStage1RotationCommand());
     addSequential(new TargetingStage2StrafeCommand());
     addSequential(new TargetingStage3RangefinderCommand());*/
-    addSequential(new LowerElevatorCommand());
+    //addSequential(new LowerElevatorCommand());
     addSequential(new RaiseElevatorCommand(level, cargo));
 
     /*
@@ -48,6 +48,6 @@ public class TargetingCommandGroup extends CommandGroup
     else
       addSequential(new ReleaseHatchCommand());*/
 
-    addSequential(new LowerElevatorCommand());
+    //addSequential(new LowerElevatorCommand());
   }
 }

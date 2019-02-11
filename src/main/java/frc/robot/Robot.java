@@ -104,7 +104,7 @@ public class Robot extends TimedRobot
 
     //RobotMap.elevatorEncoder.setPosition(RobotMap.ELEVATOR_LOWER_ENCODER_LIMIT);
 
-    new TargetingCommandGroup(1, true).start();
+    //new TargetingCommandGroup(1, true).start();
     new TargetingCommandGroup(2, true).start();
   }
 
