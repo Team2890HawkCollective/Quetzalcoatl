@@ -76,7 +76,7 @@ public class RobotMap {
 
     //Elevator Constants//
       //Speed modifers
-      public static final double ELEVATOR_QUARTER_SPEED = 0.25;
+      public static final double ELEVATOR_APPROACHING_LOWER_LIMIT_SPEED_MODIFIER = 0.05;
       public static final double ELEVATOR_FULL_SPEED = 1.0;
       public static final double ELEVATOR_ENCODER_TARGET_SPEED_MODIFIER = 100.0; //What the difference between the elevator target and current elevator position will be divided by to determine speed
       public static final double ELEVATOR_STOP_SPEED = 0.0;
@@ -91,7 +91,7 @@ public class RobotMap {
       public static final double ELEVATOR_LEVEL_1_HATCH_VALUE = 0.0;
       public static final double ELEVATOR_LEVEL_2_HATCH_VALUE = 0.0;
       public static final double ELEVATOR_LEVEL_3_HATCH_VALUE = 0.0;
-      public static final double ELEVATOR_LEVEL_1_CARGO_VALUE = 0.0;
+      public static final double ELEVATOR_LEVEL_1_CARGO_VALUE = 54.0;
       public static final double ELEVATOR_LEVEL_2_CARGO_VALUE = 0.0;
       public static final double ELEVATOR_LEVEL_3_CARGO_VALUE = 0.0;
 

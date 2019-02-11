@@ -28,14 +28,17 @@ public class RaiseElevatorCommand extends Command
     //If we are carrying cargo
     if (cargo)
     {
-      if (level == 0)
-        encoderTarget = 0.0; //Cargo ship cargo chute encoder value
-      else if (level == 1)
-        encoderTarget = 1.0; //1st level rocket ship encoder value
-      else if (level == 2)
-        encoderTarget = 2.0; //2nd level rocket ship encoder value;
-      else     
-        encoderTarget = 3.0; //3rd level rocket ship encoder value;
+      switch (level) 
+      {
+        case 1:
+          encoderTarget = RobotMap.ELEVATOR_LEVEL_1_CARGO_VALUE;
+          break;
+        case 2:
+          encoderTarget = RobotMap.ELEVATOR_LEVEL_2_CARGO_VALUE;
+          break;
+        case 3:
+          encoderTarget = RobotMap.ELEVATOR_LEVEL_3_CARGO_VALUE;
+      }
     }
     else
     {

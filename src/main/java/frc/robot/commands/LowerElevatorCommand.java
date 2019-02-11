@@ -36,7 +36,7 @@ public class LowerElevatorCommand extends Command
   @Override
   protected boolean isFinished() 
   {
-    return RobotMap.elevatorSubsystem.getEncoderPosition() == 0;
+    return RobotMap.elevatorSubsystem.getEncoderPosition() == RobotMap.ELEVATOR_LOWER_ENCODER_LIMIT;
   }
 
   // Called once after isFinished returns true
