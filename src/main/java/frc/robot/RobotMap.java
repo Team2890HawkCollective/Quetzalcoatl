@@ -76,7 +76,7 @@ public class RobotMap {
 
     //Elevator Constants//
       //Speed modifers
-      public static final double ELEVATOR_SPEED_MODIFIER = 1.0;
+      public static final double ELEVATOR_QUARTER_SPEED = 0.25;
       public static final double ELEVATOR_FULL_SPEED = 1.0;
       public static final double ELEVATOR_ENCODER_TARGET_SPEED_MODIFIER = 100.0; //What the difference between the elevator target and current elevator position will be divided by to determine speed
       public static final double ELEVATOR_STOP_SPEED = 0.0;
@@ -112,6 +112,9 @@ public class RobotMap {
 
   //Flags
   public static boolean ballInIntake = true;
+
+  //Non-constant speed modifiers//
+  public static double ELEVATOR_SPEED_MODIFIER = 1.0;
 
   //Objects//
     //Drivetrain//
@@ -193,7 +196,7 @@ public class RobotMap {
 
     elevatorSparkMax.setClosedLoopRampRate(ELEVATOR_RAMP_TIME);
     elevatorSparkMax.setIdleMode(IdleMode.kCoast);
-    
+
     //Set names and subsystems
     driveTrainSubsystem.setName(driveTrainSubsystem.getSubsystem(), "DriveTrainSubsystem");
     manipulatorSubsystem.setName(manipulatorSubsystem.getSubsystem(), "ManipulatorSubsystem");

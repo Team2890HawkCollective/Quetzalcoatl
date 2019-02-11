@@ -11,6 +11,7 @@ import javax.lang.model.util.ElementScanner6;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 /**
@@ -56,15 +57,20 @@ public class ElevatorSubsystem extends Subsystem
 
   public void xboxElevatorControl()
   {
-      //Left Trigger goes down ONLY if we are above the lower limit
-      if (RobotMap.assistantDriverController.getTriggerAxis(Hand.kLeft) > RobotMap.ELEVATOR_CONTROLLER_DEADZONE && RobotMap.elevatorEncoder.getPosition() >= RobotMap.ELEVATOR_LOWER_ENCODER_LIMIT)
-        moveElevator(-RobotMap.assistantDriverController.getTriggerAxis(Hand.kLeft));
-      //Right Trigger goes up
-      else if (RobotMap.assistantDriverController.getTriggerAxis(Hand.kRight) > RobotMap.ELEVATOR_CONTROLLER_DEADZONE)
-        moveElevator(RobotMap.assistantDriverController.getTriggerAxis(Hand.kRight));
-      //If we aren't pressing anything, stop
-      else 
-        moveElevator(RobotMap.ELEVATOR_STOP_SPEED);
+    if (RobotMap.elevatorEncoder.getPosition() <= 20.0)
+      RobotMap.ELEVATOR_SPEED_MODIFIER = RobotMap.ELEVATOR_QUARTER_SPEED;
+    else
+      RobotMap.ELEVATOR_SPEED_MODIFIER = RobotMap.ELEVATOR_FULL_SPEED;
+
+    //Left Trigger goes down ONLY if we are above the lower limit
+    if (RobotMap.assistantDriverController.getTriggerAxis(Hand.kLeft) > RobotMap.ELEVATOR_CONTROLLER_DEADZONE && RobotMap.elevatorEncoder.getPosition() >= RobotMap.ELEVATOR_LOWER_ENCODER_LIMIT)
+      moveElevator(-RobotMap.assistantDriverController.getTriggerAxis(Hand.kLeft) * RobotMap.ELEVATOR_SPEED_MODIFIER);
+    //Right Trigger goes up
+    else if (RobotMap.assistantDriverController.getTriggerAxis(Hand.kRight) > RobotMap.ELEVATOR_CONTROLLER_DEADZONE)
+      moveElevator(RobotMap.assistantDriverController.getTriggerAxis(Hand.kRight) * RobotMap.ELEVATOR_SPEED_MODIFIER);
+    //If we aren't pressing anything, stop
+    else 
+      moveElevator(RobotMap.ELEVATOR_STOP_SPEED);
   }
 
   public double getEncoderPosition()
