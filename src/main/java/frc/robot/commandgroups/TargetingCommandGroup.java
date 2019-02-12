@@ -9,6 +9,7 @@ package frc.robot.commandgroups;
 
 import frc.robot.RobotMap;
 import frc.robot.commands.*;
+import frc.robot.subsystems.AutomatedSubsytem;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class TargetingCommandGroup extends CommandGroup 
@@ -17,7 +18,7 @@ public class TargetingCommandGroup extends CommandGroup
    * @param level The level to which the elevator should raise
    * @param cargo Whether or not we are depositing cargo. True if yes, false if doing hatches
    */
-  public TargetingCommandGroup(int level, boolean cargo) 
+  public TargetingCommandGroup(AutomatedSubsytem.RocketLevel level, boolean cargo) 
   {
     // Add Commands here:
     // e.g. addSequential(new Command1());

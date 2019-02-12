@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.RobotMap;
+import frc.robot.subsystems.AutomatedSubsytem;
 
 public class RaiseElevatorCommand extends Command 
 {
@@ -19,7 +20,7 @@ public class RaiseElevatorCommand extends Command
    * @param level The level to lift to. (0 for cargo ship)
    * @param cargo Whether or not we are lifting cargo
    */
-  public RaiseElevatorCommand(int level, boolean cargo) 
+  public RaiseElevatorCommand(AutomatedSubsytem.RocketLevel level, boolean cargo) 
   {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -30,24 +31,29 @@ public class RaiseElevatorCommand extends Command
     {
       switch (level) 
       {
-        case 1:
+        case LEVEL1:
           encoderTarget = RobotMap.ELEVATOR_LEVEL_1_CARGO_VALUE;
           break;
-        case 2:
+        case LEVEL2:
           encoderTarget = RobotMap.ELEVATOR_LEVEL_2_CARGO_VALUE;
           break;
-        case 3:
+        case LEVEL3:
           encoderTarget = RobotMap.ELEVATOR_LEVEL_3_CARGO_VALUE;
       }
     }
     else
     {
-      if (level == 0 || level == 1)
-        encoderTarget = 1.0; //1st level rocket ship encoder value
-      else if (level == 2)
-        encoderTarget = 2.0; //2nd level rocket ship encoder value;
-      else     
-        encoderTarget = 3.0; //3rd level rocket ship encoder value;
+      switch (level)
+      {
+        case LEVEL1:
+          encoderTarget = RobotMap.ELEVATOR_LEVEL_1_HATCH_VALUE;
+          break;
+        case LEVEL2:
+          encoderTarget = RobotMap.ELEVATOR_LEVEL_2_HATCH_VALUE;
+          break;
+        case LEVEL3:
+          encoderTarget = RobotMap.ELEVATOR_LEVEL_3_HATCH_VALUE;
+      }
     }
   }
 

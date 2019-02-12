@@ -160,6 +160,7 @@ public class RobotMap {
     public static DriveTrainSubsystem driveTrainSubsystem;
     public static ElevatorSubsystem elevatorSubsystem;
     public static ManipulatorSubsystem manipulatorSubsystem;
+    public static AutomatedSubsytem automatedSubsystem;
 
     //Arduino//
     public static SerialPort arduino;

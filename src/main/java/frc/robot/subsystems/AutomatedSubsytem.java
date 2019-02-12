@@ -6,15 +6,11 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.subsystems;
-<<<<<<< HEAD
 import frc.robot.commandgroups.TargetingCommandGroup;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
-=======
-
-import edu.wpi.first.wpilibj.command.Subsystem;
->>>>>>> ElevatorControl
 
 /**
  * Add your docs here.
@@ -28,15 +24,31 @@ public class AutomatedSubsytem extends Subsystem {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
   }
-<<<<<<< HEAD
 
-  public void xboxAutonomousCommand()
+  /**
+   *  If A button is pressed, move to Rocket Level 1 and if the Bumper is pressed, moves to Cargo Levels.
+   *  B button moves to Rocket Level 2.
+   *  Y button moves to Rocket Level 3.
+   */
+  public void xboxAutonomousControl()
   {
     if(RobotMap.assistantDriverController.getAButtonPressed())
     {
-      new TargetingCommandGroup(2, true).start();
+      new TargetingCommandGroup(RocketLevel.LEVEL1, RobotMap.assistantDriverController.getBumper(Hand.kRight)).start();
+    }
+    else if (RobotMap.assistantDriverController.getBButtonPressed())
+    {
+      new TargetingCommandGroup(RocketLevel.LEVEL2, RobotMap.assistantDriverController.getBumper(Hand.kRight)).start();
+    }
+    else if (RobotMap.assistantDriverController.getYButtonPressed())
+    {
+      new TargetingCommandGroup(RocketLevel.LEVEL3, RobotMap.assistantDriverController.getBumper(Hand.kRight)).start();
     }
   }
-=======
->>>>>>> ElevatorControl
+
+  public static enum RocketLevel
+  {
+    LEVEL1, LEVEL2, LEVEL3;
+  }
+
 }

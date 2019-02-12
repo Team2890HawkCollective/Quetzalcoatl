@@ -83,7 +83,8 @@ public class Robot extends TimedRobot
    * to the switch structure below with additional strings & commands.
    */
   @Override
-  public void autonomousInit() {
+  public void autonomousInit() 
+  {
     m_autonomousCommand = m_chooser.getSelected();
 
     /*
@@ -94,7 +95,8 @@ public class Robot extends TimedRobot
      */
 
     // schedule the autonomous command (example)
-    if (m_autonomousCommand != null) {
+    if (m_autonomousCommand != null) 
+    {
       m_autonomousCommand.start();
     }
 
@@ -105,7 +107,7 @@ public class Robot extends TimedRobot
     //RobotMap.elevatorEncoder.setPosition(RobotMap.ELEVATOR_LOWER_ENCODER_LIMIT);
 
     //new TargetingCommandGroup(1, true).start();
-    new TargetingCommandGroup(2, true).start();
+    //new TargetingCommandGroup(2, true).start();
   }
 
   /**
