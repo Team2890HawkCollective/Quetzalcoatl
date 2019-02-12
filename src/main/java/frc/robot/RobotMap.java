@@ -10,6 +10,8 @@ package frc.robot;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.*;
+import com.revrobotics.CANDigitalInput.LimitSwitch;
+import com.revrobotics.CANDigitalInput.LimitSwitchPolarity;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -136,7 +138,12 @@ public class RobotMap {
     public static Servo hatchHolder;
 
     //Micro Switches
-    public static DigitalInput ballIntakeStopSwitch;
+      //Manipulator
+      public static DigitalInput ballIntakeStopSwitch;
+
+      //Elevator
+      public static CANDigitalInput lowerElevatorLimitSwitch;
+      public static CANDigitalInput upperElevatorLimitSwitch;
 
     //Sensors//
     public static AHRS navX; //Gyro. The purple thingy on the rio
@@ -181,6 +188,9 @@ public class RobotMap {
 
     ballIntakeStopSwitch = new DigitalInput(BALL_INTAKE_STOP_PORT);
 
+    lowerElevatorLimitSwitch = elevatorSparkMax.getReverseLimitSwitch(LimitSwitchPolarity.kNormallyOpen);
+    upperElevatorLimitSwitch = elevatorSparkMax.getForwardLimitSwitch(LimitSwitchPolarity.kNormallyOpen);
+
     leftDriverJoystick = new Joystick(LEFT_DRIVER_JOYSTICK_PORT);
     rightDriverJoystick = new Joystick(RIGHT_DRIVER_JOYSTICK_PORT);
 
@@ -197,7 +207,7 @@ public class RobotMap {
 
     elevatorSparkMax.setClosedLoopRampRate(ELEVATOR_RAMP_TIME);
     elevatorSparkMax.setIdleMode(IdleMode.kBrake);
-
+    
     //Set names and subsystems
     driveTrainSubsystem.setName(driveTrainSubsystem.getSubsystem(), "DriveTrainSubsystem");
     manipulatorSubsystem.setName(manipulatorSubsystem.getSubsystem(), "ManipulatorSubsystem");

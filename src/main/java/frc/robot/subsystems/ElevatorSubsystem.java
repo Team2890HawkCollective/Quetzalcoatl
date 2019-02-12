@@ -63,18 +63,59 @@ public class ElevatorSubsystem extends Subsystem
       RobotMap.ELEVATOR_SPEED_MODIFIER = RobotMap.ELEVATOR_FULL_SPEED;
 
     //Left Trigger goes down ONLY if we are above the lower limit
-    if (RobotMap.assistantDriverController.getTriggerAxis(Hand.kLeft) > RobotMap.ELEVATOR_CONTROLLER_DEADZONE && RobotMap.elevatorEncoder.getPosition() >= RobotMap.ELEVATOR_LOWER_ENCODER_LIMIT)
+    if (RobotMap.assistantDriverController.getTriggerAxis(Hand.kLeft) > RobotMap.ELEVATOR_CONTROLLER_DEADZONE && elevatorCanGoDown())
       moveElevator(-RobotMap.assistantDriverController.getTriggerAxis(Hand.kLeft) * RobotMap.ELEVATOR_SPEED_MODIFIER);
     //Right Trigger goes up
-    else if (RobotMap.assistantDriverController.getTriggerAxis(Hand.kRight) > RobotMap.ELEVATOR_CONTROLLER_DEADZONE)
+    else if (RobotMap.assistantDriverController.getTriggerAxis(Hand.kRight) > RobotMap.ELEVATOR_CONTROLLER_DEADZONE && elevatorCanGoUp())
       moveElevator(RobotMap.assistantDriverController.getTriggerAxis(Hand.kRight) * RobotMap.ELEVATOR_SPEED_MODIFIER);
     //If we aren't pressing anything, stop
     else 
       moveElevator(RobotMap.ELEVATOR_STOP_SPEED);
+
+    //Make sure the encoder is reset when we reach the bottom
+    if (getLowerLimitSwitchState())
+      RobotMap.elevatorEncoder.setPosition(0.0);
   }
 
+  /**
+   * Whether or not the elevator can move down. 
+   * @return True if the encoder is above the limit AND the limit switch is not triggered
+   */
+  private boolean elevatorCanGoDown()
+  {
+    return getEncoderPosition() >= RobotMap.ELEVATOR_LOWER_ENCODER_LIMIT && !getLowerLimitSwitchState();
+  }
+
+  /**
+   * Whether or not the elevator can go up
+   * @return True if the encoder is less than the limit AND the limit switch is not triggered
+   */
+  private boolean elevatorCanGoUp()
+  {
+    return getEncoderPosition() <= RobotMap.ELEVATOR_UPPER_ENCODER_LIMIT && !getUpperLimitSwitchState();
+  }
+
+  /**
+   * @return The current position of the encoder
+   */
   public double getEncoderPosition()
   {
     return RobotMap.elevatorEncoder.getPosition();
+  }
+
+  /**
+   * @return True if the limit switch is triggered, false if not
+   */
+  public boolean getUpperLimitSwitchState()
+  {
+    return RobotMap.upperElevatorLimitSwitch.get();
+  }
+
+  /**
+   * @return True if the limit switch is triggered, false if not
+   */
+  public boolean getLowerLimitSwitchState()
+  {
+    return RobotMap.lowerElevatorLimitSwitch.get();
   }
 }
