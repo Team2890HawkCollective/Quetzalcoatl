@@ -41,6 +41,8 @@ public class Robot extends TimedRobot
     SmartDashboard.putData("Auto mode", m_chooser);
 
     RobotMap.init();
+
+    RobotMap.elevatorEncoder.setPosition(RobotMap.ELEVATOR_LOWER_ENCODER_LIMIT);
   }
 
   /**
@@ -96,11 +98,14 @@ public class Robot extends TimedRobot
       m_autonomousCommand.start();
     }
 
-    RobotMap.arduino = new SerialPort(115200, SerialPort.Port.kUSB);
+    //RobotMap.arduino = new SerialPort(115200, SerialPort.Port.kUSB);
 
-    RobotMap.arduino.enableTermination();
+    //RobotMap.arduino.enableTermination();
 
-    new TargetingCommandGroup(1, true).start();
+    //RobotMap.elevatorEncoder.setPosition(RobotMap.ELEVATOR_LOWER_ENCODER_LIMIT);
+
+    //new TargetingCommandGroup(1, true).start();
+    new TargetingCommandGroup(2, true).start();
   }
 
   /**
@@ -122,7 +127,6 @@ public class Robot extends TimedRobot
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-
     Scheduler.getInstance().removeAll();
 
     new JoystickDriveCommand().start();
@@ -134,6 +138,7 @@ public class Robot extends TimedRobot
   @Override
   public void teleopPeriodic() 
   {  
+    System.out.println(RobotMap.elevatorEncoder.getPosition());
     Scheduler.getInstance().run();
   }
 

@@ -6,10 +6,15 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.subsystems;
+<<<<<<< HEAD
 import frc.robot.commandgroups.TargetingCommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
+=======
+
+import edu.wpi.first.wpilibj.command.Subsystem;
+>>>>>>> ElevatorControl
 
 /**
  * Add your docs here.
@@ -23,6 +28,7 @@ public class AutomatedSubsytem extends Subsystem {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
   }
+<<<<<<< HEAD
 
   public void xboxAutonomousCommand()
   {
@@ -31,4 +37,6 @@ public class AutomatedSubsytem extends Subsystem {
       new TargetingCommandGroup(2, true).start();
     }
   }
+=======
+>>>>>>> ElevatorControl
 }

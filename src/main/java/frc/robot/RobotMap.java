@@ -10,6 +10,9 @@ package frc.robot;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.*;
+import com.revrobotics.CANDigitalInput.LimitSwitch;
+import com.revrobotics.CANDigitalInput.LimitSwitchPolarity;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.*;
@@ -74,10 +77,26 @@ public class RobotMap {
     public static final double DRIVETRAIN_RANGEFINDER_TARGETING_SPEED_MODIFIER = 100.0; //The modifier that the rangefinder value will be divided by to determine speed
 
     //Elevator Constants//
-    public static final double ELEVATOR_SPEED_MODIFIER = 1.0;
-    public static final double ELEVATOR_FULL_SPEED = 1.0;
-    public static final double ELEVATOR_ENCODER_TARGET_SPEED_MODIFIER = 100.0; //What the difference between the elevator target and current elevator position will be divided by to determine speed
-    public static final double ELEVATOR_STOP_SPEED = 0.0;
+      //Speed modifers
+      public static final double ELEVATOR_APPROACHING_LOWER_LIMIT_SPEED_MODIFIER = 0.05;
+      public static final double ELEVATOR_FULL_SPEED = 1.0;
+      public static final double ELEVATOR_ENCODER_TARGET_SPEED_MODIFIER = 100.0; //What the difference between the elevator target and current elevator position will be divided by to determine speed
+      public static final double ELEVATOR_STOP_SPEED = 0.0;
+      public static final double ELEVATOR_CONTROLLER_DEADZONE = 0.01;
+      public static final double ELEVATOR_RAMP_TIME = 0.2;
+      public static final double ELEVATOR_AUTONOMOUS_SPEED = 0.75; 
+
+      //Elevator limits
+      public static final double ELEVATOR_LOWER_ENCODER_LIMIT = 5.0; //The lower limit of the elevator in encoder ticks
+      public static final double ELEVATOR_UPPER_ENCODER_LIMIT = 10000.0; //The upper limit of the elevator in encoder ticks
+
+      //Encoder values for the different rocket levels
+      public static final double ELEVATOR_LEVEL_1_HATCH_VALUE = 0.0;
+      public static final double ELEVATOR_LEVEL_2_HATCH_VALUE = 0.0;
+      public static final double ELEVATOR_LEVEL_3_HATCH_VALUE = 0.0;
+      public static final double ELEVATOR_LEVEL_1_CARGO_VALUE = 54.0;
+      public static final double ELEVATOR_LEVEL_2_CARGO_VALUE = 126.0;
+      public static final double ELEVATOR_LEVEL_3_CARGO_VALUE = 0.0;
 
     //Manipulator Constants//
     public static final double MANIPULATOR_FULL_SPEED = 1.0;
@@ -96,6 +115,9 @@ public class RobotMap {
 
   //Flags
   public static boolean ballInIntake = true;
+
+  //Non-constant speed modifiers//
+  public static double ELEVATOR_SPEED_MODIFIER = 1.0;
 
   //Objects//
     //Drivetrain//
@@ -116,7 +138,12 @@ public class RobotMap {
     public static Servo hatchHolder;
 
     //Micro Switches
-    public static DigitalInput ballIntakeStopSwitch;
+      //Manipulator
+      public static DigitalInput ballIntakeStopSwitch;
+
+      //Elevator
+      public static CANDigitalInput lowerElevatorLimitSwitch;
+      public static CANDigitalInput upperElevatorLimitSwitch;
 
     //Sensors//
     public static AHRS navX; //Gyro. The purple thingy on the rio
@@ -161,6 +188,9 @@ public class RobotMap {
 
     ballIntakeStopSwitch = new DigitalInput(BALL_INTAKE_STOP_PORT);
 
+    lowerElevatorLimitSwitch = elevatorSparkMax.getReverseLimitSwitch(LimitSwitchPolarity.kNormallyOpen);
+    upperElevatorLimitSwitch = elevatorSparkMax.getForwardLimitSwitch(LimitSwitchPolarity.kNormallyOpen);
+
     leftDriverJoystick = new Joystick(LEFT_DRIVER_JOYSTICK_PORT);
     rightDriverJoystick = new Joystick(RIGHT_DRIVER_JOYSTICK_PORT);
 
@@ -170,10 +200,14 @@ public class RobotMap {
     leftBackTalon.setInverted(true);
     centralTalon.setInverted(true);
     intakeTalon.setInverted(true);
+    elevatorSparkMax.setInverted(true);
 
     leftBackTalon.follow(leftFrontTalon);
     rightBackTalon.follow(rightFrontTalon);
 
+    elevatorSparkMax.setClosedLoopRampRate(ELEVATOR_RAMP_TIME);
+    elevatorSparkMax.setIdleMode(IdleMode.kBrake);
+    
     //Set names and subsystems
     driveTrainSubsystem.setName(driveTrainSubsystem.getSubsystem(), "DriveTrainSubsystem");
     manipulatorSubsystem.setName(manipulatorSubsystem.getSubsystem(), "ManipulatorSubsystem");
