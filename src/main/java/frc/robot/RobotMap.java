@@ -64,6 +64,10 @@ public class RobotMap {
       //Manipulator Micro Switch
       public static final int BALL_INTAKE_STOP_PORT = 0;
 
+      //Elevator Limit switches
+      public static final int LOWER_ELEVATOR_LIMIT_SWTICH_PORT = 0;
+      public static final int UPPER_ELEVATOR_LIMIT_SWTICH_PORT = 0;
+
   //Constants//
     //Drivetrain Misc Constants//
     public static final int DRIVETRAIN_ENCODER_TICKS_PER_REVOLUTION = 42;
@@ -192,8 +196,8 @@ public class RobotMap {
 
     ballIntakeStopSwitch = new DigitalInput(BALL_INTAKE_STOP_PORT);
 
-    lowerElevatorLimitSwitch = new DigitalInput
-    upperElevatorLimitSwitch = elevatorSparkMax.getForwardLimitSwitch(LimitSwitchPolarity.kNormallyOpen);
+    lowerElevatorLimitSwitch = new DigitalInput(LOWER_ELEVATOR_LIMIT_SWTICH_PORT);
+    upperElevatorLimitSwitch = new DigitalInput(UPPER_ELEVATOR_LIMIT_SWTICH_PORT);
 
     leftDriverJoystick = new Joystick(LEFT_DRIVER_JOYSTICK_PORT);
     rightDriverJoystick = new Joystick(RIGHT_DRIVER_JOYSTICK_PORT);
