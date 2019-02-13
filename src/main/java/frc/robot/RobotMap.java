@@ -51,6 +51,8 @@ public class RobotMap {
 
     //Elevator//
     public static final int ELEVATOR_SPARK_MAX_ID = 6;
+	
+	
 
     //Manipulator//
       //Manipulator Talon
@@ -85,6 +87,8 @@ public class RobotMap {
       public static final double ELEVATOR_CONTROLLER_DEADZONE = 0.01;
       public static final double ELEVATOR_RAMP_TIME = 0.2;
       public static final double ELEVATOR_AUTONOMOUS_SPEED = 0.75; 
+	
+	
 
       //Elevator limits
       public static final double ELEVATOR_LOWER_ENCODER_LIMIT = 5.0; //The lower limit of the elevator in encoder ticks
@@ -142,8 +146,8 @@ public class RobotMap {
       public static DigitalInput ballIntakeStopSwitch;
 
       //Elevator
-      public static CANDigitalInput lowerElevatorLimitSwitch;
-      public static CANDigitalInput upperElevatorLimitSwitch;
+      public static DigitalInput lowerElevatorLimitSwitch;
+      public static DigitalInput upperElevatorLimitSwitch;
 
     //Sensors//
     public static AHRS navX; //Gyro. The purple thingy on the rio
@@ -188,7 +192,7 @@ public class RobotMap {
 
     ballIntakeStopSwitch = new DigitalInput(BALL_INTAKE_STOP_PORT);
 
-    lowerElevatorLimitSwitch = elevatorSparkMax.getReverseLimitSwitch(LimitSwitchPolarity.kNormallyOpen);
+    lowerElevatorLimitSwitch = new DigitalInput
     upperElevatorLimitSwitch = elevatorSparkMax.getForwardLimitSwitch(LimitSwitchPolarity.kNormallyOpen);
 
     leftDriverJoystick = new Joystick(LEFT_DRIVER_JOYSTICK_PORT);
