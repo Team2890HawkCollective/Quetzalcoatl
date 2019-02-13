@@ -75,21 +75,11 @@ public class ElevatorSubsystem extends Subsystem
     if (RobotMap.assistantDriverController.getTriggerAxis(Hand.kLeft) > RobotMap.ELEVATOR_CONTROLLER_DEADZONE && elevatorCanGoDown())
     {
       moveElevator(-RobotMap.assistantDriverController.getTriggerAxis(Hand.kLeft) * RobotMap.ELEVATOR_SPEED_MODIFIER);
-      //Stops elevator if it hits lower limit switch
-      if (getLowerLimitSwitchState())
-      {
-        moveElevator(RobotMap.ELEVATOR_STOP_SPEED);
-      }
     }
     //Right Trigger goes up
     else if (RobotMap.assistantDriverController.getTriggerAxis(Hand.kRight) > RobotMap.ELEVATOR_CONTROLLER_DEADZONE && elevatorCanGoUp())
     {
       moveElevator(RobotMap.assistantDriverController.getTriggerAxis(Hand.kRight) * RobotMap.ELEVATOR_SPEED_MODIFIER);
-      //Stops elevator if it hits upper limit switch
-      if (getUpperLimitSwitchState())
-      {
-        moveElevator(RobotMap.ELEVATOR_STOP_SPEED);
-      }
     }
     //If we aren't pressing anything, stop
     else 

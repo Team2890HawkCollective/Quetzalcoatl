@@ -42,7 +42,7 @@ public class Robot extends TimedRobot
 
     RobotMap.init();
 
-    RobotMap.elevatorEncoder.setPosition(RobotMap.ELEVATOR_LOWER_ENCODER_LIMIT);
+    RobotMap.elevatorEncoder.setPosition(0.0);
   }
 
   /**

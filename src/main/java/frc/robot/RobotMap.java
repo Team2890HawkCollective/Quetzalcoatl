@@ -51,22 +51,17 @@ public class RobotMap {
 
     //Elevator//
     public static final int ELEVATOR_SPARK_MAX_ID = 6;
-	
-	
 
     //Manipulator//
       //Manipulator Talon
       public static final int INATKE_TALON_ID = 7;
 
-      //Manipulator Servos
-      public static final int HATCH_HOLDER_PORT = 0;
-
       //Manipulator Micro Switch
       public static final int BALL_INTAKE_STOP_PORT = 0;
 
       //Elevator Limit switches
-      public static final int LOWER_ELEVATOR_LIMIT_SWTICH_PORT = 0;
-      public static final int UPPER_ELEVATOR_LIMIT_SWTICH_PORT = 0;
+      public static final int LOWER_ELEVATOR_LIMIT_SWTICH_PORT = 1;
+      public static final int UPPER_ELEVATOR_LIMIT_SWTICH_PORT = 2;
 
   //Constants//
     //Drivetrain Misc Constants//
@@ -91,8 +86,6 @@ public class RobotMap {
       public static final double ELEVATOR_CONTROLLER_DEADZONE = 0.01;
       public static final double ELEVATOR_RAMP_TIME = 0.2;
       public static final double ELEVATOR_AUTONOMOUS_SPEED = 0.75; 
-	
-	
 
       //Elevator limits
       public static final double ELEVATOR_LOWER_ENCODER_LIMIT = 5.0; //The lower limit of the elevator in encoder ticks
@@ -191,8 +184,6 @@ public class RobotMap {
 
     elevatorSparkMax = new CANSparkMax(ELEVATOR_SPARK_MAX_ID, MotorType.kBrushless);
     elevatorEncoder = elevatorSparkMax.getEncoder();
-
-    hatchHolder = new Servo(HATCH_HOLDER_PORT);
 
     ballIntakeStopSwitch = new DigitalInput(BALL_INTAKE_STOP_PORT);
 
