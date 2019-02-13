@@ -7,11 +7,15 @@
 
 package frc.robot.subsystems;
 
+import javax.lang.model.util.ElementScanner6;
+
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
 /**
- * Add your docs here.
+ * Implements the methods to move the elevator and get the current position
+ * of the elevator.
  */
 public class ElevatorSubsystem extends Subsystem 
 {
@@ -25,28 +29,49 @@ public class ElevatorSubsystem extends Subsystem
     // setDefaultCommand(new MySpecialCommand());
   }
 
+  /**
+   * Moves the elevator up at *full* speed
+   */
   public void elevatorUp()
   {
-    elevatorUp(RobotMap.ELEVATOR_FULL_SPEED * RobotMap.ELEVATOR_SPEED_MODIFIER);
+    moveElevator(RobotMap.ELEVATOR_FULL_SPEED * RobotMap.ELEVATOR_SPEED_MODIFIER);
   }
 
-  public void elevatorUp(double speed)
-  {
-    RobotMap.elevatorSparkMax.set(speed * RobotMap.ELEVATOR_SPEED_MODIFIER);
-  }
-
+  /**
+   * Moves the elevator down at *full* speed
+   */
   public void elevatorDown()
   {
-    elevatorUp(-RobotMap.ELEVATOR_FULL_SPEED * RobotMap.ELEVATOR_SPEED_MODIFIER);
+    moveElevator(-RobotMap.ELEVATOR_FULL_SPEED * RobotMap.ELEVATOR_SPEED_MODIFIER);
   }
 
-  public void elevatorDown(double speed)
+  /**
+   * Moves the elevator up/down at the given speed. Positive for up, Negative for down
+   * @param speed
+   */
+  public void moveElevator(double speed)
   {
-    elevatorUp(-speed);
+    RobotMap.elevatorSparkMax.set(speed * RobotMap.ELEVATOR_SPEED_MODIFIER);
   }
 
   public double getEncoderPosition()
   {
     return RobotMap.elevatorEncoder.getPosition();
+  }
+
+  public void xboxElevatorControl()
+  {
+    //Left Trigger goes down
+    if (RobotMap.assistantDriverController.getTriggerAxis(Hand.kLeft) > 0.01)
+    {
+      moveElevator(-RobotMap.assistantDriverController.getTriggerAxis(Hand.kLeft));
+    }
+    //Right Trigger goes up
+    else if (RobotMap.assistantDriverController.getTriggerAxis(Hand.kRight) > 0.01)
+    {
+      moveElevator(RobotMap.assistantDriverController.getTriggerAxis(Hand.kRight));
+    }
+    else 
+      moveElevator(RobotMap.ELEVATOR_STOP_SPEED);
   }
 }

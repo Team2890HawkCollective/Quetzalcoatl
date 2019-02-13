@@ -7,8 +7,6 @@
 
 package frc.robot;
 
-import java.awt.Color;
-
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -16,8 +14,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commandgroups.TargetingCommandGroup;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.commands.JoystickDriveCommand;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -28,8 +25,6 @@ import frc.robot.subsystems.ExampleSubsystem;
  */
 public class Robot extends TimedRobot 
 {
-  public static final String programName = "DestinationDeepSpace";
-  public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
   public static OI m_oi;
 
   Command m_autonomousCommand;
@@ -42,7 +37,6 @@ public class Robot extends TimedRobot
   @Override
   public void robotInit() {
     m_oi = new OI();
-    m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
     SmartDashboard.putNumber("motor", RobotMap.LEFT_BACK_TALON_ID)
@@ -101,6 +95,12 @@ public class Robot extends TimedRobot
     if (m_autonomousCommand != null) {
       m_autonomousCommand.start();
     }
+
+    RobotMap.arduino = new SerialPort(115200, SerialPort.Port.kUSB);
+
+    RobotMap.arduino.enableTermination();
+
+    new TargetingCommandGroup(1, true).start();
   }
 
   /**
@@ -123,11 +123,9 @@ public class Robot extends TimedRobot
       m_autonomousCommand.cancel();
     }
 
-    RobotMap.arduino = new SerialPort(115200, SerialPort.Port.kUSB);
+    Scheduler.getInstance().removeAll();
 
-    RobotMap.arduino.enableTermination();
-
-    new TargetingCommandGroup(1, true).start();
+    new JoystickDriveCommand().start();
   }
 
   /**
