@@ -36,17 +36,15 @@ public class TargetingCommandGroup extends CommandGroup
     // a CommandGroup containing them would require both the chassis and the
     // arm.
 
-    addSequential(new TargetingStage1RotationCommand());
+    addParallel(new RaiseElevatorCommand(level, cargo));
+    addParallel(new TargetingStage1RotationCommand());
     addSequential(new TargetingStage2StrafeCommand());
     addSequential(new TargetingStage3RangefinderCommand());
-    /*addSequential(new LowerElevatorCommand());
-    addSequential(new RaiseElevatorCommand(level, cargo));
+    /*addSequential(new LowerElevatorCommand());*/
 
     if (cargo)
       addSequential(new ReleaseBallCommand(RobotMap.MANIPULATOR_TIME_TO_RELEASE_CARGO));
     else
       addSequential(new ReleaseHatchCommand());
-
-    addSequential(new LowerElevatorCommand());*/
   }
 }
