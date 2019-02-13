@@ -30,6 +30,10 @@ public class JoystickDriveCommand extends Command
   protected void execute() {
     RobotMap.driveTrainSubsystem.joystickArcadeDrive();
     RobotMap.manipulatorSubsystem.xboxIntakeOuttake();
+<<<<<<< HEAD
+=======
+    RobotMap.elevatorSubsystem.xboxElevatorControl();
+>>>>>>> bf3e41eb9fb07d27955f735cb8e93565960bd4f5
   }
 
   // Make this return true when this Command no longer needs to run execute()
