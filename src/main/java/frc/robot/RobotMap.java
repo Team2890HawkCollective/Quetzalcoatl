@@ -47,6 +47,10 @@ public class RobotMap {
 
   public static final int INATKE_TALON_ID = 7;
 
+  public static final int LOWER_LIMIT_SWITCH_ID = 0;
+  public static final int MIDDLE_LIMIT_SWITCH_ID = 1;
+  public static final int HIGH_LIMIT_SWITCH_ID = 2;
+
   public static final int HATCH_HOLDER_PORT = 0;
 
   public static final int DRIVETRAIN_ENCODER_TICKS_PER_REVOLUTION = 42;
@@ -93,6 +97,10 @@ public class RobotMap {
 
   public static Servo hatchHolder;
 
+  public static DigitalInput limitSwitchHigh;
+  public static DigitalInput limitSwitchMiddle;
+  public static DigitalInput limitSwitchLow; 
+
   public static AHRS navX;
 
   public static Joystick leftDriverJoystick;
@@ -130,6 +138,8 @@ public class RobotMap {
 
     elevatorSparkMax = new CANSparkMax(ELEVATOR_SPARK_MAX_ID, MotorType.kBrushless);
     elevatorEncoder = elevatorSparkMax.getEncoder();
+
+    
 
     hatchHolder = new Servo(HATCH_HOLDER_PORT);
 
