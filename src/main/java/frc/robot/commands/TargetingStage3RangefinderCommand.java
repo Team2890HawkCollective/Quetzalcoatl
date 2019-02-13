@@ -11,6 +11,9 @@ import components.utilities.FormatChecker;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.RobotMap;
 
+/**
+ * 
+ */
 public class TargetingStage3RangefinderCommand extends Command 
 {
   private String data;
@@ -39,7 +42,7 @@ public class TargetingStage3RangefinderCommand extends Command
   {
     if (data.length() > 0)
       if (FormatChecker.canParseDouble(data))
-        RobotMap.driveTrainSubsystem.arcadeDrive(-Double.parseDouble(data) / RobotMap.DRIVETRAIN_RANGEFINDER_TARGETING_SPEED_MODIFIER, RobotMap.DRIVETRAIN_FULL_STOP, RobotMap.DRIVETRAIN_FULL_STOP);
+        RobotMap.driveTrainSubsystem.arcadeDrive(Double.parseDouble(data) / RobotMap.DRIVETRAIN_RANGEFINDER_TARGETING_SPEED_MODIFIER, RobotMap.DRIVETRAIN_FULL_STOP, RobotMap.DRIVETRAIN_FULL_STOP);
   }
 
   // Make this return true when this Command no longer needs to run execute()
