@@ -52,7 +52,6 @@ public class ManipulatorSubsystem extends Subsystem
     RobotMap.hatchHolder.set(RobotMap.HATCH_HOLDER_SERVO_RELEASE);
   }
 
-<<<<<<< HEAD
   /**
    * Controls the manipulator using an xbox controller. X-button intakes and outtakes
    */
@@ -74,17 +73,5 @@ public class ManipulatorSubsystem extends Subsystem
       spinIntake(RobotMap.MANIPULATOR_STOP_SPEED); //Stop the intake from spinning
     else if (!RobotMap.ballIntakeStopSwitch.get() && RobotMap.ballInIntake)
       spinIntake(RobotMap.MANIPULATOR_STOP_SPEED); //Stop the intake from spinning when the ball is inside
-=======
-  //Makes wheels on intake/outtake spin to move ball up and out
-  public void xboxIntakeOuttake()
-  {
-    if (RobotMap.assistantDriverController().getYButton())
-    {
-      spinIntake(RobotMap.MANIPULATOR_FULL_SPEED);
-    }
-    else
-      stopIntake();
-
->>>>>>> Documentation
   }
 }

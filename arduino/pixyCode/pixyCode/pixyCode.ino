@@ -65,11 +65,6 @@ void setup()
   //Set the lights to their initial colors
   for (int i = 0; i < 12; i++)
     driverNotifier.setPixelColor(i, pink);
-<<<<<<< HEAD
-  }
-
-=======
->>>>>>> Documentation
   for (int i = 0; i < 12; i++)
     cameraLight.setPixelColor(i, white);
   
@@ -139,11 +134,8 @@ void stage3()
   //If We are <= the target value, we don't need to move forward
   if (rangefinderValue <= rangefinderStopPoint)
   {
-<<<<<<< HEAD
-=======
     //Set this stage as done and print "Done" to let the robot code know
     stage3Done = true;
->>>>>>> Documentation
     Serial.println("Done");
     stage1Done = false;
     stage2Done = false;

@@ -26,10 +26,6 @@ public class XboxDriveCommand extends Command {
   @Override
   protected void initialize() 
   {
-<<<<<<< HEAD
-
-=======
->>>>>>> Documentation
   }
 
   // Called repeatedly when this Command is scheduled to run
