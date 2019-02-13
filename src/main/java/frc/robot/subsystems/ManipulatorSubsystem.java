@@ -8,8 +8,10 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
+import frc.robot.commands.*;
 
 /**
  * Actions the bot can do other than driving. 
@@ -45,14 +47,6 @@ public class ManipulatorSubsystem extends Subsystem
   }
 
   /**
-   * Releases any grabbed Hatches
-   */
-  public void releaseHatch()
-  {
-    RobotMap.hatchHolder.set(RobotMap.HATCH_HOLDER_SERVO_RELEASE);
-  }
-
-  /**
    * Controls the manipulator using an xbox controller. X-button intakes and outtakes
    */
   public void xboxIntakeOuttake()
@@ -73,5 +67,46 @@ public class ManipulatorSubsystem extends Subsystem
       spinIntake(RobotMap.MANIPULATOR_STOP_SPEED); //Stop the intake from spinning
     else if (!RobotMap.ballIntakeStopSwitch.get() && RobotMap.ballInIntake)
       spinIntake(RobotMap.MANIPULATOR_STOP_SPEED); //Stop the intake from spinning when the ball is inside
+  }
+
+  public void xboxHatchControl()
+  {
+    if (RobotMap.assistantDriverController.getPOV(0) != -1)
+    {
+      switch (RobotMap.assistantDriverController.getPOV(0))
+      {
+        case 0:
+          Scheduler.getInstance().add(new goToUpperHatchPositionCommand());
+          break;
+        case 90:
+          Scheduler.getInstance().add(new goToMiddleHatchPositionCommand());
+          break;
+        case 180:
+          Scheduler.getInstance().add(new goToLowerHatchPositionCommand());
+      }
+    }
+  }
+
+  public void goToUpperHatchPosition()
+  {
+    RobotMap.hatchHolderTalon.set(RobotMap.HATCH_HOLDER_FULL_SPEED * RobotMap.HATCH_HOLDER_SPEED_MODIFIER);
+  }
+
+  public void goToMiddleHatchPosition()
+  {
+    if (RobotMap.lowerPositionHatchHolderLimitSwitch.get())
+      RobotMap.hatchHolderTalon.set(RobotMap.HATCH_HOLDER_FULL_SPEED * RobotMap.HATCH_HOLDER_SPEED_MODIFIER);
+    else  
+      RobotMap.hatchHolderTalon.set(-RobotMap.HATCH_HOLDER_FULL_SPEED * RobotMap.HATCH_HOLDER_SPEED_MODIFIER);
+  }
+
+  public void goToLowerHatchPosition()
+  {
+    RobotMap.hatchHolderTalon.set(-RobotMap.HATCH_HOLDER_FULL_SPEED * RobotMap.HATCH_HOLDER_SPEED_MODIFIER);
+  }
+
+  public enum HatchHolderPosition
+  {
+    UP, MIDDLE, LOW
   }
 }

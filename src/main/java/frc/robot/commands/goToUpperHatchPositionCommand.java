@@ -9,15 +9,14 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.RobotMap;
-import frc.robot.subsystems.ManipulatorSubsystem;
 
-public class JoystickDriveCommand extends Command 
+public class goToUpperHatchPositionCommand extends Command 
 {
-  public JoystickDriveCommand() 
+  public goToUpperHatchPositionCommand() 
   {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(RobotMap.driveTrainSubsystem);
+    requires(RobotMap.manipulatorSubsystem);
   }
 
   // Called just before this Command runs the first time
@@ -27,22 +26,23 @@ public class JoystickDriveCommand extends Command
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() {
-    RobotMap.driveTrainSubsystem.joystickArcadeDrive();
-    RobotMap.manipulatorSubsystem.xboxIntakeOuttake();
-    RobotMap.elevatorSubsystem.xboxElevatorControl();
-    RobotMap.manipulatorSubsystem.xboxHatchControl();
+  protected void execute() 
+  {
+    RobotMap.manipulatorSubsystem.goToUpperHatchPosition();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
-  protected boolean isFinished() {
-    return false;
+  protected boolean isFinished() 
+  {
+    return RobotMap.upperPositionHatchHolderLimitSwitch.get();
   }
 
   // Called once after isFinished returns true
   @Override
-  protected void end() {
+  protected void end() 
+  {
+    RobotMap.hatchHolderTalon.set(RobotMap.HATCH_HOLDER_STOP_SPEED);
   }
 
   // Called when another command which requires one or more of the same

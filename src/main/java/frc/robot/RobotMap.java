@@ -50,14 +50,21 @@ public class RobotMap {
     public static final int ELEVATOR_SPARK_MAX_ID = 6;
 
     //Manipulator//
-      //Manipulator Talon
-      public static final int INATKE_TALON_ID = 7;
+      //Cargo Intake
+        //Manipulator Talon
+        public static final int INATKE_TALON_ID = 7;
 
-      //Manipulator Servos
-      public static final int HATCH_HOLDER_PORT = 0;
+        //Manipulator Micro Switch
+        public static final int BALL_INTAKE_STOP_PORT = 0;
 
-      //Manipulator Micro Switch
-      public static final int BALL_INTAKE_STOP_PORT = 0;
+      //Hatch Holder
+        //Hatch Holder Talon
+        public static final int HATCH_HOLDER_TALON_ID = 8;
+
+        //Hatch Holder Micro Switches
+        public static final int HATCH_HOLDER_UPPER_POSITION_LIMIT_SWITCH_PORT = 3;
+        public static final int HATCH_HOLDER_MIDDLE_POSITION_LIMIT_SWITCH_PORT = 4;
+        public static final int HATCH_HOLDER_LOWER_POSITION_LIMIT_SWITCH_PORT = 5;
 
   //Constants//
     //Drivetrain Misc Constants//
@@ -80,15 +87,17 @@ public class RobotMap {
     public static final double ELEVATOR_STOP_SPEED = 0.0;
 
     //Manipulator Constants//
-    public static final double MANIPULATOR_FULL_SPEED = 1.0;
-    public static final double MANIPULATOR_DEFAULT_SPEED = 1.0; 
-    public static final double MANIPULATOR_TIME_TO_RELEASE_CARGO = 1.0;
-    public static final double MANIPULATOR_STOP_SPEED = 0.0;
-    public static final double MANIPULATOR_SPEED_MODIFER = 0.375;
+      //Cargo Intake
+      public static final double MANIPULATOR_FULL_SPEED = 1.0;
+      public static final double MANIPULATOR_DEFAULT_SPEED = 1.0; 
+      public static final double MANIPULATOR_TIME_TO_RELEASE_CARGO = 1.0;
+      public static final double MANIPULATOR_STOP_SPEED = 0.0;
+      public static final double MANIPULATOR_SPEED_MODIFER = 0.375;
 
-    //Hatch Holder Constants//
-    public static final double HATCH_HOLDER_SERVO_RELEASE = 0.5;
-    public static final double HATCH_FOLDER_SERVO_GRAB = 0.0;
+      //Hatch Holder
+      public static final double HATCH_HOLDER_FULL_SPEED = 1.0;
+      public static final double HATCH_HOLDER_STOP_SPEED = 0.0;
+      public static final double HATCH_HOLDER_SPEED_MODIFIER = 1.0;
 
     //Misc Constants//
     public static final double MAX_VELOCITY = 17.5;
@@ -105,18 +114,28 @@ public class RobotMap {
     public static WPI_TalonSRX rightBackTalon;
     public static WPI_TalonSRX centralTalon;
 
-    //Intake//
-    public static WPI_TalonSRX intakeTalon;
+    //Manipulator//
+      //Cargo Intake
+      public static WPI_TalonSRX intakeTalon;
+
+      //Hatch holder
+      public static WPI_TalonSRX hatchHolderTalon;
 
     //Elevator//
     public static CANSparkMax elevatorSparkMax;
     public static CANEncoder elevatorEncoder;
 
     //Servos//
-    public static Servo hatchHolder;
 
     //Micro Switches
-    public static DigitalInput ballIntakeStopSwitch;
+      //Manipulator//
+        //Ball Intake
+        public static DigitalInput ballIntakeStopSwitch;
+
+        //Hatch Holder
+        public static DigitalInput upperPositionHatchHolderLimitSwitch;
+        public static DigitalInput middlePositionHatchHolderLimitSwitch;
+        public static DigitalInput lowerPositionHatchHolderLimitSwitch;
 
     //Sensors//
     public static AHRS navX; //Gyro. The purple thingy on the rio
@@ -154,14 +173,16 @@ public class RobotMap {
 
     intakeTalon = new WPI_TalonSRX(INATKE_TALON_ID);
 
+    hatchHolderTalon = new WPI_TalonSRX(HATCH_HOLDER_TALON_ID);
+
     elevatorSparkMax = new CANSparkMax(ELEVATOR_SPARK_MAX_ID, MotorType.kBrushless);
     elevatorEncoder = elevatorSparkMax.getEncoder();
 
-    
-
-    hatchHolder = new Servo(HATCH_HOLDER_PORT);
-
     ballIntakeStopSwitch = new DigitalInput(BALL_INTAKE_STOP_PORT);
+
+    upperPositionHatchHolderLimitSwitch = new DigitalInput(HATCH_HOLDER_UPPER_POSITION_LIMIT_SWITCH_PORT);
+    middlePositionHatchHolderLimitSwitch = new DigitalInput(HATCH_HOLDER_MIDDLE_POSITION_LIMIT_SWITCH_PORT);
+    lowerPositionHatchHolderLimitSwitch = new DigitalInput(HATCH_HOLDER_LOWER_POSITION_LIMIT_SWITCH_PORT);
 
     leftDriverJoystick = new Joystick(LEFT_DRIVER_JOYSTICK_PORT);
     rightDriverJoystick = new Joystick(RIGHT_DRIVER_JOYSTICK_PORT);
@@ -188,6 +209,6 @@ public class RobotMap {
     centralTalon.setName(driveTrainSubsystem.getSubsystem(), "CentralTalon");
 
     intakeTalon.setName(manipulatorSubsystem.getSubsystem(), "IntakeTalon");
-    hatchHolder.setName(manipulatorSubsystem.getSubsystem(), "HatchHolder");
+    hatchHolderTalon.setName(manipulatorSubsystem.getSubsystem(), "HatchHolderTalon");
   }
 }

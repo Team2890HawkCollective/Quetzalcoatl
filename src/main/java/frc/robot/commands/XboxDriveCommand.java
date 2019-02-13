@@ -34,6 +34,8 @@ public class XboxDriveCommand extends Command {
   {
     RobotMap.driveTrainSubsystem.xboxArcadeDrive();
     RobotMap.manipulatorSubsystem.xboxIntakeOuttake();
+    RobotMap.elevatorSubsystem.xboxElevatorControl();
+    RobotMap.manipulatorSubsystem.xboxHatchControl();
   }
 
   // Make this return true when this Command no longer needs to run execute()
