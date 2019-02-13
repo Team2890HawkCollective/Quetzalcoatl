@@ -15,7 +15,8 @@ import frc.robot.RobotMap;
  * Implements methods to run xbox methods and can end which works like a return
  */
 public class XboxDriveCommand extends Command {
-  public XboxDriveCommand() {
+  public XboxDriveCommand() 
+  {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(RobotMap.driveTrainSubsystem);
@@ -25,30 +26,33 @@ public class XboxDriveCommand extends Command {
   @Override
   protected void initialize() 
   {
-
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() {
+  protected void execute() 
+  {
     RobotMap.driveTrainSubsystem.xboxArcadeDrive();
     RobotMap.manipulatorSubsystem.xboxIntakeOuttake();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
-  protected boolean isFinished() {
+  protected boolean isFinished() 
+  {
     return false;
   }
 
   // Called once after isFinished returns true
   @Override
-  protected void end() {
+  protected void end() 
+  {
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
-  protected void interrupted() {
+  protected void interrupted() 
+  {
   }
 }

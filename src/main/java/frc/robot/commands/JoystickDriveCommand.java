@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.RobotMap;
+import frc.robot.subsystems.ManipulatorSubsystem;
 
 public class JoystickDriveCommand extends Command 
 {
@@ -29,7 +30,6 @@ public class JoystickDriveCommand extends Command
   protected void execute() {
     RobotMap.driveTrainSubsystem.joystickArcadeDrive();
     RobotMap.manipulatorSubsystem.xboxIntakeOuttake();
-    RobotMap.elevatorSubsystem.xboxElevatorControl();
   }
 
   // Make this return true when this Command no longer needs to run execute()

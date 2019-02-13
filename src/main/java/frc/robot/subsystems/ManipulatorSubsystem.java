@@ -39,6 +39,11 @@ public class ManipulatorSubsystem extends Subsystem
     RobotMap.intakeTalon.set(speed);
   }
 
+  public void stopIntake()
+  {
+    RobotMap.intakeTalon.set(0);
+  }
+
   /**
    * Releases any grabbed Hatches
    */
@@ -47,26 +52,15 @@ public class ManipulatorSubsystem extends Subsystem
     RobotMap.hatchHolder.set(RobotMap.HATCH_HOLDER_SERVO_RELEASE);
   }
 
-  /**
-   * Controls the manipulator using an xbox controller. X-button intakes and outtakes
-   */
+  //Makes wheels on intake/outtake spin to move ball up and out
   public void xboxIntakeOuttake()
   {
-    //Whether or not we are intaking from the bottom or front. If from front, value is negative.
-    double intakeDirection = 1.0;
-    if (RobotMap.assistantDriverController.getBumper(Hand.kRight))
-      intakeDirection = -1.0;
-
-    //Spins the motors when the button is pressed. THIS IS ONLY RUN ONCE UNTIL THE BUTTON IS RELEASED AND PRESSED AGAIN
-    if (RobotMap.assistantDriverController.getXButtonPressed())
+    if (RobotMap.assistantDriverController().getYButton())
     {
-      spinIntake(RobotMap.MANIPULATOR_FULL_SPEED * RobotMap.MANIPULATOR_SPEED_MODIFER * intakeDirection); //Spin the intake
-      RobotMap.ballInIntake = !RobotMap.ballInIntake;
+      spinIntake(RobotMap.MANIPULATOR_FULL_SPEED);
     }
-    //Only stop the motors when the button is released
-    else if (RobotMap.assistantDriverController.getXButtonReleased())
-      spinIntake(RobotMap.MANIPULATOR_STOP_SPEED); //Stop the intake from spinning
-    else if (!RobotMap.ballIntakeStopSwitch.get() && RobotMap.ballInIntake)
-      spinIntake(RobotMap.MANIPULATOR_STOP_SPEED); //Stop the intake from spinning when the ball is inside
+    else
+      stopIntake();
+
   }
 }
