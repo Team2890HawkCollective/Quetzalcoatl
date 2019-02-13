@@ -43,7 +43,7 @@ bool stage1Done = false;
 bool stage2Done = false;
 bool stage3Done = false;
 
-int cameraMiddlePoint = 150; //The middle value of the Pixy cam video feed. Used for strafing
+int cameraMiddlePoint = 400; //The middle value of the Pixy cam video feed. Used for strafing
 int rangefinderStopPoint = 150; //The stopping point for the rangefinder. This is when the robot will stop
 
 uint8_t rangefinderValue; //The distance returned by the rangefinder
@@ -95,7 +95,7 @@ void loop()
       stage1();
     else if (!stage2Done)
       stage2();
-    else
+    else if (!stage3Done)
       stage3();
   }
 }
@@ -110,7 +110,7 @@ void stage1()
     Serial.println("Done");
   }
   //This checks to see which Block is on the left as the pixy doesn't order them
-  else if ((int)pixy.ccc.blocks[0].m_x > (int)pixy.ccc.blocks[1].m_x
+  else if ((int)pixy.ccc.blocks[0].m_x > (int)pixy.ccc.blocks[1].m_x)
     Serial.println((int)pixy.ccc.blocks[0].m_height - (int)pixy.ccc.blocks[1].m_height);
   else
     Serial.println((int)pixy.ccc.blocks[1].m_height - (int)pixy.ccc.blocks[0].m_height);
@@ -126,7 +126,7 @@ void stage2()
     Serial.println("Done");
   }
   else
-    Serial.println(average() - middlePoint); //Print out how far we have to go until we are in the middle
+    Serial.println(average() - cameraMiddlePoint); //Print out how far we have to go until we are in the middle
 }
 
 void stage3()
@@ -137,11 +137,9 @@ void stage3()
     //Set this stage as done and print "Done" to let the robot code know
     stage3Done = true;
     Serial.println("Done");
-    stage1Done = false;
-    stage2Done = false;
   }
   else
-    Serial.println(rangefinderValue - rangfinderStopPoint); //Print out how far we have to go until we are at the stop point
+    Serial.println(rangefinderValue - rangefinderStopPoint); //Print out how far we have to go until we are at the stop point
 }
            
 //Returns the average of the x-values of the two blocks

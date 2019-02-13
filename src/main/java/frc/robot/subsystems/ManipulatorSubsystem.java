@@ -55,7 +55,7 @@ public class ManipulatorSubsystem extends Subsystem
   //Makes wheels on intake/outtake spin to move ball up and out
   public void xboxIntakeOuttake()
   {
-    if (RobotMap.assistantDriverController().getYButton())
+    if (RobotMap.assistantDriverController.getYButton())
     {
       spinIntake(RobotMap.MANIPULATOR_FULL_SPEED);
     }

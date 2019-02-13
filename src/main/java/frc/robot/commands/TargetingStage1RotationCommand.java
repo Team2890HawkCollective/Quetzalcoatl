@@ -7,6 +7,7 @@
 
 package frc.robot.commands;
 
+import components.utilities.FormatChecker;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.RobotMap;
 
@@ -38,16 +39,8 @@ public class TargetingStage1RotationCommand extends Command
     //System.out.print("Stage1\t");
     //System.out.println("Data: " + data + "\tnewData: " + newData);4
     if (data.length() > 0)
-    {
-      if (!data.substring(0, 1).equalsIgnoreCase("e"))
-      {
-        System.out.println("newData");
-        if (Double.parseDouble(data) < 0)
-          RobotMap.driveTrainSubsystem.arcadeDrive(RobotMap.DRIVETRAIN_FULL_STOP, -Math.sqrt(Math.abs(Double.parseDouble(data))) / RobotMap.DRIVETRAIN_CAMERA_TARGETING_SPEED_MODIFIER, RobotMap.DRIVETRAIN_FULL_STOP);
-        else
-          RobotMap.driveTrainSubsystem.arcadeDrive(RobotMap.DRIVETRAIN_FULL_STOP, Math.sqrt(Math.abs(Double.parseDouble(data))) / RobotMap.DRIVETRAIN_CAMERA_TARGETING_SPEED_MODIFIER, RobotMap.DRIVETRAIN_FULL_STOP);
-      }
-    }
+      if (FormatChecker.canParseDouble(data))
+        RobotMap.driveTrainSubsystem.arcadeDrive(RobotMap.DRIVETRAIN_FULL_STOP, Double.parseDouble(data) / RobotMap.DRIVETRAIN_CAMERA_TARGETING_SPEED_MODIFIER, RobotMap.DRIVETRAIN_FULL_STOP);
     //System.out.println("Data: " + data + "\tnewData: " + newData);
   }
 
@@ -56,13 +49,9 @@ public class TargetingStage1RotationCommand extends Command
   protected boolean isFinished() 
   {
     data = RobotMap.arduino.readString();
-    System.out.println("IsFinished newData: " + data + "I");
     if (data.length() > 0)
       if (data.substring(0, 1).equals("D"))
-      {
-        System.out.println("Done");
         return true;
-      }        
     return false;
   }
 
