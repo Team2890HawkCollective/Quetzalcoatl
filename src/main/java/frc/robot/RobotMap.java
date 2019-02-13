@@ -67,6 +67,14 @@ public class RobotMap {
         public static final int HATCH_HOLDER_LOWER_POSITION_LIMIT_SWITCH_PORT = 5;
 
   //Constants//
+    //Controllers//
+    public static final int DPAD_ID = 0;
+    public static final int DPAD_NOT_PRESSED = -1;
+    public static final int DPAD_UP = 0;
+    public static final int DPAD_RIGHT = 90;
+    public static final int DPAD_BOTTOM = 180;
+    public static final int DPAD_LEFT = 270;
+
     //Drivetrain Misc Constants//
     public static final int DRIVETRAIN_ENCODER_TICKS_PER_REVOLUTION = 42;
     public static final int DRIVETRAIN_WHEEL_DIAMETER = 4;

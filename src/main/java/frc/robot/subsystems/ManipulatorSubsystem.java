@@ -71,17 +71,17 @@ public class ManipulatorSubsystem extends Subsystem
 
   public void xboxHatchControl()
   {
-    if (RobotMap.assistantDriverController.getPOV(0) != -1)
+    if (RobotMap.assistantDriverController.getPOV(RobotMap.DPAD_ID) != RobotMap.DPAD_NOT_PRESSED)
     {
-      switch (RobotMap.assistantDriverController.getPOV(0))
+      switch (RobotMap.assistantDriverController.getPOV(RobotMap.DPAD_ID))
       {
-        case 0:
+        case RobotMap.DPAD_UP:
           Scheduler.getInstance().add(new goToUpperHatchPositionCommand());
           break;
-        case 90:
+        case RobotMap.DPAD_RIGHT:
           Scheduler.getInstance().add(new goToMiddleHatchPositionCommand());
           break;
-        case 180:
+        case RobotMap.DPAD_BOTTOM:
           Scheduler.getInstance().add(new goToLowerHatchPositionCommand());
       }
     }
@@ -103,10 +103,5 @@ public class ManipulatorSubsystem extends Subsystem
   public void goToLowerHatchPosition()
   {
     RobotMap.hatchHolderTalon.set(-RobotMap.HATCH_HOLDER_FULL_SPEED * RobotMap.HATCH_HOLDER_SPEED_MODIFIER);
-  }
-
-  public enum HatchHolderPosition
-  {
-    UP, MIDDLE, LOW
   }
 }
