@@ -83,7 +83,7 @@ public class RobotMap {
       public static final double ELEVATOR_FULL_SPEED = 1.0;
       public static final double ELEVATOR_ENCODER_TARGET_SPEED_MODIFIER = 100.0; //What the difference between the elevator target and current elevator position will be divided by to determine speed
       public static final double ELEVATOR_STOP_SPEED = 0.0;
-      public static final double ELEVATOR_CONTROLLER_DEADZONE = 0.01;
+      public static final double ELEVATOR_CONTROLLER_TRIGGER_DEADZONE = 0.01;
       public static final double ELEVATOR_RAMP_TIME = 0.2;
       public static final double ELEVATOR_AUTONOMOUS_SPEED = 0.75; 
 
