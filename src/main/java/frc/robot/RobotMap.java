@@ -55,7 +55,7 @@ public class RobotMap {
         public static final int INATKE_TALON_ID = 7;
 
         //Manipulator Micro Switch
-        public static final int BALL_INTAKE_STOP_PORT = 0;
+        public static final int BALL_INTAKE_STOP_PORT = 2;
 
       //Hatch Holder
         //Hatch Holder Talon
