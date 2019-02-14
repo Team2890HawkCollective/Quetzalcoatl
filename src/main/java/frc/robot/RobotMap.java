@@ -219,6 +219,5 @@ public class RobotMap {
     centralTalon.setName(driveTrainSubsystem.getSubsystem(), "CentralTalon");
 
     intakeTalon.setName(manipulatorSubsystem.getSubsystem(), "IntakeTalon");
-    hatchHolder.setName(manipulatorSubsystem.getSubsystem(), "HatchHolder");
   }
 }
