@@ -9,11 +9,23 @@ package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
-import com.revrobotics.*;
+import com.revrobotics.CANEncoder;
+import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.wpilibj.*;
-import frc.robot.subsystems.*;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.Servo;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
+import edu.wpi.first.wpilibj.shuffleboard.WidgetType;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import frc.robot.subsystems.DriveTrainSubsystem;
+import frc.robot.subsystems.ElevatorSubsystem;
+import frc.robot.subsystems.ManipulatorSubsystem;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -137,6 +149,9 @@ public class RobotMap {
     //Arduino//
     public static SerialPort arduino;
 
+    //Shuffleboard//
+    public static ShuffleboardTab drivetrainTab = Shuffleboard.getTab("Drivetrain");
+
   public static void init()
   {
     driveTrainSubsystem = new DriveTrainSubsystem();
@@ -187,5 +202,7 @@ public class RobotMap {
 
     intakeTalon.setName(manipulatorSubsystem.getSubsystem(), "IntakeTalon");
     hatchHolder.setName(manipulatorSubsystem.getSubsystem(), "HatchHolder");
+
+    //drivetrainTab.add("Drive Motors"
   }
 }
