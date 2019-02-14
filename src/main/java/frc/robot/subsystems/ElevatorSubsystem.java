@@ -38,9 +38,7 @@ public class ElevatorSubsystem extends Subsystem
 
     moveElevator(RobotMap.ELEVATOR_AUTONOMOUS_SPEED);
     if (getUpperLimitSwitchState())
-    {
       moveElevator(RobotMap.ELEVATOR_STOP_SPEED);
-    }
   }
 
   /**
@@ -50,9 +48,7 @@ public class ElevatorSubsystem extends Subsystem
   {
     moveElevator(-RobotMap.ELEVATOR_AUTONOMOUS_SPEED);
     if (getLowerLimitSwitchState())
-    {
       moveElevator(RobotMap.ELEVATOR_STOP_SPEED);
-    }
   }
 
   /**
@@ -64,6 +60,9 @@ public class ElevatorSubsystem extends Subsystem
     RobotMap.elevatorSparkMax.set(speed * RobotMap.ELEVATOR_SPEED_MODIFIER);
   }
 
+  /**
+   * Controls the elevator using the left and right triggers on the assistant xbox controller
+   */
   public void xboxElevatorControl()
   {
     if (RobotMap.elevatorEncoder.getPosition() <= 20.0)
@@ -73,14 +72,10 @@ public class ElevatorSubsystem extends Subsystem
 
     //Left Trigger goes down ONLY if we are above the lower limit
     if (RobotMap.assistantDriverController.getTriggerAxis(Hand.kLeft) > RobotMap.ELEVATOR_CONTROLLER_TIGGER_DEADZONE && elevatorCanGoDown())
-    {
       moveElevator(-RobotMap.assistantDriverController.getTriggerAxis(Hand.kLeft) * RobotMap.ELEVATOR_SPEED_MODIFIER);
-    }
     //Right Trigger goes up
     else if (RobotMap.assistantDriverController.getTriggerAxis(Hand.kRight) > RobotMap.ELEVATOR_CONTROLLER_TRIGGER_DEADZONE && elevatorCanGoUp())
-    {
       moveElevator(RobotMap.assistantDriverController.getTriggerAxis(Hand.kRight) * RobotMap.ELEVATOR_SPEED_MODIFIER);
-    }
     //If we aren't pressing anything, stop
     else 
       moveElevator(RobotMap.ELEVATOR_STOP_SPEED);
