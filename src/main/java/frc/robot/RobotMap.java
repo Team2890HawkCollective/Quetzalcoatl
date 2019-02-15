@@ -69,8 +69,6 @@ public class RobotMap {
 
     //Drivetrain Speed Constants//
     public static final double DRIVETRAIN_SPEED_MODIFIER = 1.0;
-    public static final double DRIVETRAIN_FULL_SPEED = 1.0;
-    public static final double DRIVETRAIN_FULL_STOP = 0.0;
     public static final double DRIVETRAIN_STRAFE_SPEED_MODIFIER = 0.5;
     public static final double DRIVETRAIN_CAMERA_TARGETING_SPEED_MODIFIER = 10.0; //What the value returned by the arduino will be divided by to determine speed
     public static final double DRIVETRAIN_CAMERA_TARGETING_STRAFE_SPEED_MODIFIER = 100.0;
@@ -79,9 +77,7 @@ public class RobotMap {
     //Elevator Constants//
       //Speed modifers
       public static final double ELEVATOR_APPROACHING_LOWER_LIMIT_SPEED_MODIFIER = 0.05;
-      public static final double ELEVATOR_FULL_SPEED = 1.0;
       public static final double ELEVATOR_ENCODER_TARGET_SPEED_MODIFIER = 100.0; //What the difference between the elevator target and current elevator position will be divided by to determine speed
-      public static final double ELEVATOR_STOP_SPEED = 0.0;
       public static final double ELEVATOR_CONTROLLER_DEADZONE = 0.01;
       public static final double ELEVATOR_RAMP_TIME = 0.2;
       public static final double ELEVATOR_AUTONOMOUS_SPEED = 0.75; 
@@ -99,10 +95,8 @@ public class RobotMap {
       public static final double ELEVATOR_LEVEL_3_CARGO_VALUE = 0.0;
 
     //Manipulator Constants//
-    public static final double MANIPULATOR_FULL_SPEED = 1.0;
     public static final double MANIPULATOR_DEFAULT_SPEED = 1.0; 
     public static final double MANIPULATOR_TIME_TO_RELEASE_CARGO = 1.0;
-    public static final double MANIPULATOR_STOP_SPEED = 0.0;
     public static final double MANIPULATOR_SPEED_MODIFER = 0.375;
 
     //Hatch Holder Constants//
@@ -112,6 +106,8 @@ public class RobotMap {
     //Misc Constants//
     public static final double MAX_VELOCITY = 17.5;
     public static final double kV = 1.0 / MAX_VELOCITY;
+    public static final double MOTOR_FULL_SPEED = 1.0;
+    public static final double MOTOR_FULL_STOP = 0.0;
 
   //Flags
   public static boolean ballInIntake = true;
