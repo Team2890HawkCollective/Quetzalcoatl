@@ -42,7 +42,7 @@ public class TargetingStage3RangefinderCommand extends Command
   {
     if (data.length() > 0)
       if (FormatChecker.canParseDouble(data))
-        RobotMap.driveTrainSubsystem.arcadeDrive(-Double.parseDouble(data) / RobotMap.DRIVETRAIN_RANGEFINDER_TARGETING_SPEED_MODIFIER, RobotMap.DRIVETRAIN_FULL_STOP, RobotMap.DRIVETRAIN_FULL_STOP);
+        RobotMap.driveTrainSubsystem.arcadeDrive(-Double.parseDouble(data) / RobotMap.DRIVETRAIN_RANGEFINDER_TARGETING_SPEED_MODIFIER, RobotMap.MOTOR_FULL_STOP, RobotMap.MOTOR_FULL_STOP);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -60,7 +60,7 @@ public class TargetingStage3RangefinderCommand extends Command
   @Override
   protected void end() 
   {
-    RobotMap.driveTrainSubsystem.arcadeDrive(RobotMap.DRIVETRAIN_FULL_STOP, RobotMap.DRIVETRAIN_FULL_STOP, RobotMap.DRIVETRAIN_FULL_STOP);
+    RobotMap.driveTrainSubsystem.arcadeDrive(RobotMap.MOTOR_FULL_STOP, RobotMap.MOTOR_FULL_STOP, RobotMap.MOTOR_FULL_STOP);
   }
 
   // Called when another command which requires one or more of the same

@@ -113,7 +113,7 @@ public class RobotMap {
   public static boolean ballInIntake = true;
 
   //Non-constant speed modifiers//
-  public static double ELEVATOR_SPEED_MODIFIER = 1.0;
+  public static double elevatorSpeedModifier = 1.0;
 
   //Objects//
     //Drivetrain//

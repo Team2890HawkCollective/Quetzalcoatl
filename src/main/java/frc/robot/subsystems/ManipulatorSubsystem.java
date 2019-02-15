@@ -60,13 +60,13 @@ public class ManipulatorSubsystem extends Subsystem
     //Spins the motors when the button is pressed. THIS IS ONLY RUN ONCE UNTIL THE BUTTON IS RELEASED AND PRESSED AGAIN
     if (RobotMap.assistantDriverController.getXButtonPressed())
     {
-      spinIntake(RobotMap.MANIPULATOR_FULL_SPEED * RobotMap.MANIPULATOR_SPEED_MODIFER * intakeDirection); //Spin the intake
+      spinIntake(RobotMap.MOTOR_FULL_SPEED * RobotMap.MANIPULATOR_SPEED_MODIFER * intakeDirection); //Spin the intake
       RobotMap.ballInIntake = !RobotMap.ballInIntake;
     }
     //Only stop the motors when the button is released
     else if (RobotMap.assistantDriverController.getXButtonReleased())
-      spinIntake(RobotMap.MANIPULATOR_STOP_SPEED); //Stop the intake from spinning
+      spinIntake(RobotMap.MOTOR_FULL_STOP); //Stop the intake from spinning
     else if (!RobotMap.ballIntakeStopSwitch.get() && RobotMap.ballInIntake)
-      spinIntake(RobotMap.MANIPULATOR_STOP_SPEED); //Stop the intake from spinning when the ball is inside
+      spinIntake(RobotMap.MOTOR_FULL_STOP); //Stop the intake from spinning when the ball is inside
   }
 }
