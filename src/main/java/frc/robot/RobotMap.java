@@ -196,6 +196,7 @@ public class RobotMap {
     rightDriverJoystick = new Joystick(RIGHT_DRIVER_JOYSTICK_PORT);
 
     navX = new AHRS(SPI.Port.kMXP);
+    arduino = new SerialPort(115200, SerialPort.Port.kMXP);
 
     leftFrontTalon.setInverted(true);
     leftBackTalon.setInverted(true);
