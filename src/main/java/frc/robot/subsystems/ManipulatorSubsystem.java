@@ -76,13 +76,13 @@ public class ManipulatorSubsystem extends Subsystem
       switch (RobotMap.assistantDriverController.getPOV(RobotMap.DPAD_ID))
       {
         case RobotMap.DPAD_UP:
-          Scheduler.getInstance().add(new goToUpperHatchPositionCommand());
+          Scheduler.getInstance().add(new GoToUpperHatchPositionCommand());
           break;
         case RobotMap.DPAD_RIGHT:
-          Scheduler.getInstance().add(new goToMiddleHatchPositionCommand());
+          Scheduler.getInstance().add(new GoToMiddleHatchPositionCommand());
           break;
         case RobotMap.DPAD_BOTTOM:
-          Scheduler.getInstance().add(new goToLowerHatchPositionCommand());
+          Scheduler.getInstance().add(new GoToLowerHatchPositionCommand());
       }
     }
   }

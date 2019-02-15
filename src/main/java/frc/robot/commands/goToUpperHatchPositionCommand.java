@@ -10,9 +10,9 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.RobotMap;
 
-public class goToUpperHatchPositionCommand extends Command 
+public class GoToUpperHatchPositionCommand extends Command 
 {
-  public goToUpperHatchPositionCommand() 
+  public GoToUpperHatchPositionCommand() 
   {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
