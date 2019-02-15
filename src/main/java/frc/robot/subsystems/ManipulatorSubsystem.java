@@ -8,8 +8,10 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
+import frc.robot.commands.*;
 
 /**
  * Actions the bot can do other than driving. 
@@ -45,14 +47,6 @@ public class ManipulatorSubsystem extends Subsystem
   }
 
   /**
-   * Releases any grabbed Hatches
-   */
-  public void releaseHatch()
-  {
-    RobotMap.hatchHolder.set(RobotMap.HATCH_HOLDER_SERVO_RELEASE);
-  }
-
-  /**
    * Controls the manipulator using an xbox controller. X-button intakes and outtakes
    */
   public void xboxIntakeOuttake()
@@ -73,5 +67,41 @@ public class ManipulatorSubsystem extends Subsystem
       spinIntake(RobotMap.MANIPULATOR_STOP_SPEED); //Stop the intake from spinning
     else if (!RobotMap.ballIntakeStopSwitch.get() && RobotMap.ballInIntake)
       spinIntake(RobotMap.MANIPULATOR_STOP_SPEED); //Stop the intake from spinning when the ball is inside
+  }
+
+  public void xboxHatchControl()
+  {
+    if (RobotMap.assistantDriverController.getPOV(RobotMap.DPAD_ID) != RobotMap.DPAD_NOT_PRESSED)
+    {
+      switch (RobotMap.assistantDriverController.getPOV(RobotMap.DPAD_ID))
+      {
+        case RobotMap.DPAD_UP:
+          Scheduler.getInstance().add(new GoToUpperHatchPositionCommand());
+          break;
+        case RobotMap.DPAD_RIGHT:
+          Scheduler.getInstance().add(new GoToMiddleHatchPositionCommand());
+          break;
+        case RobotMap.DPAD_BOTTOM:
+          Scheduler.getInstance().add(new GoToLowerHatchPositionCommand());
+      }
+    }
+  }
+
+  public void goToUpperHatchPosition()
+  {
+    RobotMap.hatchHolderTalon.set(RobotMap.HATCH_HOLDER_FULL_SPEED * RobotMap.HATCH_HOLDER_SPEED_MODIFIER);
+  }
+
+  public void goToMiddleHatchPosition()
+  {
+    if (RobotMap.lowerPositionHatchHolderLimitSwitch.get())
+      RobotMap.hatchHolderTalon.set(RobotMap.HATCH_HOLDER_FULL_SPEED * RobotMap.HATCH_HOLDER_SPEED_MODIFIER);
+    else  
+      RobotMap.hatchHolderTalon.set(-RobotMap.HATCH_HOLDER_FULL_SPEED * RobotMap.HATCH_HOLDER_SPEED_MODIFIER);
+  }
+
+  public void goToLowerHatchPosition()
+  {
+    RobotMap.hatchHolderTalon.set(-RobotMap.HATCH_HOLDER_FULL_SPEED * RobotMap.HATCH_HOLDER_SPEED_MODIFIER);
   }
 }
