@@ -42,8 +42,7 @@ public class Robot extends TimedRobot
 
     RobotMap.init();
 
-    //Sets actual value of encoder. Doesn't move the elevator
-    RobotMap.elevatorEncoder.setPosition(RobotMap.ELEVATOR_LOWER_ENCODER_LIMIT);
+    RobotMap.elevatorEncoder.setPosition(0.0);
   }
 
   /**

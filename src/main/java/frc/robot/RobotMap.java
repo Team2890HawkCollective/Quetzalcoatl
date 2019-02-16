@@ -117,6 +117,10 @@ public class RobotMap {
          */
         public static final int HATCH_HOLDER_LOWER_POSITION_LIMIT_SWITCH_PORT = 5;
 
+      //Elevator Limit switches
+      public static final int LOWER_ELEVATOR_LIMIT_SWTICH_PORT = 1;
+      public static final int UPPER_ELEVATOR_LIMIT_SWTICH_PORT = 2;
+
   //Constants//
     //Controllers//
     /**
@@ -334,8 +338,8 @@ public class RobotMap {
         public static DigitalInput lowerPositionHatchHolderLimitSwitch;
 
       //Elevator
-      public static CANDigitalInput lowerElevatorLimitSwitch;
-      public static CANDigitalInput upperElevatorLimitSwitch;
+      public static DigitalInput lowerElevatorLimitSwitch;
+      public static DigitalInput upperElevatorLimitSwitch;
 
     //Sensors//
     public static AHRS navX; //Gyro. The purple thingy on the rio
@@ -412,8 +416,8 @@ public class RobotMap {
     upperPositionHatchHolderLimitSwitch = new DigitalInput(HATCH_HOLDER_UPPER_POSITION_LIMIT_SWITCH_PORT);
     middlePositionHatchHolderLimitSwitch = new DigitalInput(HATCH_HOLDER_MIDDLE_POSITION_LIMIT_SWITCH_PORT);
     lowerPositionHatchHolderLimitSwitch = new DigitalInput(HATCH_HOLDER_LOWER_POSITION_LIMIT_SWITCH_PORT);
-    lowerElevatorLimitSwitch = elevatorSparkMax.getReverseLimitSwitch(LimitSwitchPolarity.kNormallyOpen);
-    upperElevatorLimitSwitch = elevatorSparkMax.getForwardLimitSwitch(LimitSwitchPolarity.kNormallyOpen);
+    lowerElevatorLimitSwitch = new DigitalInput(LOWER_ELEVATOR_LIMIT_SWTICH_PORT);
+    upperElevatorLimitSwitch = new DigitalInput(UPPER_ELEVATOR_LIMIT_SWTICH_PORT);
 
     leftDriverJoystick = new Joystick(LEFT_DRIVER_JOYSTICK_PORT);
     rightDriverJoystick = new Joystick(RIGHT_DRIVER_JOYSTICK_PORT);

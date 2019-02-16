@@ -35,7 +35,12 @@ public class ElevatorSubsystem extends Subsystem
    */
   public void elevatorUp()
   {
+
     moveElevator(RobotMap.ELEVATOR_AUTONOMOUS_SPEED);
+    if (getUpperLimitSwitchState())
+    {
+      moveElevator(RobotMap.ELEVATOR_STOP_SPEED);
+    }
   }
 
   /**
@@ -44,6 +49,10 @@ public class ElevatorSubsystem extends Subsystem
   public void elevatorDown()
   {
     moveElevator(-RobotMap.ELEVATOR_AUTONOMOUS_SPEED);
+    if (getLowerLimitSwitchState())
+    {
+      moveElevator(RobotMap.ELEVATOR_STOP_SPEED);
+    }
   }
 
   /**
