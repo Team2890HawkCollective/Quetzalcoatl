@@ -10,6 +10,9 @@ package frc.robot;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.*;
+import com.revrobotics.CANDigitalInput.LimitSwitch;
+import com.revrobotics.CANDigitalInput.LimitSwitchPolarity;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.*;
@@ -248,12 +251,17 @@ public class RobotMap {
      * The inverse of the maximum velocity to be applied to any motor
      */
     public static final double kV = 1.0 / MAX_VELOCITY;
+    public static final double MOTOR_FULL_SPEED = 1.0;
+    public static final double MOTOR_FULL_STOP = 0.0;
 
   //Flags
   /**
    * triggers true when the ball is in the intake
    */
   public static boolean ballInIntake = true;
+
+  //Non-constant speed modifiers//
+  public static double elevatorSpeedModifier = 1.0;
 
   //Objects//
     //Drivetrain//
@@ -325,6 +333,10 @@ public class RobotMap {
          */
         public static DigitalInput lowerPositionHatchHolderLimitSwitch;
 
+      //Elevator
+      public static CANDigitalInput lowerElevatorLimitSwitch;
+      public static CANDigitalInput upperElevatorLimitSwitch;
+
     //Sensors//
     public static AHRS navX; //Gyro. The purple thingy on the rio
 
@@ -361,6 +373,7 @@ public class RobotMap {
      * declaration of manipulatorSubsystem
      */
     public static ManipulatorSubsystem manipulatorSubsystem;
+    public static AutomatedSubsytem automatedSubsystem;
 
     //Arduino//
     /**
@@ -399,20 +412,27 @@ public class RobotMap {
     upperPositionHatchHolderLimitSwitch = new DigitalInput(HATCH_HOLDER_UPPER_POSITION_LIMIT_SWITCH_PORT);
     middlePositionHatchHolderLimitSwitch = new DigitalInput(HATCH_HOLDER_MIDDLE_POSITION_LIMIT_SWITCH_PORT);
     lowerPositionHatchHolderLimitSwitch = new DigitalInput(HATCH_HOLDER_LOWER_POSITION_LIMIT_SWITCH_PORT);
+    lowerElevatorLimitSwitch = elevatorSparkMax.getReverseLimitSwitch(LimitSwitchPolarity.kNormallyOpen);
+    upperElevatorLimitSwitch = elevatorSparkMax.getForwardLimitSwitch(LimitSwitchPolarity.kNormallyOpen);
 
     leftDriverJoystick = new Joystick(LEFT_DRIVER_JOYSTICK_PORT);
     rightDriverJoystick = new Joystick(RIGHT_DRIVER_JOYSTICK_PORT);
 
     navX = new AHRS(SPI.Port.kMXP);
+    arduino = new SerialPort(115200, SerialPort.Port.kMXP);
 
     leftFrontTalon.setInverted(true);
     leftBackTalon.setInverted(true);
     centralTalon.setInverted(true);
     intakeTalon.setInverted(true);
+    elevatorSparkMax.setInverted(true);
 
     leftBackTalon.follow(leftFrontTalon);
     rightBackTalon.follow(rightFrontTalon);
 
+    elevatorSparkMax.setClosedLoopRampRate(ELEVATOR_RAMP_TIME);
+    elevatorSparkMax.setIdleMode(IdleMode.kBrake);
+    
     //Set names and subsystems
     driveTrainSubsystem.setName(driveTrainSubsystem.getSubsystem(), "DriveTrainSubsystem");
     manipulatorSubsystem.setName(manipulatorSubsystem.getSubsystem(), "ManipulatorSubsystem");
