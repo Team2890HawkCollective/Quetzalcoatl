@@ -92,7 +92,7 @@ public class GoToLowerHatchPositionCommand extends Command
   @Override
   protected void end() 
   {
-    RobotMap.hatchHolderTalon.set(RobotMap.HATCH_HOLDER_STOP_SPEED);
+    RobotMap.hatchHolderTalon.set(RobotMap.MOTOR_FULL_STOP);
   }
 
   /** 

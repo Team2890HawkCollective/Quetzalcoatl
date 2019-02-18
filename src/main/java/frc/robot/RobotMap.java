@@ -118,8 +118,8 @@ public class RobotMap {
         public static final int HATCH_HOLDER_LOWER_POSITION_LIMIT_SWITCH_PORT = 5;
 
       //Elevator Limit switches
-      public static final int LOWER_ELEVATOR_LIMIT_SWTICH_PORT = 1;
-      public static final int UPPER_ELEVATOR_LIMIT_SWTICH_PORT = 2;
+      public static final int LOWER_ELEVATOR_LIMIT_SWTICH_PORT = 0;
+      public static final int UPPER_ELEVATOR_LIMIT_SWTICH_PORT = 1;
 
   //Constants//
     //Controllers//
@@ -214,7 +214,7 @@ public class RobotMap {
     /**
      * Value that makes the elevator not move
      */
-    public static final double ELEVATOR_CONTROLLER_DEADZONE = 0.5;
+    public static final double ELEVATOR_CONTROLLER_DEADZONE = 0.05;
     /**
      * The value assigned to the speed at which the elevator moves during autonomous
      */
@@ -456,6 +456,7 @@ public class RobotMap {
     driveTrainSubsystem = new DriveTrainSubsystem();
     elevatorSubsystem = new ElevatorSubsystem();
     manipulatorSubsystem = new ManipulatorSubsystem();
+    automatedSubsystem = new AutomatedSubsytem();
 
     //Instantiate controllers
     driverController = new XboxController(DRIVER_CONTROLLER_PORT);
@@ -493,7 +494,7 @@ public class RobotMap {
     navX = new AHRS(SPI.Port.kMXP);
     
     //Instantiates arduino to control pixycam and other functions
-    arduino = new SerialPort(115200, SerialPort.Port.kMXP);
+    arduino = new SerialPort(115200, SerialPort.Port.kUSB);
 
     //Sets motors to inverted
     leftFrontTalon.setInverted(true);

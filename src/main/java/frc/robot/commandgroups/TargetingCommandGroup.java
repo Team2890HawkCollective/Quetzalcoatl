@@ -37,7 +37,7 @@ public class TargetingCommandGroup extends CommandGroup
     // a CommandGroup containing them would require both the chassis and the
     // arm.
 
-    addParallel(new RaiseElevatorCommand(level, cargo));
+    addParallel(new MoveElevatorCommand(level, cargo));
     addParallel(new TargetingStage1RotationCommand());
     addSequential(new TargetingStage2StrafeCommand());
     addSequential(new TargetingStage3RangefinderCommand());

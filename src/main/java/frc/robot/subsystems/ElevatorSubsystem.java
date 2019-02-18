@@ -78,10 +78,10 @@ public class ElevatorSubsystem extends Subsystem
       RobotMap.elevatorSpeedModifier = RobotMap.MOTOR_FULL_SPEED;
 
     //Left Trigger goes down ONLY if we are above the lower limit
-    if (RobotMap.assistantDriverController.getTriggerAxis(Hand.kLeft) > RobotMap.ELEVATOR_CONTROLLER_DEADZONE && elevatorCanGoDown())
+    if (RobotMap.assistantDriverController.getTriggerAxis(Hand.kLeft) > RobotMap.ELEVATOR_CONTROLLER_DEADZONE)
       moveElevator(-RobotMap.assistantDriverController.getTriggerAxis(Hand.kLeft) * RobotMap.elevatorSpeedModifier);
     //Right Trigger goes up
-    else if (RobotMap.assistantDriverController.getTriggerAxis(Hand.kRight) > RobotMap.ELEVATOR_CONTROLLER_DEADZONE && elevatorCanGoUp())
+    else if (RobotMap.assistantDriverController.getTriggerAxis(Hand.kRight) > RobotMap.ELEVATOR_CONTROLLER_DEADZONE)
       moveElevator(RobotMap.assistantDriverController.getTriggerAxis(Hand.kRight) * RobotMap.elevatorSpeedModifier);
     //If we aren't pressing anything, stop
     else 
