@@ -118,7 +118,13 @@ public class RobotMap {
         public static final int HATCH_HOLDER_LOWER_POSITION_LIMIT_SWITCH_PORT = 5;
 
       //Elevator Limit switches
+      /**
+       * The DIO port on the roborio into which the Lower Elevator limit switch is to be plugged into
+       */
       public static final int LOWER_ELEVATOR_LIMIT_SWTICH_PORT = 0;
+      /**
+       * The DIO port on the roborio into which the Upper Elevator limit switch is to be plugged into
+       */
       public static final int UPPER_ELEVATOR_LIMIT_SWTICH_PORT = 1;
 
   //Constants//
@@ -256,11 +262,6 @@ public class RobotMap {
      */
     public static final double ELEVATOR_LEVEL_3_CARGO_VALUE = 0.0;
 
-    
-
-
-
-
     //Manipulator Constants//
       //Cargo Intake
       /**
@@ -282,6 +283,9 @@ public class RobotMap {
        */
       public static final double MANIPULATOR_STOP_SPEED = 0.0;
 
+      /**
+       * The slow speed for intake
+       */
       public static final double MANIPULATOR_SLOW_SPEED = 0.4;
 
       //Hatch Holder
@@ -309,7 +313,13 @@ public class RobotMap {
      * The inverse of the maximum velocity to be applied to any motor
      */
     public static final double kV = 1.0 / MAX_VELOCITY;
+    /**
+     * General Full Speed for motors
+     */
     public static final double MOTOR_FULL_SPEED = 1.0;
+    /**
+     * General Full Stop value for motors
+     */
     public static final double MOTOR_FULL_STOP = 0.0;
 
   //Flags
@@ -447,6 +457,9 @@ public class RobotMap {
      * declaration of manipulatorSubsystem
      */
     public static ManipulatorSubsystem manipulatorSubsystem;
+    /**
+     * Declaration of automatedSubsystem
+     */
     public static AutomatedSubsytem automatedSubsystem;
 
     //Arduino//
