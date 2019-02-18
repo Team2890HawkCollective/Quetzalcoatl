@@ -73,12 +73,7 @@ public class MoveElevatorCommand extends Command
   @Override
   protected void execute() 
   {
-
-    if (RobotMap.elevatorSubsystem.getEncoderPosition() == encoderTarget)
-    {
-      RobotMap.elevatorSparkMax.set(RobotMap.MOTOR_FULL_STOP);
-    }
-    else if (RobotMap.elevatorSubsystem.getEncoderPosition() > encoderTarget)
+    if (RobotMap.elevatorSubsystem.getEncoderPosition() > encoderTarget)
     {
       RobotMap.elevatorSubsystem.elevatorDown();
     }
