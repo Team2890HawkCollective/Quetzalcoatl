@@ -281,10 +281,8 @@ public class RobotMap {
        * stop speed assigned to manipulator
        */
       public static final double MANIPULATOR_STOP_SPEED = 0.0;
-      /**
-       * The value the the speed is divided by in manipulator
-       */
-      public static final double MANIPULATOR_SPEED_MODIFER = 0.375;
+
+      public static final double MANIPULATOR_SLOW_SPEED = 0.4;
 
       //Hatch Holder
       /**
@@ -321,7 +319,14 @@ public class RobotMap {
   public static boolean ballInIntake = true;
 
   //Non-constant speed modifiers//
+  /**
+   * The value which the speed sent to the elevator is multiplied by
+   */
   public static double elevatorSpeedModifier = 1.0;
+  /**
+   * The value the the speed is divided by in manipulator
+   */
+  public static double manipulatorSpeedModifier = 0.40;
 
   //Objects//
     //Drivetrain//

@@ -72,10 +72,10 @@ public class ElevatorSubsystem extends Subsystem
    */
   public void xboxElevatorControl()
   {
-    if (RobotMap.elevatorEncoder.getPosition() <= 20.0)
+    /*if (RobotMap.elevatorEncoder.getPosition() <= 20.0)
       RobotMap.elevatorSpeedModifier = RobotMap.elevatorEncoder.getPosition() * RobotMap.ELEVATOR_APPROACHING_LOWER_LIMIT_SPEED_MODIFIER;
     else
-      RobotMap.elevatorSpeedModifier = RobotMap.MOTOR_FULL_SPEED;
+      RobotMap.elevatorSpeedModifier = RobotMap.MOTOR_FULL_SPEED;*/
 
     //Left Trigger goes down ONLY if we are above the lower limit
     if (RobotMap.assistantDriverController.getTriggerAxis(Hand.kLeft) > RobotMap.ELEVATOR_CONTROLLER_DEADZONE)
@@ -88,8 +88,8 @@ public class ElevatorSubsystem extends Subsystem
       moveElevator(RobotMap.MOTOR_FULL_STOP);
 
     //Make sure the encoder is reset when we reach the bottom
-    if (getLowerLimitSwitchState())
-      RobotMap.elevatorEncoder.setPosition(0.0);
+    /*if (getLowerLimitSwitchState())
+      RobotMap.elevatorEncoder.setPosition(0.0);*/
   }
 
   /**
