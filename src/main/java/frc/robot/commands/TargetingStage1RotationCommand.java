@@ -11,28 +11,35 @@ import components.utilities.FormatChecker;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.RobotMap;
 
+/**
+ * Continues to rotate the bot by reading the ardiuno until it's told to stop
+ */
 public class TargetingStage1RotationCommand extends Command 
 {
   private String data;
-  private String newData;
 
+  /**
+   * Claims use of driveTrainSubsystem preventing other commands from using it
+   */
   public TargetingStage1RotationCommand() 
   {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+    // Use requires() here to declare subsystem dependencies eg. requires(chassis);
     requires(RobotMap.driveTrainSubsystem);
 
     data = "";
   }
 
-  // Called just before this Command runs the first time
+  //  Called just before this Command runs the first time
   @Override
   protected void initialize() 
   {
     data = RobotMap.arduino.readString();
   }
 
-  // Called repeatedly when this Command is scheduled to run
+  //Called repeatedly when this Command is scheduled to run
+  /**
+   * rotates the bot until told to stop
+   */
   @Override
   protected void execute() 
   {
@@ -40,11 +47,15 @@ public class TargetingStage1RotationCommand extends Command
     //System.out.println("Data: " + data + "\tnewData: " + newData);4
     if (data.length() > 0)
       if (FormatChecker.canParseDouble(data))
-        RobotMap.driveTrainSubsystem.arcadeDrive(RobotMap.DRIVETRAIN_FULL_STOP, Double.parseDouble(data) / RobotMap.DRIVETRAIN_CAMERA_TARGETING_SPEED_MODIFIER, RobotMap.DRIVETRAIN_FULL_STOP);
+        RobotMap.driveTrainSubsystem.arcadeDrive(
+          RobotMap.MOTOR_FULL_SPEED, Double.parseDouble(data) / RobotMap.DRIVETRAIN_CAMERA_TARGETING_SPEED_MODIFIER,
+           RobotMap.MOTOR_FULL_STOP);
     //System.out.println("Data: " + data + "\tnewData: " + newData);
   }
 
-  // Make this return true when this Command no longer needs to run execute()
+  /**
+   *  @return true if arduino says done otherwise returns false
+   */
   @Override
   protected boolean isFinished() 
   {
@@ -55,15 +66,17 @@ public class TargetingStage1RotationCommand extends Command
     return false;
   }
 
-  // Called once after isFinished returns true
+  //Called once after isFinished returns true
+  /**
+   *  stops motors
+   */
   @Override
   protected void end() 
   {
     RobotMap.driveTrainSubsystem.arcadeDrive(RobotMap.MOTOR_FULL_STOP, RobotMap.MOTOR_FULL_STOP, RobotMap.MOTOR_FULL_STOP);
   }
 
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
+  //Called when another command which requires one or more of the same subsystems is scheduled to run
   @Override
   protected void interrupted() 
   {

@@ -190,6 +190,10 @@ public class RobotMap {
      */
     public static final double ELEVATOR_SPEED_MODIFIER = 1.0;
     /**
+     * The value set to the elevator encoder
+     */
+    public static final double ELEVATOR_ENCODER_DEFAULT_POSITION = 0.0;
+    /**
      * What the difference between the elevator target and current elevator position will be divided by to determine speed
      */
     public static final double ELEVATOR_ENCODER_TARGET_SPEED_MODIFIER = 100.0;
@@ -203,7 +207,59 @@ public class RobotMap {
      * stop speed assigned to elevator
      */
     public static final double ELEVATOR_STOP_SPEED = 0.0;
+    /**
+     * Time elevator take to go from 0 speed to full speed
+     */
+    public static final double ELEVATOR_RAMP_TIME = 0.1;
+    /**
+     * Value that makes the elevator not move
+     */
+    public static final double ELEVATOR_CONTROLLER_DEADZONE = 0.5;
+    /**
+     * The value assigned to the speed at which the elevator moves during autonomous
+     */
+    public static final double ELEVATOR_AUTONOMOUS_SPEED = 0.5;
+    /**
+     * Slows the elevator when it is close to the limit
+     */
+    public static final double ELEVATOR_APPROACHING_LOWER_LIMIT_SPEED_MODIFIER = 0.1;
+    /**
+     * The lowest encoder value for the elevator
+     */
+    public static final double ELEVATOR_LOWER_ENCODER_LIMIT = 5.0;
+    /**
+     * The highest encoder value for the elevator
+     */
+    public static final double ELEVATOR_UPPER_ENCODER_LIMIT = 10000;
+    /**
+     * Encoder value for the level one hatch
+     */
+    public static final double ELEVATOR_LEVEL_1_HATCH_VALUE = 0.0;
+    /**
+     * Encoder value for the level two hatch
+     */
+    public static final double ELEVATOR_LEVEL_2_HATCH_VALUE = 64.0;
+        /**
+     * Encoder value for the level three hatch
+                           */
+    public static final double ELEVATOR_LEVEL_3_HATCH_VALUE = 129.0;
+    /**
+     * Encoder value for the level one cargo
+     */
+    public static final double ELEVATOR_LEVEL_1_CARGO_VALUE = 0.0;
+    /**
+     * Encoder value for the level two cargo
+     */
+    public static final double ELEVATOR_LEVEL_2_CARGO_VALUE = 0.0;
+    /**
+     * Encoder value for the level three cargo
+     */
+    public static final double ELEVATOR_LEVEL_3_CARGO_VALUE = 0.0;
+
     
+
+
+
 
     //Manipulator Constants//
       //Cargo Intake
@@ -338,11 +394,20 @@ public class RobotMap {
         public static DigitalInput lowerPositionHatchHolderLimitSwitch;
 
       //Elevator
+      /**
+       * Limit of the lower position of the elevator
+       */
       public static DigitalInput lowerElevatorLimitSwitch;
+      /**
+       * Limit of the lower position of the elevator
+       */
       public static DigitalInput upperElevatorLimitSwitch;
 
-    //Sensors//
-    public static AHRS navX; //Gyro. The purple thingy on the rio
+    //Sensors
+    /**
+     * Gyro. The purple thingy on the rio
+     */
+    public static AHRS navX;
 
     //Joysticks//
     /**
@@ -410,21 +475,27 @@ public class RobotMap {
     elevatorSparkMax = new CANSparkMax(ELEVATOR_SPARK_MAX_ID, MotorType.kBrushless);
     elevatorEncoder = elevatorSparkMax.getEncoder();
 
-    //
+    //Instantiate intake stop switch
     ballIntakeStopSwitch = new DigitalInput(BALL_INTAKE_STOP_PORT);
 
+    //Instantiating hatch position limit switches
     upperPositionHatchHolderLimitSwitch = new DigitalInput(HATCH_HOLDER_UPPER_POSITION_LIMIT_SWITCH_PORT);
     middlePositionHatchHolderLimitSwitch = new DigitalInput(HATCH_HOLDER_MIDDLE_POSITION_LIMIT_SWITCH_PORT);
     lowerPositionHatchHolderLimitSwitch = new DigitalInput(HATCH_HOLDER_LOWER_POSITION_LIMIT_SWITCH_PORT);
     lowerElevatorLimitSwitch = new DigitalInput(LOWER_ELEVATOR_LIMIT_SWTICH_PORT);
     upperElevatorLimitSwitch = new DigitalInput(UPPER_ELEVATOR_LIMIT_SWTICH_PORT);
 
+    //Instantiating joysticks for joystick drive
     leftDriverJoystick = new Joystick(LEFT_DRIVER_JOYSTICK_PORT);
     rightDriverJoystick = new Joystick(RIGHT_DRIVER_JOYSTICK_PORT);
 
+    //Instantiates gyro
     navX = new AHRS(SPI.Port.kMXP);
+    
+    //Instantiates arduino to control pixycam and other functions
     arduino = new SerialPort(115200, SerialPort.Port.kMXP);
 
+    //Sets motors to inverted
     leftFrontTalon.setInverted(true);
     leftBackTalon.setInverted(true);
     centralTalon.setInverted(true);
@@ -438,16 +509,19 @@ public class RobotMap {
     elevatorSparkMax.setIdleMode(IdleMode.kBrake);
     
     //Set names and subsystems
+    //Subsystems
     driveTrainSubsystem.setName(driveTrainSubsystem.getSubsystem(), "DriveTrainSubsystem");
     manipulatorSubsystem.setName(manipulatorSubsystem.getSubsystem(), "ManipulatorSubsystem");
     elevatorSubsystem.setName(elevatorSubsystem.getSubsystem(), "ElevatorSubsystem");
 
+    //Talons
     leftFrontTalon.setName(driveTrainSubsystem.getSubsystem(), "LeftFrontTalon");
     rightFrontTalon.setName(driveTrainSubsystem.getSubsystem(), "RightFrontTalon");
     leftBackTalon.setName(driveTrainSubsystem.getSubsystem(), "LeftBackTalon");
     rightBackTalon.setName(driveTrainSubsystem.getSubsystem(), "RightBackTalon");
     centralTalon.setName(driveTrainSubsystem.getSubsystem(), "CentralTalon");
 
+    //Manipulator
     intakeTalon.setName(manipulatorSubsystem.getSubsystem(), "IntakeTalon");
     hatchHolderTalon.setName(manipulatorSubsystem.getSubsystem(), "HatchHolderTalon");
   }

@@ -24,6 +24,9 @@ public class ElevatorSubsystem extends Subsystem
   // here. Call these from Commands.
 
   @Override
+  /**
+   * Does NADA
+   */
   public void initDefaultCommand() 
   {
     // Set the default command for a subsystem here.
@@ -39,7 +42,7 @@ public class ElevatorSubsystem extends Subsystem
     moveElevator(RobotMap.ELEVATOR_AUTONOMOUS_SPEED);
     if (getUpperLimitSwitchState())
     {
-      moveElevator(RobotMap.ELEVATOR_STOP_SPEED);
+      moveElevator(RobotMap.MOTOR_FULL_STOP);
     }
   }
 
@@ -51,7 +54,7 @@ public class ElevatorSubsystem extends Subsystem
     moveElevator(-RobotMap.ELEVATOR_AUTONOMOUS_SPEED);
     if (getLowerLimitSwitchState())
     {
-      moveElevator(RobotMap.ELEVATOR_STOP_SPEED);
+      moveElevator(RobotMap.MOTOR_FULL_STOP);
     }
   }
 
@@ -64,6 +67,9 @@ public class ElevatorSubsystem extends Subsystem
     RobotMap.elevatorSparkMax.set(speed * RobotMap.elevatorSpeedModifier);
   }
 
+  /**
+   * Uses the triggers on the assistant controller to move the elevator up and down
+   */
   public void xboxElevatorControl()
   {
     if (RobotMap.elevatorEncoder.getPosition() <= 20.0)

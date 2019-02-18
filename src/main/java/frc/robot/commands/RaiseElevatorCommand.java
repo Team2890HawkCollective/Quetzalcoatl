@@ -13,11 +13,15 @@ import frc.robot.subsystems.AutomatedSubsytem;
 
 public class RaiseElevatorCommand extends Command 
 {
+  /**
+   * The value which when the motor reaches, will stop
+   */
   private double encoderTarget;
 
   /**
-   * PRECONDITION: level is a number between 0 and 3 inclusive
-   * @param level The level to lift to. (0 for cargo ship)
+   * Claims elevator subsystem so other classes can't use it
+   * Sets the encoder target based on the level given and whether or not cargo is true
+   * @param level The level to lift to. 
    * @param cargo Whether or not we are lifting cargo
    */
   public RaiseElevatorCommand(AutomatedSubsytem.RocketLevel level, boolean cargo) 
@@ -57,14 +61,15 @@ public class RaiseElevatorCommand extends Command
     }
   }
 
-  // Called just before this Command runs the first time
+  /**
+   *  Called just before this Command runs the first time
+   */
   @Override
-  protected void initialize() 
-  {
-    //Lower elevator to minimum
-  }
+  protected void initialize() {}
 
-  // Called repeatedly when this Command is scheduled to run
+  /**
+   * Moves elevator up.
+   */
   @Override
   protected void execute() 
   {
@@ -72,7 +77,9 @@ public class RaiseElevatorCommand extends Command
     System.out.println(RobotMap.elevatorEncoder.getPosition());
   }
 
-  // Make this return true when this Command no longer needs to run execute()
+  /**
+   * @return true if elevator has reached the target
+   */
   @Override
   protected boolean isFinished() 
   {
@@ -80,10 +87,13 @@ public class RaiseElevatorCommand extends Command
   }
 
   // Called once after isFinished returns true
+  /**
+   * When command ends, stops the motor
+   */
   @Override
   protected void end() 
   {
-    RobotMap.elevatorEncoder.setPosition(encoderTarget);
+    //RobotMap.elevatorEncoder.setPosition(encoderTarget);
     RobotMap.elevatorSparkMax.stopMotor();
   }
 

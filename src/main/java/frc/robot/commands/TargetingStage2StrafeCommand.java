@@ -11,10 +11,16 @@ import components.utilities.FormatChecker;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.RobotMap;
 
+/**
+ * Makes the bot strafe by reading the arduino until it's told to stop
+ */
 public class TargetingStage2StrafeCommand extends Command 
 {
   private String data;
 
+  /**
+   * Claims use of driveTrainSubsystem preventing other commands from using it
+   */
   public TargetingStage2StrafeCommand() 
   {
     // Use requires() here to declare subsystem dependencies
@@ -24,23 +30,34 @@ public class TargetingStage2StrafeCommand extends Command
     data = "";
   }
 
-  // Called just before this Command runs the first time
+  //Called just before this Command runs the first time
+  /**
+   * reads arduino and stores it in data
+   */
   @Override
   protected void initialize() 
   {
     data = RobotMap.arduino.readString();
   }
 
-  // Called repeatedly when this Command is scheduled to run
+  //Called repeatedly when this Command is scheduled to run
+  /**
+   * strafes until told to stop
+   */
   @Override
   protected void execute() 
   {
     if (data.length() > 0)
       if (FormatChecker.canParseDouble(data))
-        RobotMap.driveTrainSubsystem.arcadeDrive(RobotMap.MOTOR_FULL_STOP, RobotMap.MOTOR_FULL_STOP, -Double.parseDouble(data) / RobotMap.DRIVETRAIN_CAMERA_TARGETING_STRAFE_SPEED_MODIFIER);
+        RobotMap.driveTrainSubsystem.arcadeDrive(
+          RobotMap.MOTOR_FULL_STOP, RobotMap.MOTOR_FULL_STOP,
+           -Double.parseDouble(data) / RobotMap.DRIVETRAIN_CAMERA_TARGETING_STRAFE_SPEED_MODIFIER);
   }
 
-  // Make this return true when this Command no longer needs to run execute()
+  //Make this return true when this Command no longer needs to run execute()
+  /**
+   *  returns true if ardiuno says Done otherwise return false
+   */
   @Override
   protected boolean isFinished() 
   {
@@ -51,15 +68,17 @@ public class TargetingStage2StrafeCommand extends Command
     return false;
   }
 
-  // Called once after isFinished returns true
+  //Called once after isFinished returns true
+  /**
+   * stops motor
+   */
   @Override
   protected void end() 
   {
     RobotMap.driveTrainSubsystem.arcadeDrive(RobotMap.MOTOR_FULL_STOP, RobotMap.MOTOR_FULL_STOP, RobotMap.MOTOR_FULL_STOP);
   }
 
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
+  //Called when another command which requires one or more of the same subsystems is scheduled to run
   @Override
   protected void interrupted() 
   {

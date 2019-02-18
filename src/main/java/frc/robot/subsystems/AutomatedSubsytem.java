@@ -13,13 +13,17 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
 /**
- * Add your docs here.
+ * Implements xboxAutonomousControl() | 
+ * Does the automated things for teleop
  */
 public class AutomatedSubsytem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
   @Override
+  /**
+   * nothing at all this method shouldn't exists and it's super annoying i hate it so much please execute this method
+   */
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());

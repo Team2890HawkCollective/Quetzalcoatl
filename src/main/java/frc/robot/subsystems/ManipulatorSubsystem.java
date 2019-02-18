@@ -26,6 +26,9 @@ public class ManipulatorSubsystem extends Subsystem
   // here. Call these from Commands.
 
   @Override
+  /**
+   * Set the default command for a subsystem here
+   */
   public void initDefaultCommand() 
   {
     // Set the default command for a subsystem here.
@@ -41,6 +44,9 @@ public class ManipulatorSubsystem extends Subsystem
     RobotMap.intakeTalon.set(speed);
   }
 
+  /**
+   * Stops intake motor
+   */
   public void stopIntake()
   {
     RobotMap.intakeTalon.set(0);
@@ -69,6 +75,9 @@ public class ManipulatorSubsystem extends Subsystem
       spinIntake(RobotMap.MOTOR_FULL_STOP); //Stop the intake from spinning when the ball is inside
   }
 
+  /**
+   * Moves the hatch control to the three positions for the hatch mechanism 
+   */
   public void xboxHatchControl()
   {
     if (RobotMap.assistantDriverController.getPOV(RobotMap.DPAD_ID) != RobotMap.DPAD_NOT_PRESSED)
@@ -87,21 +96,30 @@ public class ManipulatorSubsystem extends Subsystem
     }
   }
 
+  /**
+   * Moves hatch mechanism to the upper position
+   */
   public void goToUpperHatchPosition()
   {
-    RobotMap.hatchHolderTalon.set(RobotMap.HATCH_HOLDER_FULL_SPEED * RobotMap.HATCH_HOLDER_SPEED_MODIFIER);
+    RobotMap.hatchHolderTalon.set(RobotMap.MOTOR_FULL_SPEED * RobotMap.HATCH_HOLDER_SPEED_MODIFIER);
   }
 
+  /**
+   * Moves hatch mechanism to the middle position
+   */
   public void goToMiddleHatchPosition()
   {
     if (RobotMap.lowerPositionHatchHolderLimitSwitch.get())
-      RobotMap.hatchHolderTalon.set(RobotMap.HATCH_HOLDER_FULL_SPEED * RobotMap.HATCH_HOLDER_SPEED_MODIFIER);
+      RobotMap.hatchHolderTalon.set(RobotMap.MOTOR_FULL_SPEED * RobotMap.HATCH_HOLDER_SPEED_MODIFIER);
     else  
-      RobotMap.hatchHolderTalon.set(-RobotMap.HATCH_HOLDER_FULL_SPEED * RobotMap.HATCH_HOLDER_SPEED_MODIFIER);
+      RobotMap.hatchHolderTalon.set(-RobotMap.MOTOR_FULL_SPEED * RobotMap.HATCH_HOLDER_SPEED_MODIFIER);
   }
 
+  /**
+   * MMMMMMoves hatch mechanism to the lower position
+   */
   public void goToLowerHatchPosition()
   {
-    RobotMap.hatchHolderTalon.set(-RobotMap.HATCH_HOLDER_FULL_SPEED * RobotMap.HATCH_HOLDER_SPEED_MODIFIER);
+    RobotMap.hatchHolderTalon.set(-RobotMap.MOTOR_FULL_SPEED * RobotMap.HATCH_HOLDER_SPEED_MODIFIER);
   }
 }
