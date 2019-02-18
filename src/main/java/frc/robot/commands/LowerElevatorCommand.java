@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.RobotMap;
 
 /**
+ * @deprecated replaced by MoveElevatorCommand 18/02/2019 |
  * lowers the elevator
  */
 public class LowerElevatorCommand extends Command 
