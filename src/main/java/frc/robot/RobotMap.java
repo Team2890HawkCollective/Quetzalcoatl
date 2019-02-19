@@ -14,6 +14,7 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.*;
 import frc.robot.subsystems.*;
 
@@ -520,7 +521,7 @@ public class RobotMap {
     navX = new AHRS(SPI.Port.kMXP);
     
     //Instantiates arduino to control pixycam and other functions
-    //arduino = new SerialPort(115200, SerialPort.Port.kUSB);
+    arduino = new SerialPort(115200, SerialPort.Port.kUSB);
 
     //Sets motors to inverted
     leftFrontTalon.setInverted(true);
