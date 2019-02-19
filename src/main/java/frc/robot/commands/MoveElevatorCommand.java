@@ -83,12 +83,10 @@ public class MoveElevatorCommand extends Command
     {
       RobotMap.elevatorSubsystem.elevatorDown();
     }
-    else if (RobotMap.elevatorSubsystem.getEncoderPosition() < encoderTarget)
+    else
     {
       RobotMap.elevatorSubsystem.elevatorUp();
     }
-
-    System.out.println(RobotMap.elevatorEncoder.getPosition());
   }
 
   /**
