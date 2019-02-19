@@ -10,11 +10,10 @@ package frc.robot;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.*;
-import com.revrobotics.CANDigitalInput.LimitSwitch;
-import com.revrobotics.CANDigitalInput.LimitSwitchPolarity;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.*;
 import frc.robot.subsystems.*;
 
@@ -434,6 +433,12 @@ public class RobotMap {
      */
     public static Joystick rightDriverJoystick;
 
+    //Cameras
+    /**
+     * The camera mounted on the manipulator
+     */
+    public static UsbCamera manipulatorCamera;
+
     //Controllers//
     /**
      * The xbox controller used for the primary driver
@@ -508,6 +513,9 @@ public class RobotMap {
     leftDriverJoystick = new Joystick(LEFT_DRIVER_JOYSTICK_PORT);
     rightDriverJoystick = new Joystick(RIGHT_DRIVER_JOYSTICK_PORT);
 
+    //Instantiates Cameras
+    manipulatorCamera =  CameraServer.getInstance().startAutomaticCapture();
+
     //Instantiates gyro
     navX = new AHRS(SPI.Port.kMXP);
     
@@ -524,7 +532,7 @@ public class RobotMap {
     leftBackTalon.follow(leftFrontTalon);
     rightBackTalon.follow(rightFrontTalon);
 
-    elevatorSparkMax.setClosedLoopRampRate(ELEVATOR_RAMP_TIME);
+    //elevatorSparkMax.setClosedLoopRampRate(ELEVATOR_RAMP_TIME);
     elevatorSparkMax.setIdleMode(IdleMode.kBrake);
     
     //Set names and subsystems
