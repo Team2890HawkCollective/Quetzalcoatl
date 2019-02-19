@@ -11,12 +11,13 @@ import edu.wpi.first.wpilibj.command.TimedCommand;
 import frc.robot.RobotMap;
 
 /**
- * Add your docs here.
+ * releases ball
  */
 public class ReleaseBallCommand extends TimedCommand 
 {
   /**
-   * Add your docs here.
+   * Claims use of manipulatorSubsystem preventing other commands from using it |
+   * @param timeout how long the command will run
    */
   public ReleaseBallCommand(double timeout) 
   {
@@ -32,21 +33,22 @@ public class ReleaseBallCommand extends TimedCommand
   {
   }
 
-  // Called repeatedly when this Command is scheduled to run
+  /**
+   * sets the motor to default speed
+   */
   @Override
   protected void execute() 
   {
     RobotMap.manipulatorSubsystem.spinIntake(RobotMap.MANIPULATOR_DEFAULT_SPEED);
   }
 
-  // Called once after timeout
+  //Called once after timeout
   @Override
   protected void end() 
   {
   }
 
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
+  //Called when another command which requires one or more of the same subsystems is scheduled to run
   @Override
   protected void interrupted() 
   {

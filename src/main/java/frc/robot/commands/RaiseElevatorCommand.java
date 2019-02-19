@@ -9,17 +9,26 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.RobotMap;
+import frc.robot.subsystems.AutomatedSubsytem;
 
+/**
+ * @deprecated replaced by MoveElevatorCommand 18/02/2019 |
+ * Raises the elevator
+ */
 public class RaiseElevatorCommand extends Command 
 {
+  /**
+   * The value which when the motor reaches, will stop
+   */
   private double encoderTarget;
 
   /**
-   * PRECONDITION: level is a number between 0 and 3 inclusive
-   * @param level The level to lift to. (0 for cargo ship)
+   * Claims elevator subsystem so other classes can't use it
+   * Sets the encoder target based on the level given and whether or not cargo is true
+   * @param level The level to lift to. 
    * @param cargo Whether or not we are lifting cargo
    */
-  public RaiseElevatorCommand(int level, boolean cargo) 
+  public RaiseElevatorCommand(AutomatedSubsytem.RocketLevel level, boolean cargo) 
   {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -28,51 +37,68 @@ public class RaiseElevatorCommand extends Command
     //If we are carrying cargo
     if (cargo)
     {
-      if (level == 0)
-        encoderTarget = 0.0; //Cargo ship cargo chute encoder value
-      else if (level == 1)
-        encoderTarget = 1.0; //1st level rocket ship encoder value
-      else if (level == 2)
-        encoderTarget = 2.0; //2nd level rocket ship encoder value;
-      else     
-        encoderTarget = 3.0; //3rd level rocket ship encoder value;
+      switch (level) 
+      {
+        case LEVEL1:
+          encoderTarget = RobotMap.ELEVATOR_LEVEL_1_CARGO_VALUE;
+          break;
+        case LEVEL2:
+          encoderTarget = RobotMap.ELEVATOR_LEVEL_2_CARGO_VALUE;
+          break;
+        case LEVEL3:
+          encoderTarget = RobotMap.ELEVATOR_LEVEL_3_CARGO_VALUE;
+      }
     }
     else
     {
-      if (level == 0 || level == 1)
-        encoderTarget = 1.0; //1st level rocket ship encoder value
-      else if (level == 2)
-        encoderTarget = 2.0; //2nd level rocket ship encoder value;
-      else     
-        encoderTarget = 3.0; //3rd level rocket ship encoder value;
+      switch (level)
+      {
+        case LEVEL1:
+          encoderTarget = RobotMap.ELEVATOR_LEVEL_1_HATCH_VALUE;
+          break;
+        case LEVEL2:
+          encoderTarget = RobotMap.ELEVATOR_LEVEL_2_HATCH_VALUE;
+          break;
+        case LEVEL3:
+          encoderTarget = RobotMap.ELEVATOR_LEVEL_3_HATCH_VALUE;
+      }
     }
   }
 
-  // Called just before this Command runs the first time
+  /**
+   *  Called just before this Command runs the first time
+   */
   @Override
-  protected void initialize() 
-  {
-    //Lower elevator to minimum
-  }
+  protected void initialize() {}
 
-  // Called repeatedly when this Command is scheduled to run
+  /**
+   * Moves elevator up.
+   */
   @Override
   protected void execute() 
   {
-    RobotMap.elevatorSubsystem.moveElevator((encoderTarget - RobotMap.elevatorSubsystem.getEncoderPosition()) / 100.0);
+    RobotMap.elevatorSubsystem.elevatorUp();
+    System.out.println(RobotMap.elevatorEncoder.getPosition());
   }
 
-  // Make this return true when this Command no longer needs to run execute()
+  /**
+   * @return true if elevator has reached the target
+   */
   @Override
   protected boolean isFinished() 
   {
-    return RobotMap.elevatorSubsystem.getEncoderPosition() == encoderTarget;
+    return RobotMap.elevatorSubsystem.getEncoderPosition() >= encoderTarget;
   }
 
   // Called once after isFinished returns true
+  /**
+   * When command ends, stops the motor
+   */
   @Override
   protected void end() 
   {
+    //RobotMap.elevatorEncoder.setPosition(encoderTarget);
+    RobotMap.elevatorSparkMax.stopMotor();
   }
 
   // Called when another command which requires one or more of the same

@@ -11,8 +11,15 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.RobotMap;
 import frc.robot.subsystems.ManipulatorSubsystem;
 
+/**
+ * implements joystick arcade drive and xbox assistant driver
+ */
 public class JoystickDriveCommand extends Command 
 {
+
+  /**
+   * claims driveTrainSubsystem so other classes can't use it
+   */
   public JoystickDriveCommand() 
   {
     // Use requires() here to declare subsystem dependencies
@@ -26,14 +33,22 @@ public class JoystickDriveCommand extends Command
   }
 
   // Called repeatedly when this Command is scheduled to run
+  /**
+   * runs commands for joystick arcade drive and xbox assistant driver
+   */
   @Override
   protected void execute() {
     RobotMap.driveTrainSubsystem.joystickArcadeDrive();
     RobotMap.manipulatorSubsystem.xboxIntakeOuttake();
     RobotMap.elevatorSubsystem.xboxElevatorControl();
+    RobotMap.manipulatorSubsystem.xboxHatchControl();
+    RobotMap.automatedSubsystem.xboxAutonomousControl();
   }
 
   // Make this return true when this Command no longer needs to run execute()
+  /**
+   * will never stop running as long as the bot is on
+   */
   @Override
   protected boolean isFinished() {
     return false;

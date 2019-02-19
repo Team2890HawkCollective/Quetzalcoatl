@@ -119,3 +119,4 @@ gradle-app.setting
 # End of https://www.gitignore.io/api/c++,java,gradle,windows,visualstudiocode
 
 !components.jar
+*.class
