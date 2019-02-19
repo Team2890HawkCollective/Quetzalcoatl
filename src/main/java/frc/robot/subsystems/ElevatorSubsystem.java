@@ -72,24 +72,24 @@ public class ElevatorSubsystem extends Subsystem
    */
   public void xboxElevatorControl()
   {
-    /*if (RobotMap.elevatorEncoder.getPosition() <= 20.0)
+    if (RobotMap.elevatorEncoder.getPosition() <= 20.0)
       RobotMap.elevatorSpeedModifier = RobotMap.elevatorEncoder.getPosition() * RobotMap.ELEVATOR_APPROACHING_LOWER_LIMIT_SPEED_MODIFIER;
     else
-      RobotMap.elevatorSpeedModifier = RobotMap.MOTOR_FULL_SPEED;*/
+      RobotMap.elevatorSpeedModifier = RobotMap.MOTOR_FULL_SPEED;
 
     //Left Trigger goes down ONLY if we are above the lower limit
-    if (RobotMap.assistantDriverController.getTriggerAxis(Hand.kLeft) > RobotMap.ELEVATOR_CONTROLLER_DEADZONE)
+    if (RobotMap.assistantDriverController.getTriggerAxis(Hand.kLeft) > RobotMap.ELEVATOR_CONTROLLER_DEADZONE && elevatorCanGoDown())
       moveElevator(-RobotMap.assistantDriverController.getTriggerAxis(Hand.kLeft) * RobotMap.elevatorSpeedModifier);
     //Right Trigger goes up
-    else if (RobotMap.assistantDriverController.getTriggerAxis(Hand.kRight) > RobotMap.ELEVATOR_CONTROLLER_DEADZONE)
+    else if (RobotMap.assistantDriverController.getTriggerAxis(Hand.kRight) > RobotMap.ELEVATOR_CONTROLLER_DEADZONE && elevatorCanGoUp())
       moveElevator(RobotMap.assistantDriverController.getTriggerAxis(Hand.kRight) * RobotMap.elevatorSpeedModifier);
     //If we aren't pressing anything, stop
     else 
       moveElevator(RobotMap.MOTOR_FULL_STOP);
 
     //Make sure the encoder is reset when we reach the bottom
-    /*if (getLowerLimitSwitchState())
-      RobotMap.elevatorEncoder.setPosition(0.0);*/
+    if (getLowerLimitSwitchState())
+      RobotMap.elevatorEncoder.setPosition(0.0);
   }
 
   /**
