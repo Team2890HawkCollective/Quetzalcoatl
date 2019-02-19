@@ -17,6 +17,9 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.*;
 import frc.robot.subsystems.*;
+import team492.PixyVision;
+import team492.Robot;
+import team492.PixyVision.Orientation;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -423,6 +426,10 @@ public class RobotMap {
      * Gyro. The purple thingy on the rio
      */
     public static AHRS navX;
+    /**
+     * The PixyCam on the robot
+     */
+    public static PixyVision pixyCam;
 
     //Joysticks//
     /**
@@ -510,6 +517,8 @@ public class RobotMap {
 
     //Instantiates gyro
     navX = new AHRS(SPI.Port.kMXP);
+    //Name, Robot, isPixyv2, Sig#, Brightness, Orentation, SPIPort
+    pixyCam = new PixyVision("Pix2", new Robot(), true, 0, 5, Orientation.UPSIDEDOWN_LANDSCAPE, SPI.Port.kOnboardCS0);
     
     //Instantiates arduino to control pixycam and other functions
     arduino = new SerialPort(115200, SerialPort.Port.kUSB);

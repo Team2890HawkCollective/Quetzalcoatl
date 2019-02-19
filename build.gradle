@@ -51,6 +51,7 @@ dependencies {
     nativeDesktopZip wpi.deps.vendor.jni(wpi.platforms.desktop)
     testCompile 'junit:junit:4.12'
 
+    compile group: 'com.google.code.gson', name: 'gson', version: '2.7'
     compile fileTree(dir: 'libs', include:['*.jar'])
 }
 
