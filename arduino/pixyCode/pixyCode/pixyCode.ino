@@ -98,6 +98,12 @@ void loop()
     else if (!stage3Done)
       stage3();
   }
+  else
+  {
+    for (int i = 0; i < 12; i++)
+      driverNotifier.setPixelColor(i, pink);
+    driverNotifier.show();
+  }
 }
 
 void stage1()

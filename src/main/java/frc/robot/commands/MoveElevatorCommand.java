@@ -16,6 +16,7 @@ public class MoveElevatorCommand extends Command
   /**
    * The value which when the motor reaches, will stop
    */
+  private boolean goingDown = true;
   private double encoderTarget;
 
   /**
@@ -29,7 +30,7 @@ public class MoveElevatorCommand extends Command
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(RobotMap.elevatorSubsystem);
-
+    
     //If we are carrying cargo
     if (cargo)
     {
@@ -59,6 +60,11 @@ public class MoveElevatorCommand extends Command
           encoderTarget = RobotMap.ELEVATOR_LEVEL_3_HATCH_VALUE;
       }
     }
+    
+    if (RobotMap.elevatorSubsystem.getEncoderPosition() < encoderTarget)
+    {
+      goingDown = false;
+    }
   }
 
   /**
@@ -77,12 +83,12 @@ public class MoveElevatorCommand extends Command
     {
       RobotMap.elevatorSubsystem.elevatorDown();
     }
-    else if (RobotMap.elevatorSubsystem.getEncoderPosition() < encoderTarget)
+    else
     {
       RobotMap.elevatorSubsystem.elevatorUp();
     }
 
-    System.out.println(RobotMap.elevatorEncoder.getPosition());
+    System.out.println("Executing move elevator command: " + encoderTarget);
   }
 
   /**
@@ -91,7 +97,14 @@ public class MoveElevatorCommand extends Command
   @Override
   protected boolean isFinished() 
   {
-    return RobotMap.elevatorSubsystem.getEncoderPosition() >= encoderTarget;
+    if (goingDown)
+    {
+      return RobotMap.elevatorSubsystem.getEncoderPosition() <= encoderTarget;
+    }
+    else
+    {
+      return RobotMap.elevatorSubsystem.getEncoderPosition() >= encoderTarget;
+    }
   }
 
   // Called once after isFinished returns true

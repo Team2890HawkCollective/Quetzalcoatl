@@ -42,8 +42,6 @@ public class Robot extends TimedRobot
     //SmartDashboard.putData("Auto mode", m_chooser);
 
     RobotMap.init();
-
-    RobotMap.elevatorEncoder.setPosition(RobotMap.ELEVATOR_ENCODER_DEFAULT_POSITION);
   }
 
   /**
@@ -132,6 +130,8 @@ public class Robot extends TimedRobot
      // m_autonomousCommand.cancel();
     //}
     Scheduler.getInstance().removeAll();
+
+    RobotMap.elevatorEncoder.setPosition(RobotMap.ELEVATOR_ENCODER_DEFAULT_POSITION);
 
     new JoystickDriveCommand().start();
   }
