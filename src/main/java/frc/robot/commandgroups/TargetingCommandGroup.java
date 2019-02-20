@@ -38,9 +38,9 @@ public class TargetingCommandGroup extends CommandGroup
     // arm.
 
     addParallel(new MoveElevatorCommand(level, cargo));
-    addParallel(new TargetingStage1RotationCommand());
+    /*addParallel(new TargetingStage1RotationCommand());
     addSequential(new TargetingStage2StrafeCommand());
-    addSequential(new TargetingStage3RangefinderCommand());
+    addSequential(new TargetingStage3RangefinderCommand());*/
     /*addSequential(new LowerElevatorCommand());*/
 
     /*

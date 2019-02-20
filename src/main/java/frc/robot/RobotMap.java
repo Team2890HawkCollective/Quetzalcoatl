@@ -162,7 +162,7 @@ public class RobotMap {
     /**
      * The value by which any speed being sent to the drivetrain will be multiplied by
      */
-    public static final double DRIVETRAIN_SPEED_MODIFIER = 1.0;
+    public static final double DRIVETRAIN_SPEED_MODIFIER = 0.5;
     /**
      * The value by which any speed being sent to the center wheel will be multiplied by
      */
@@ -192,13 +192,9 @@ public class RobotMap {
 
     //Elevator Constants//
     /**
-     * The modifier that the elevator value will by divided by to determine speed
-     */
-    public static final double ELEVATOR_SPEED_MODIFIER = 1.0;
-    /**
      * The value set to the elevator encoder
      */
-    public static final double ELEVATOR_ENCODER_DEFAULT_POSITION = 0.0;
+    public static final double ELEVATOR_ENCODER_DEFAULT_POSITION = 4.0;
     /**
      * What the difference between the elevator target and current elevator position will be divided by to determine speed
      */
@@ -216,7 +212,7 @@ public class RobotMap {
     /**
      * Time elevator take to go from 0 speed to full speed
      */
-    public static final double ELEVATOR_RAMP_TIME = 0.1;
+    public static final double ELEVATOR_RAMP_TIME = 0.2;
     /**
      * Value that makes the elevator not move
      */
@@ -228,11 +224,15 @@ public class RobotMap {
     /**
      * Slows the elevator when it is close to the limit
      */
-    public static final double ELEVATOR_APPROACHING_LOWER_LIMIT_SPEED_MODIFIER = 0.1;
+    public static final double ELEVATOR_APPROACHING_LOWER_LIMIT_SPEED_MODIFIER = 0.025;
+    /**
+     * 
+     */
+    public static final double ELEVATOR_SPEED_BASE_VALUE = 0.5;
     /**
      * The lowest encoder value for the elevator
      */
-    public static final double ELEVATOR_LOWER_ENCODER_LIMIT = 5.0;
+    public static final double ELEVATOR_LOWER_ENCODER_LIMIT = 0.0;
     /**
      * The highest encoder value for the elevator
      */
@@ -240,27 +240,27 @@ public class RobotMap {
     /**
      * Encoder value for the level one hatch
      */
-    public static final double ELEVATOR_LEVEL_1_HATCH_VALUE = 0.0;
+    public static final double ELEVATOR_LEVEL_1_HATCH_VALUE = 13.0;
     /**
      * Encoder value for the level two hatch
      */
-    public static final double ELEVATOR_LEVEL_2_HATCH_VALUE = 64.0;
+    public static final double ELEVATOR_LEVEL_2_HATCH_VALUE = 79.0;
         /**
      * Encoder value for the level three hatch
                            */
-    public static final double ELEVATOR_LEVEL_3_HATCH_VALUE = 129.0;
+    public static final double ELEVATOR_LEVEL_3_HATCH_VALUE = 142.0;
     /**
      * Encoder value for the level one cargo
      */
-    public static final double ELEVATOR_LEVEL_1_CARGO_VALUE = 0.0;
+    public static final double ELEVATOR_LEVEL_1_CARGO_VALUE = 35.0;
     /**
      * Encoder value for the level two cargo
      */
-    public static final double ELEVATOR_LEVEL_2_CARGO_VALUE = 0.0;
+    public static final double ELEVATOR_LEVEL_2_CARGO_VALUE = 100.0;
     /**
      * Encoder value for the level three cargo
      */
-    public static final double ELEVATOR_LEVEL_3_CARGO_VALUE = 0.0;
+    public static final double ELEVATOR_LEVEL_3_CARGO_VALUE = 163.0;
 
     //Manipulator Constants//
       //Cargo Intake
@@ -332,7 +332,7 @@ public class RobotMap {
   /**
    * The value which the speed sent to the elevator is multiplied by
    */
-  public static double elevatorSpeedModifier = 1.0;
+  public static double elevatorSpeedModifier = 0.7;
   /**
    * The value the the speed is divided by in manipulator
    */
@@ -533,7 +533,7 @@ public class RobotMap {
     leftBackTalon.follow(leftFrontTalon);
     rightBackTalon.follow(rightFrontTalon);
 
-    //elevatorSparkMax.setClosedLoopRampRate(ELEVATOR_RAMP_TIME);
+    elevatorSparkMax.setClosedLoopRampRate(ELEVATOR_RAMP_TIME);
     elevatorSparkMax.setIdleMode(IdleMode.kBrake);
     
     //Set names and subsystems

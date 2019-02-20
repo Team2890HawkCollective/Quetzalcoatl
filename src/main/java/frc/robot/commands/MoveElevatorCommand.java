@@ -87,6 +87,8 @@ public class MoveElevatorCommand extends Command
     {
       RobotMap.elevatorSubsystem.elevatorUp();
     }
+
+    System.out.println("Executing move elevator command: " + encoderTarget);
   }
 
   /**
