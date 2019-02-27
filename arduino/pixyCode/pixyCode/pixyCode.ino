@@ -28,7 +28,7 @@
 #define driverNotifierPin 6
 #define cameraLightPin 5
 
-#define numberOfDriverNotifierLeds 12
+#define numberOfDriverNotifierLeds 150
 #define numberOfCameraLeds 12
 
 Adafruit_VL6180X vl = Adafruit_VL6180X();
