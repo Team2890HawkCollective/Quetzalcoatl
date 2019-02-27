@@ -22,7 +22,8 @@
             "skipInvalidPlatforms": true,
             "isJar": false,
             "validPlatforms": [
-                "linuxathena"
+                "linuxathena",
+                "windowsx86-64"
             ]
         }
     ],

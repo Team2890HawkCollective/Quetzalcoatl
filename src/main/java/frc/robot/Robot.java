@@ -7,14 +7,15 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.SerialPort;
+import java.io.IOException;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commandgroups.TargetingCommandGroup;
 import frc.robot.commands.JoystickDriveCommand;
+import jaci.pathfinder.PathfinderFRC;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -27,10 +28,15 @@ public class Robot extends TimedRobot
 {
   /*public static OI m_oi;
 
-  Command m_autonomousCommand;
-  SendableChooser<Command> m_chooser = new SendableChooser<>();
-  */
+  Command m_autonomousCommand;*/
+  SendableChooser<String> startingPositionChooser = new SendableChooser<>();
+  SendableChooser<String> gamePieceChooser = new SendableChooser<>();
+  SendableChooser<String> targetChooser = new SendableChooser<>();
+  SendableChooser<String> gamePiecePosition = new SendableChooser<>();
+  SendableChooser<String> gamePiecePositionPart2 = new SendableChooser<>();
 
+  private String autonomousPath;
+  
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
@@ -40,6 +46,32 @@ public class Robot extends TimedRobot
     //m_oi = new OI();
     // chooser.addOption("My Auto", new MyAutoCommand());
     //SmartDashboard.putData("Auto mode", m_chooser);
+
+    autonomousPath = "";
+
+    startingPositionChooser.addOption("Left", "Left-side ");
+    startingPositionChooser.addOption("Center", "Center ");
+    startingPositionChooser.addOption("Right", "Right-side ");
+
+    gamePieceChooser.addOption("Cargo", "Cargo ");
+    gamePieceChooser.addOption("Hatch", "hatch ");
+
+    gamePiecePosition.addOption("Close", "Close-");
+    gamePiecePosition.addOption("Middle", "Middle-");
+    gamePiecePosition.addOption("Far", "Far-");
+    gamePiecePosition.addOption("Center", "Center-");
+    gamePiecePositionPart2.addOption("Left", "left ");
+    gamePiecePositionPart2.addOption("Right", "right ");
+    
+    targetChooser.addOption("Left Rocket", "Left-rocket");
+    targetChooser.addOption("Right Rocket", "Right-rocket");
+    targetChooser.addOption("Cargo Ship", "Cargo-ship");
+
+    Shuffleboard.getTab("Main").add("Robot Starting Position", startingPositionChooser);
+    Shuffleboard.getTab("Main").add("Game Piece", gamePieceChooser);
+    Shuffleboard.getTab("Main").add("Target", targetChooser);
+    Shuffleboard.getTab("Main").add("Game Piece Position", gamePiecePosition);
+    Shuffleboard.getTab("Main").add("Cargo Ship Side", gamePiecePositionPart2);
 
     RobotMap.init();
   }
@@ -83,7 +115,7 @@ public class Robot extends TimedRobot
    */
   
   @Override
-  public void autonomousInit() 
+  public void autonomousInit()
   {
     //m_autonomousCommand = m_chooser.getSelected();
 
@@ -108,6 +140,36 @@ public class Robot extends TimedRobot
 
     //new TargetingCommandGroup(1, true).start();
     //new TargetingCommandGroup(2, true).start();
+
+    autonomousPath += startingPositionChooser.getSelected();
+
+    //Because the middle portion on the rocket is Cargo only, it has a different path name.
+    if (gamePieceChooser.getSelected().equals("Cargo ") 
+        && (targetChooser.getSelected().equals("Left-Rocket") || targetChooser.getSelected().equals("Right-Rocket")) 
+        && (gamePiecePosition.getSelected().equals("Middle-") || gamePiecePosition.getSelected().equals("Center-")))
+    {
+      autonomousPath += gamePieceChooser.getSelected() + targetChooser.getSelected();
+    }
+    else if (targetChooser.getSelected().equals("Cargo-ship"))
+    {
+      autonomousPath += gamePiecePosition.getSelected() + gamePiecePositionPart2.getSelected();
+    }
+    else 
+    {
+      autonomousPath += gamePiecePosition.getSelected() + gamePieceChooser.getSelected() + targetChooser.getSelected();
+    }
+
+    Shuffleboard.getTab("Main").add("autonomous Path", autonomousPath);
+
+    /*try
+    {
+      RobotMap.leftDrivetrainTrajectory = PathfinderFRC.getTrajectory(RobotMap.autonomousPath + ".right");
+      RobotMap.rightDrivetrainTrajectory = PathfinderFRC.getTrajectory(RobotMap.autonomousPath + ".left");
+    }
+    catch (IOException e)
+    {
+      System.out.println("Path not found. Check Spelling.");
+    }*/
   }
 
   /**
@@ -117,6 +179,7 @@ public class Robot extends TimedRobot
   public void autonomousPeriodic() 
   {
     Scheduler.getInstance().run();
+    System.out.println(autonomousPath);
   }
 
   @Override
