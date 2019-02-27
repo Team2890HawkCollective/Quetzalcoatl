@@ -154,9 +154,17 @@ public class RobotMap {
      */
     public static final int DPAD_LEFT = 270;
 
-    //Drivetrain Misc Constants//
-    //public static final int DRIVETRAIN_ENCODER_TICKS_PER_REVOLUTION = 42;
-    //public static final int DRIVETRAIN_WHEEL_DIAMETER = 4;
+    //Elevator PID Constants//
+      //Mechanical Constants
+      public static final int ELEVATOR_ENCODER_TICK_PER_REV = 42;
+      public static final double ELEVATOR_MAX_VELOCITY = 10.0;
+      //PID
+      public static final double ELEVATOR_P = 1.0;
+      public static final double ELEVATOR_I = 0.0;
+      public static final double ELEVATOR_D = 0.0;
+      public static final double ELEVATOR_V = 1 / ELEVATOR_MAX_VELOCITY;
+      public static final double ELEVATOR_A = 0.0;
+      public static final double ELEVATOR_PID_ABSOLUTE_TOLERANCE = 0.05;
 
     //Drivetrain Speed Constants//
     /**
@@ -306,10 +314,12 @@ public class RobotMap {
 
     //Misc Constants//
     /**
+     * @deprecated Replaced by subsystem-specific values
      * maximum velocity to be applied to any motor
      */
     public static final double MAX_VELOCITY = 17.5;
     /**
+     * @deprecated Replaced by subsystem-specific values
      * The inverse of the maximum velocity to be applied to any motor
      */
     public static final double kV = 1.0 / MAX_VELOCITY;

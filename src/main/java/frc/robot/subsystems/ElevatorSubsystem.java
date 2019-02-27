@@ -10,7 +10,7 @@ package frc.robot.subsystems;
 import javax.lang.model.util.ElementScanner6;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
-import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
@@ -18,7 +18,7 @@ import frc.robot.RobotMap;
  * Implements the methods to move the elevator and get the current position
  * of the elevator.
  */
-public class ElevatorSubsystem extends Subsystem 
+public class ElevatorSubsystem extends PIDSubsystem 
 {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
@@ -31,6 +31,13 @@ public class ElevatorSubsystem extends Subsystem
   {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
+  }
+
+  public ElevatorSubsystem()
+  {
+    super("Elevator", RobotMap.ELEVATOR_P, RobotMap.ELEVATOR_I, RobotMap.ELEVATOR_D);
+    setAbsoluteTolerance(RobotMap.ELEVATOR_PID_ABSOLUTE_TOLERANCE);
+    getPIDController().setContinuous(false);
   }
 
   /**
@@ -146,5 +153,15 @@ public class ElevatorSubsystem extends Subsystem
   public boolean getLowerLimitSwitchState()
   {
     return RobotMap.lowerElevatorLimitSwitch.get();
+  }
+
+  protected double returnPIDInput()
+  {
+    return getEncoderPosition();
+  }
+
+  protected void usePIDOutput(double output)
+  {
+    RobotMap.elevatorSparkMax.pidWrite(output);
   }
 }
