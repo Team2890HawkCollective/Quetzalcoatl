@@ -9,18 +9,26 @@ package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
-import com.revrobotics.*;
+import com.revrobotics.CANEncoder;
+import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import jaci.pathfinder.Pathfinder;
-import jaci.pathfinder.PathfinderFRC;
-import jaci.pathfinder.Trajectory;
-import jaci.pathfinder.followers.EncoderFollower;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.wpilibj.*;
-import frc.robot.subsystems.*;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Notifier;
+import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import frc.robot.subsystems.AutomatedSubsytem;
+import frc.robot.subsystems.DriveTrainSubsystem;
+import frc.robot.subsystems.ElevatorSubsystem;
+import frc.robot.subsystems.ManipulatorSubsystem;
+import jaci.pathfinder.Trajectory;
+import jaci.pathfinder.followers.EncoderFollower;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -461,7 +469,15 @@ public class RobotMap {
         public static Notifier drivetrainNotifier;
     
     //Autonomous//
-    public static String autonomousPath;
+      //Pathweaver
+      public static String autonomousPath;
+
+      //ShuffleBoard
+      public static SendableChooser<String> startingPositionChooser;
+      public static SendableChooser<String> gamePieceChooser;
+      public static SendableChooser<String> targetChooser;
+      public static SendableChooser<String> gamePiecePosition;
+      public static SendableChooser<String> gamePiecePositionPart2;
 
     //Joysticks//
     /**
@@ -515,6 +531,13 @@ public class RobotMap {
 
   public static void init()
   {
+    //Instantiating Autonomous path choosers
+    startingPositionChooser = new SendableChooser<>();
+    gamePieceChooser = new SendableChooser<>();
+    targetChooser = new SendableChooser<>();
+    gamePiecePosition = new SendableChooser<>();
+    gamePiecePositionPart2 = new SendableChooser<>();
+
     //Instantiating subsystems
     driveTrainSubsystem = new DriveTrainSubsystem();
     elevatorSubsystem = new ElevatorSubsystem();

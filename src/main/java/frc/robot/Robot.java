@@ -9,13 +9,14 @@ package frc.robot;
 
 import java.io.IOException;
 
+import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import frc.robot.commands.JoystickDriveCommand;
+import jaci.pathfinder.Pathfinder;
 import jaci.pathfinder.PathfinderFRC;
+import jaci.pathfinder.followers.EncoderFollower;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -29,13 +30,6 @@ public class Robot extends TimedRobot
   /*public static OI m_oi;
 
   Command m_autonomousCommand;*/
-  SendableChooser<String> startingPositionChooser = new SendableChooser<>();
-  SendableChooser<String> gamePieceChooser = new SendableChooser<>();
-  SendableChooser<String> targetChooser = new SendableChooser<>();
-  SendableChooser<String> gamePiecePosition = new SendableChooser<>();
-  SendableChooser<String> gamePiecePositionPart2 = new SendableChooser<>();
-
-  private String autonomousPath;
   
   /**
    * This function is run when the robot is first started up and should be
@@ -47,31 +41,29 @@ public class Robot extends TimedRobot
     // chooser.addOption("My Auto", new MyAutoCommand());
     //SmartDashboard.putData("Auto mode", m_chooser);
 
-    autonomousPath = "";
+    RobotMap.startingPositionChooser.addOption("Left", "Left-side ");
+    RobotMap.startingPositionChooser.addOption("Center", "Center ");
+    RobotMap.startingPositionChooser.addOption("Right", "Right-side ");
 
-    startingPositionChooser.addOption("Left", "Left-side ");
-    startingPositionChooser.addOption("Center", "Center ");
-    startingPositionChooser.addOption("Right", "Right-side ");
+    RobotMap.gamePieceChooser.addOption("Cargo", "Cargo ");
+    RobotMap.gamePieceChooser.addOption("Hatch", "hatch ");
 
-    gamePieceChooser.addOption("Cargo", "Cargo ");
-    gamePieceChooser.addOption("Hatch", "hatch ");
-
-    gamePiecePosition.addOption("Close", "Close-");
-    gamePiecePosition.addOption("Middle", "Middle-");
-    gamePiecePosition.addOption("Far", "Far-");
-    gamePiecePosition.addOption("Center", "Center-");
-    gamePiecePositionPart2.addOption("Left", "left ");
-    gamePiecePositionPart2.addOption("Right", "right ");
+    RobotMap.gamePiecePosition.addOption("Close", "Close-");
+    RobotMap.gamePiecePosition.addOption("Middle", "Middle-");
+    RobotMap.gamePiecePosition.addOption("Far", "Far-");
+    RobotMap.gamePiecePosition.addOption("Center", "Center-");
+    RobotMap.gamePiecePositionPart2.addOption("Left", "left ");
+    RobotMap.gamePiecePositionPart2.addOption("Right", "right ");
     
-    targetChooser.addOption("Left Rocket", "Left-rocket");
-    targetChooser.addOption("Right Rocket", "Right-rocket");
-    targetChooser.addOption("Cargo Ship", "Cargo-ship");
+    RobotMap.targetChooser.addOption("Left Rocket", "Left-rocket");
+    RobotMap.targetChooser.addOption("Right Rocket", "Right-rocket");
+    RobotMap.targetChooser.addOption("Cargo Ship", "Cargo-ship");
 
-    Shuffleboard.getTab("Main").add("Robot Starting Position", startingPositionChooser);
-    Shuffleboard.getTab("Main").add("Game Piece", gamePieceChooser);
-    Shuffleboard.getTab("Main").add("Target", targetChooser);
-    Shuffleboard.getTab("Main").add("Game Piece Position", gamePiecePosition);
-    Shuffleboard.getTab("Main").add("Cargo Ship Side", gamePiecePositionPart2);
+    Shuffleboard.getTab("Main").add("Robot Starting Position", RobotMap.startingPositionChooser);
+    Shuffleboard.getTab("Main").add("Game Piece", RobotMap.gamePieceChooser);
+    Shuffleboard.getTab("Main").add("Target", RobotMap.targetChooser);
+    Shuffleboard.getTab("Main").add("Game Piece Position", RobotMap.gamePiecePosition);
+    Shuffleboard.getTab("Main").add("Cargo Ship Side", RobotMap.gamePiecePositionPart2);
 
     RobotMap.init();
   }
@@ -141,27 +133,27 @@ public class Robot extends TimedRobot
     //new TargetingCommandGroup(1, true).start();
     //new TargetingCommandGroup(2, true).start();
 
-    autonomousPath += startingPositionChooser.getSelected();
+    RobotMap.autonomousPath += RobotMap.startingPositionChooser.getSelected();
 
     //Because the middle portion on the rocket is Cargo only, it has a different path name.
-    if (gamePieceChooser.getSelected().equals("Cargo ") 
-        && (targetChooser.getSelected().equals("Left-Rocket") || targetChooser.getSelected().equals("Right-Rocket")) 
-        && (gamePiecePosition.getSelected().equals("Middle-") || gamePiecePosition.getSelected().equals("Center-")))
+    if (RobotMap.gamePieceChooser.getSelected().equals("Cargo ") 
+        && (RobotMap.targetChooser.getSelected().equals("Left-Rocket") || RobotMap.targetChooser.getSelected().equals("Right-Rocket")) 
+        && (RobotMap.gamePiecePosition.getSelected().equals("Middle-") || RobotMap.gamePiecePosition.getSelected().equals("Center-")))
     {
-      autonomousPath += gamePieceChooser.getSelected() + targetChooser.getSelected();
+      RobotMap.autonomousPath += RobotMap.gamePieceChooser.getSelected() + RobotMap.targetChooser.getSelected();
     }
-    else if (targetChooser.getSelected().equals("Cargo-ship"))
+    else if (RobotMap.targetChooser.getSelected().equals("Cargo-ship"))
     {
-      autonomousPath += gamePiecePosition.getSelected() + gamePiecePositionPart2.getSelected();
+      RobotMap.autonomousPath += RobotMap.gamePiecePosition.getSelected() + RobotMap.gamePiecePositionPart2.getSelected();
     }
     else 
     {
-      autonomousPath += gamePiecePosition.getSelected() + gamePieceChooser.getSelected() + targetChooser.getSelected();
+      RobotMap.autonomousPath += RobotMap.gamePiecePosition.getSelected() + RobotMap.gamePieceChooser.getSelected() + RobotMap.targetChooser.getSelected();
     }
 
-    Shuffleboard.getTab("Main").add("autonomous Path", autonomousPath);
+    Shuffleboard.getTab("Main").add("autonomous Path", RobotMap.autonomousPath);
 
-    /*try
+    try
     {
       RobotMap.leftDrivetrainTrajectory = PathfinderFRC.getTrajectory(RobotMap.autonomousPath + ".right");
       RobotMap.rightDrivetrainTrajectory = PathfinderFRC.getTrajectory(RobotMap.autonomousPath + ".left");
@@ -169,7 +161,39 @@ public class Robot extends TimedRobot
     catch (IOException e)
     {
       System.out.println("Path not found. Check Spelling.");
-    }*/
+    }
+
+    RobotMap.leftSideDrivetrainPathFollower = new EncoderFollower(RobotMap.leftDrivetrainTrajectory);
+    RobotMap.rightSideDrivetrainPathFollower = new EncoderFollower(RobotMap.rightDrivetrainTrajectory);
+
+    RobotMap.leftSideDrivetrainPathFollower.configureEncoder(RobotMap.leftFrontTalon.getSelectedSensorPosition(), RobotMap.DRIVETRAIN_ENCODER_TICKS_PER_REVOLUTION, RobotMap.DRIVETRAIN_WHEEL_DIAMETER);
+    RobotMap.leftSideDrivetrainPathFollower.configureEncoder(RobotMap.rightFrontTalon.getSelectedSensorPosition(), RobotMap.DRIVETRAIN_ENCODER_TICKS_PER_REVOLUTION, RobotMap.DRIVETRAIN_WHEEL_DIAMETER);
+
+    RobotMap.leftSideDrivetrainPathFollower.configurePIDVA(RobotMap.DRIVETRAIN_P, RobotMap.DRIVETRAIN_I, RobotMap.DRIVETRAIN_D, RobotMap.DRIVETRAIN_V, RobotMap.DRIVETRAIN_A);
+    RobotMap.rightSideDrivetrainPathFollower.configurePIDVA(RobotMap.DRIVETRAIN_P, RobotMap.DRIVETRAIN_I, RobotMap.DRIVETRAIN_D, RobotMap.DRIVETRAIN_V, RobotMap.DRIVETRAIN_A);
+
+    RobotMap.drivetrainNotifier = new Notifier(this::followPath);
+    RobotMap.drivetrainNotifier.startPeriodic(RobotMap.leftDrivetrainTrajectory.get(0).dt);
+  }
+
+  private void followPath()
+  {
+    if (RobotMap.leftSideDrivetrainPathFollower.isFinished() || RobotMap.rightSideDrivetrainPathFollower.isFinished())
+    {
+      RobotMap.drivetrainNotifier.stop();
+    }
+    else
+    {
+      double leftSpeed = RobotMap.leftSideDrivetrainPathFollower.calculate(RobotMap.leftFrontTalon.getSelectedSensorPosition());
+      double rightSpeed = RobotMap.rightSideDrivetrainPathFollower.calculate(RobotMap.rightFrontTalon.getSelectedSensorPosition());
+      double heading = RobotMap.navX.getAngle();
+      double desiredHeading = Pathfinder.r2d(RobotMap.leftSideDrivetrainPathFollower.getHeading());
+      double headingDifference = Pathfinder.boundHalfDegrees(desiredHeading - heading);
+      double turn = 0.8 * (-1.0/80.0) * headingDifference;
+
+      RobotMap.leftFrontTalon.set(leftSpeed + turn);
+      RobotMap.rightFrontTalon.set(rightSpeed + turn);
+    }
   }
 
   /**
@@ -179,7 +203,7 @@ public class Robot extends TimedRobot
   public void autonomousPeriodic() 
   {
     Scheduler.getInstance().run();
-    System.out.println(autonomousPath);
+    System.out.println(RobotMap.autonomousPath);
   }
 
   @Override
@@ -197,6 +221,10 @@ public class Robot extends TimedRobot
     RobotMap.elevatorEncoder.setPosition(RobotMap.ELEVATOR_ENCODER_DEFAULT_POSITION);
 
     new JoystickDriveCommand().start();
+
+    RobotMap.drivetrainNotifier.stop();
+    RobotMap.leftFrontTalon.set(RobotMap.MOTOR_FULL_STOP);
+    RobotMap.rightFrontTalon.set(RobotMap.MOTOR_FULL_STOP);
   }
 
   /**
