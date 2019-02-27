@@ -16,7 +16,7 @@ public class MoveElevatorCommand extends Command
   /**
    * The value which when the motor reaches, will stop
    */
-  private boolean goingDown = true;
+  //private boolean goingDown = true;
   private double encoderTarget;
 
   /**

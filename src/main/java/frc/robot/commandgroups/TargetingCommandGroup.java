@@ -7,7 +7,6 @@
 
 package frc.robot.commandgroups;
 
-import frc.robot.RobotMap;
 import frc.robot.commands.*;
 import frc.robot.subsystems.AutomatedSubsytem;
 import edu.wpi.first.wpilibj.command.CommandGroup;

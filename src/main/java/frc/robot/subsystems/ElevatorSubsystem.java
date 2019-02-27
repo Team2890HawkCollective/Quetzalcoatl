@@ -7,11 +7,8 @@
 
 package frc.robot.subsystems;
 
-import javax.lang.model.util.ElementScanner6;
-
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
-import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 /**
@@ -22,7 +19,7 @@ public class ElevatorSubsystem extends PIDSubsystem
 {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  private int printCounter = 0;
+  //private int printCounter = 0;
   @Override
   /**
    * Does NADA
