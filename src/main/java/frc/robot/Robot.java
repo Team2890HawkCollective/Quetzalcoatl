@@ -185,7 +185,7 @@ public class Robot extends TimedRobot
     {
       double leftSpeed = RobotMap.leftSideDrivetrainPathFollower.calculate(RobotMap.leftFrontTalon.getSelectedSensorPosition());
       double rightSpeed = RobotMap.rightSideDrivetrainPathFollower.calculate(RobotMap.rightFrontTalon.getSelectedSensorPosition());
-      double heading = RobotMap.navX.getAngle();
+      double heading = RobotMap.gyro.getAngle();
       double desiredHeading = Pathfinder.r2d(RobotMap.leftSideDrivetrainPathFollower.getHeading());
       double headingDifference = Pathfinder.boundHalfDegrees(desiredHeading - heading);
       double turn = 0.8 * (-1.0/80.0) * headingDifference;

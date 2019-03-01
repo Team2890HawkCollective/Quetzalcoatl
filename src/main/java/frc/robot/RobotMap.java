@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import com.analog.adis16448.frc.ADIS16448_IMU;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANEncoder;
@@ -455,6 +456,8 @@ public class RobotMap {
      */
     public static AHRS navX;
 
+    public static ADIS16448_IMU gyro;
+
     //Pathweaver//
       //Drivetrain//
         //Followers
@@ -580,7 +583,8 @@ public class RobotMap {
     manipulatorCamera =  CameraServer.getInstance().startAutomaticCapture();
 
     //Instantiates gyro
-    navX = new AHRS(SPI.Port.kMXP);
+    //navX = new AHRS(SPI.Port.kMXP);
+    gyro = new ADIS16448_IMU();
     
     //Instantiates arduino to control pixycam and other functions
     //arduino = new SerialPort(115200, SerialPort.Port.kUSB);
