@@ -191,7 +191,7 @@ public class Robot extends TimedRobot
       double turn = 0.8 * (-1.0/80.0) * headingDifference;
 
       RobotMap.leftFrontTalon.set(leftSpeed + turn);
-      RobotMap.rightFrontTalon.set(rightSpeed + turn);
+      RobotMap.rightFrontTalon.set(rightSpeed - turn);
     }
   }
 
