@@ -152,16 +152,18 @@ public class Robot extends TimedRobot
 
     Shuffleboard.getTab("Main").add("autonomous Path", RobotMap.autonomousPath);
 
-    /*try
+    try
     {
+      //Error in current vers of pathweaver where paths need to be flipped. Will be fixed next season.
       RobotMap.leftDrivetrainTrajectory = PathfinderFRC.getTrajectory(RobotMap.autonomousPath + ".right");
       RobotMap.rightDrivetrainTrajectory = PathfinderFRC.getTrajectory(RobotMap.autonomousPath + ".left");
     }
     catch (IOException e)
     {
-      System.out.println("Path not found. Check Spelling.");
+      System.out.println(e.getMessage());
     }
 
+    /*
     RobotMap.leftSideDrivetrainPathFollower = new EncoderFollower(RobotMap.leftDrivetrainTrajectory);
     RobotMap.rightSideDrivetrainPathFollower = new EncoderFollower(RobotMap.rightDrivetrainTrajectory);
 
@@ -202,7 +204,7 @@ public class Robot extends TimedRobot
   public void autonomousPeriodic() 
   {
     Scheduler.getInstance().run();
-    System.out.println(RobotMap.autonomousPath);
+    //System.out.println(RobotMap.autonomousPath);
   }
 
   @Override
