@@ -150,8 +150,6 @@ public class Robot extends TimedRobot
       RobotMap.autonomousPath += RobotMap.gamePiecePosition.getSelected() + RobotMap.gamePieceChooser.getSelected() + RobotMap.targetChooser.getSelected();
     }
 
-    Shuffleboard.getTab("Main").add("autonomous Path", RobotMap.autonomousPath);
-
     try
     {
       //Error in current vers of pathweaver where paths need to be flipped. Will be fixed next season.
@@ -163,7 +161,7 @@ public class Robot extends TimedRobot
       System.out.println(e.getMessage());
     }
 
-    /*
+    
     RobotMap.leftSideDrivetrainPathFollower = new EncoderFollower(RobotMap.leftDrivetrainTrajectory);
     RobotMap.rightSideDrivetrainPathFollower = new EncoderFollower(RobotMap.rightDrivetrainTrajectory);
 
@@ -174,7 +172,7 @@ public class Robot extends TimedRobot
     RobotMap.rightSideDrivetrainPathFollower.configurePIDVA(RobotMap.DRIVETRAIN_P, RobotMap.DRIVETRAIN_I, RobotMap.DRIVETRAIN_D, RobotMap.DRIVETRAIN_V, RobotMap.DRIVETRAIN_A);
 
     RobotMap.drivetrainNotifier = new Notifier(this::followPath);
-    RobotMap.drivetrainNotifier.startPeriodic(RobotMap.leftDrivetrainTrajectory.get(0).dt);*/
+    RobotMap.drivetrainNotifier.startPeriodic(RobotMap.leftDrivetrainTrajectory.get(0).dt);
   }
 
   private void followPath()
