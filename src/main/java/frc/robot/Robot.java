@@ -61,11 +61,11 @@ public class Robot extends TimedRobot
     RobotMap.targetChooser.addOption("Right Rocket", "Right-rocket");
     RobotMap.targetChooser.addOption("Cargo Ship", "Cargo-ship");
 
-    Shuffleboard.getTab("Main").add("Robot Starting Position", RobotMap.startingPositionChooser);
-    Shuffleboard.getTab("Main").add("Game Piece", RobotMap.gamePieceChooser);
-    Shuffleboard.getTab("Main").add("Target", RobotMap.targetChooser);
-    Shuffleboard.getTab("Main").add("Game Piece Position", RobotMap.gamePiecePosition);
-    Shuffleboard.getTab("Main").add("Cargo Ship Side", RobotMap.gamePiecePositionPart2);
+    Shuffleboard.getTab("Robot Configuration").add("Robot Starting Position", RobotMap.startingPositionChooser);
+    Shuffleboard.getTab("Robot Configuration").add("Game Piece", RobotMap.gamePieceChooser);
+    Shuffleboard.getTab("Robot Configuration").add("Target", RobotMap.targetChooser);
+    Shuffleboard.getTab("Robot Configuration").add("Game Piece Position", RobotMap.gamePiecePosition);
+    Shuffleboard.getTab("Robot Configuration").add("Cargo Ship Side", RobotMap.gamePiecePositionPart2);
   }
 
   /**
@@ -132,6 +132,13 @@ public class Robot extends TimedRobot
 
     //new TargetingCommandGroup(1, true).start();
     //new TargetingCommandGroup(2, true).start();
+
+    //Sets the flags for the hatch holder and ball intake.
+    if (RobotMap.gamePieceChooser.getSelected().equals("hatch "))
+    {
+      RobotMap.ballInIntake = false;
+      RobotMap.hatchHolderHasHatch = true;
+    }
 
     RobotMap.autonomousPath = RobotMap.startingPositionChooser.getSelected();
 

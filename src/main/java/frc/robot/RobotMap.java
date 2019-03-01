@@ -120,15 +120,11 @@ public class RobotMap {
         /**
          * The DIO port on the roborio into which the hatch holder's upper position limit is to be plugged into
          */
-        public static final int HATCH_HOLDER_UPPER_POSITION_LIMIT_SWITCH_PORT = 3;
+        public static final int HATCH_HOLDER_GRABBING_LIMIT_SWITCH_PORT = 3;
         /**
          * The DIO port on the roborio into which the hatch holder's middle position limit is to be plugged into
          */
-        public static final int HATCH_HOLDER_MIDDLE_POSITION_LIMIT_SWITCH_PORT = 4;
-        /**
-         * The DIO port on the roborio into which the hatch holder's middle position limit is to be plugged into
-         */
-        public static final int HATCH_HOLDER_LOWER_POSITION_LIMIT_SWITCH_PORT = 5;
+        public static final int HATCH_HOLDER_RELEASING_LIMIT_SWITCH_PORT = 4;
 
       //Elevator Limit switches
       /**
@@ -360,6 +356,8 @@ public class RobotMap {
    */
   public static boolean ballInIntake = true;
 
+  public static boolean hatchHolderHasHatch = false;
+
   //Non-constant speed modifiers//
   /**
    * The value which the speed sent to the elevator is multiplied by
@@ -428,17 +426,13 @@ public class RobotMap {
 
         //Hatch Holder
         /**
-         * Limit for the hatch in the upper position
+         * Limit for the hatch when grabbing a hatch
          */
-        public static DigitalInput upperPositionHatchHolderLimitSwitch;
+        public static DigitalInput grabbedHatchLimitSwitch;
         /**
-         * Limit for the hatch in the middle position
+         * Limit for the hatch when releasing a hatch
          */
-        public static DigitalInput middlePositionHatchHolderLimitSwitch;
-        /**
-         * Limit for the hatch in the lower position
-         */
-        public static DigitalInput lowerPositionHatchHolderLimitSwitch;
+        public static DigitalInput releasedHatchLimitSwitch;
 
       //Elevator//
       /**
@@ -569,9 +563,8 @@ public class RobotMap {
     ballIntakeStopSwitch = new DigitalInput(BALL_INTAKE_STOP_PORT);
 
     //Instantiating hatch position limit switches
-    upperPositionHatchHolderLimitSwitch = new DigitalInput(HATCH_HOLDER_UPPER_POSITION_LIMIT_SWITCH_PORT);
-    middlePositionHatchHolderLimitSwitch = new DigitalInput(HATCH_HOLDER_MIDDLE_POSITION_LIMIT_SWITCH_PORT);
-    lowerPositionHatchHolderLimitSwitch = new DigitalInput(HATCH_HOLDER_LOWER_POSITION_LIMIT_SWITCH_PORT);
+    grabbedHatchLimitSwitch = new DigitalInput(HATCH_HOLDER_GRABBING_LIMIT_SWITCH_PORT);
+    releasedHatchLimitSwitch = new DigitalInput(HATCH_HOLDER_RELEASING_LIMIT_SWITCH_PORT);
     lowerElevatorLimitSwitch = new DigitalInput(LOWER_ELEVATOR_LIMIT_SWTICH_PORT);
     upperElevatorLimitSwitch = new DigitalInput(UPPER_ELEVATOR_LIMIT_SWTICH_PORT);
 
