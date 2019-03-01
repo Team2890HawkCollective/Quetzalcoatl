@@ -133,7 +133,7 @@ public class Robot extends TimedRobot
     //new TargetingCommandGroup(1, true).start();
     //new TargetingCommandGroup(2, true).start();
 
-    RobotMap.autonomousPath += RobotMap.startingPositionChooser.getSelected();
+    RobotMap.autonomousPath = RobotMap.startingPositionChooser.getSelected();
 
     //Because the middle portion on the rocket is Cargo only, it has a different path name.
     if (RobotMap.gamePieceChooser.getSelected().equals("Cargo ") 
