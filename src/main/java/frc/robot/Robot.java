@@ -70,11 +70,11 @@ public class Robot extends TimedRobot
     RobotMap.targetChooser.addOption("Right Rocket", "Right-rocket");
     RobotMap.targetChooser.addOption("Cargo Ship", "Cargo-ship");
 
-    Shuffleboard.getTab("Main").add("Robot Starting Position", RobotMap.startingPositionChooser);
-    Shuffleboard.getTab("Main").add("Game Piece", RobotMap.gamePieceChooser);
-    Shuffleboard.getTab("Main").add("Target", RobotMap.targetChooser);
-    Shuffleboard.getTab("Main").add("Game Piece Position", RobotMap.gamePiecePosition);
-    Shuffleboard.getTab("Main").add("Cargo Ship Side", RobotMap.gamePiecePositionPart2);
+    Shuffleboard.getTab("Robot Configuration").add("Robot Starting Position", RobotMap.startingPositionChooser);
+    Shuffleboard.getTab("Robot Configuration").add("Game Piece", RobotMap.gamePieceChooser);
+    Shuffleboard.getTab("Robot Configuration").add("Target", RobotMap.targetChooser);
+    Shuffleboard.getTab("Robot Configuration").add("Game Piece Position", RobotMap.gamePiecePosition);
+    Shuffleboard.getTab("Robot Configuration").add("Cargo Ship Side", RobotMap.gamePiecePositionPart2);
   }
 
   /**
@@ -142,18 +142,24 @@ public class Robot extends TimedRobot
     //new TargetingCommandGroup(1, true).start();
     //new TargetingCommandGroup(2, true).start();
 
+    //Sets the flags for the hatch holder and ball intake.
+    if (RobotMap.gamePieceChooser.getSelected().equals("hatch "))
+    {
+      RobotMap.ballInIntake = false;
+      RobotMap.hatchHolderHasHatch = true;
+    }
+
     determinePath();
 
-    //Sets the trajectories based off of the determined path
-    //Is in a try catch in case the path doesn't exist
     try
     {
+      //Error in current vers of pathweaver where paths need to be flipped. Will be fixed next season.
       RobotMap.leftDrivetrainTrajectory = PathfinderFRC.getTrajectory(RobotMap.autonomousPath + ".right");
       RobotMap.rightDrivetrainTrajectory = PathfinderFRC.getTrajectory(RobotMap.autonomousPath + ".left");
     }
     catch (IOException e)
     {
-      System.out.println(e);
+      System.out.println(e.getMessage());
     }
 
     configureMotorsForPathWeaver();
@@ -161,7 +167,7 @@ public class Robot extends TimedRobot
 
   private void determinePath()
   {
-    RobotMap.autonomousPath += RobotMap.startingPositionChooser.getSelected();
+    RobotMap.autonomousPath = RobotMap.startingPositionChooser.getSelected();
 
     //Because the middle portion on the rocket is Cargo only, it has a different path name.
     if (RobotMap.gamePieceChooser.getSelected().equals("Cargo ") 
@@ -171,7 +177,7 @@ public class Robot extends TimedRobot
     }
     else if (RobotMap.targetChooser.getSelected().equals("Cargo-ship"))
     {
-      RobotMap.autonomousPath += RobotMap.gamePiecePosition.getSelected() + RobotMap.gamePiecePositionPart2.getSelected();
+      RobotMap.autonomousPath += RobotMap.gamePiecePosition.getSelected() + RobotMap.gamePiecePositionPart2.getSelected() + RobotMap.targetChooser.getSelected();
     }
     else 
     {
@@ -179,9 +185,6 @@ public class Robot extends TimedRobot
     }
   }
 
-  /**
-   * This sets the path followers and configures the encoders and PIDVA values, and then begins the notifier which runs through the path.
-   */
   private void configureMotorsForPathWeaver()
   {
     RobotMap.leftSideDrivetrainPathFollower = new EncoderFollower(RobotMap.leftDrivetrainTrajectory);
@@ -207,13 +210,13 @@ public class Robot extends TimedRobot
     {
       double leftSpeed = RobotMap.leftSideDrivetrainPathFollower.calculate(RobotMap.leftFrontTalon.getSelectedSensorPosition());
       double rightSpeed = RobotMap.rightSideDrivetrainPathFollower.calculate(RobotMap.rightFrontTalon.getSelectedSensorPosition());
-      double heading = RobotMap.navX.getAngle();
+      double heading = RobotMap.gyro.getAngle();
       double desiredHeading = Pathfinder.r2d(RobotMap.leftSideDrivetrainPathFollower.getHeading());
       double headingDifference = Pathfinder.boundHalfDegrees(desiredHeading - heading);
       double turn = 0.8 * (-1.0/80.0) * headingDifference;
 
       RobotMap.leftFrontTalon.set(leftSpeed + turn);
-      RobotMap.rightFrontTalon.set(rightSpeed + turn);
+      RobotMap.rightFrontTalon.set(rightSpeed - turn);
     }
   }
 
@@ -224,7 +227,7 @@ public class Robot extends TimedRobot
   public void autonomousPeriodic() 
   {
     Scheduler.getInstance().run();
-    System.out.println(RobotMap.autonomousPath);
+    //System.out.println(RobotMap.autonomousPath);
   }
 
   @Override
