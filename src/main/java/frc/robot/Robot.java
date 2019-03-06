@@ -142,12 +142,30 @@ public class Robot extends TimedRobot
     //new TargetingCommandGroup(1, true).start();
     //new TargetingCommandGroup(2, true).start();
 
+    determinePath();
+
+    //Sets the trajectories based off of the determined path
+    //Is in a try catch in case the path doesn't exist
+    try
+    {
+      RobotMap.leftDrivetrainTrajectory = PathfinderFRC.getTrajectory(RobotMap.autonomousPath + ".right");
+      RobotMap.rightDrivetrainTrajectory = PathfinderFRC.getTrajectory(RobotMap.autonomousPath + ".left");
+    }
+    catch (IOException e)
+    {
+      System.out.println(e);
+    }
+
+    configureMotorsForPathWeaver();
+  }
+
+  private void determinePath()
+  {
     RobotMap.autonomousPath += RobotMap.startingPositionChooser.getSelected();
 
     //Because the middle portion on the rocket is Cargo only, it has a different path name.
     if (RobotMap.gamePieceChooser.getSelected().equals("Cargo ") 
-        && (RobotMap.targetChooser.getSelected().equals("Left-Rocket") || RobotMap.targetChooser.getSelected().equals("Right-Rocket")) 
-        && (RobotMap.gamePiecePosition.getSelected().equals("Middle-") || RobotMap.gamePiecePosition.getSelected().equals("Center-")))
+        && (RobotMap.targetChooser.getSelected().equals("Left-Rocket") || RobotMap.targetChooser.getSelected().equals("Right-Rocket")))
     {
       RobotMap.autonomousPath += RobotMap.gamePieceChooser.getSelected() + RobotMap.targetChooser.getSelected();
     }
@@ -159,19 +177,13 @@ public class Robot extends TimedRobot
     {
       RobotMap.autonomousPath += RobotMap.gamePiecePosition.getSelected() + RobotMap.gamePieceChooser.getSelected() + RobotMap.targetChooser.getSelected();
     }
+  }
 
-    Shuffleboard.getTab("Main").add("autonomous Path", RobotMap.autonomousPath);
-
-    try
-    {
-      RobotMap.leftDrivetrainTrajectory = PathfinderFRC.getTrajectory(RobotMap.autonomousPath + ".right");
-      RobotMap.rightDrivetrainTrajectory = PathfinderFRC.getTrajectory(RobotMap.autonomousPath + ".left");
-    }
-    catch (IOException e)
-    {
-      System.out.println("Path not found. Check Spelling.");
-    }
-
+  /**
+   * This sets the path followers and configures the encoders and PIDVA values, and then begins the notifier which runs through the path.
+   */
+  private void configureMotorsForPathWeaver()
+  {
     RobotMap.leftSideDrivetrainPathFollower = new EncoderFollower(RobotMap.leftDrivetrainTrajectory);
     RobotMap.rightSideDrivetrainPathFollower = new EncoderFollower(RobotMap.rightDrivetrainTrajectory);
 
