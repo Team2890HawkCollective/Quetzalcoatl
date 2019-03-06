@@ -41,6 +41,17 @@ public class Robot extends TimedRobot
     // chooser.addOption("My Auto", new MyAutoCommand());
     //SmartDashboard.putData("Auto mode", m_chooser);
 
+    RobotMap.init();
+
+    shuffleboardInit();
+  }
+
+  /**
+   * Add all choosers, values, subsystems, and tabs to shuffleboard here.
+   */
+  private void shuffleboardInit()
+  {
+    //Pathweaver
     RobotMap.startingPositionChooser.addOption("Left", "Left-side ");
     RobotMap.startingPositionChooser.addOption("Center", "Center ");
     RobotMap.startingPositionChooser.addOption("Right", "Right-side ");
@@ -64,8 +75,6 @@ public class Robot extends TimedRobot
     Shuffleboard.getTab("Main").add("Target", RobotMap.targetChooser);
     Shuffleboard.getTab("Main").add("Game Piece Position", RobotMap.gamePiecePosition);
     Shuffleboard.getTab("Main").add("Cargo Ship Side", RobotMap.gamePiecePositionPart2);
-
-    RobotMap.init();
   }
 
   /**
