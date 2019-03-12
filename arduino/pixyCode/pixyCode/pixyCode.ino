@@ -1,4 +1,4 @@
-//
+  //
 // begin license header
 //
 // This file is part of Pixy CMUcam5 or "Pixy" for short
@@ -25,8 +25,8 @@
 #include "Adafruit_VL6180X.h"
 #include "Adafruit_NeoPixel.h"
 
-#define driverNotifierPin 6
-#define cameraLightPin 5
+#define driverNotifierPin 5
+#define cameraLightPin 4
 
 #define numberOfDriverNotifierLeds 150
 #define numberOfCameraLeds 12
