@@ -7,16 +7,29 @@
 
 package frc.robot;
 
+import com.analog.adis16448.frc.ADIS16448_IMU;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
-import com.revrobotics.*;
+import com.revrobotics.CANEncoder;
+import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.wpilibj.*;
-import frc.robot.subsystems.*;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Notifier;
+import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import frc.robot.subsystems.AutomatedSubsytem;
+import frc.robot.subsystems.DriveTrainSubsystem;
+import frc.robot.subsystems.ElevatorSubsystem;
+import frc.robot.subsystems.ManipulatorSubsystem;
+import jaci.pathfinder.Trajectory;
+import jaci.pathfinder.followers.EncoderFollower;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -107,15 +120,11 @@ public class RobotMap {
         /**
          * The DIO port on the roborio into which the hatch holder's upper position limit is to be plugged into
          */
-        public static final int HATCH_HOLDER_UPPER_POSITION_LIMIT_SWITCH_PORT = 3;
+        public static final int HATCH_HOLDER_GRABBING_LIMIT_SWITCH_PORT = 3;
         /**
          * The DIO port on the roborio into which the hatch holder's middle position limit is to be plugged into
          */
-        public static final int HATCH_HOLDER_MIDDLE_POSITION_LIMIT_SWITCH_PORT = 4;
-        /**
-         * The DIO port on the roborio into which the hatch holder's middle position limit is to be plugged into
-         */
-        public static final int HATCH_HOLDER_LOWER_POSITION_LIMIT_SWITCH_PORT = 5;
+        public static final int HATCH_HOLDER_RELEASING_LIMIT_SWITCH_PORT = 4;
 
       //Elevator Limit switches
       /**
@@ -154,9 +163,28 @@ public class RobotMap {
      */
     public static final int DPAD_LEFT = 270;
 
-    //Drivetrain Misc Constants//
-    //public static final int DRIVETRAIN_ENCODER_TICKS_PER_REVOLUTION = 42;
-    //public static final int DRIVETRAIN_WHEEL_DIAMETER = 4;
+    //Drivetrain PID/Pathweaver Constants//
+      //Pathweaver
+      public static final int DRIVETRAIN_ENCODER_TICKS_PER_REVOLUTION = 4096;
+      public static final double DRIVETRAIN_WHEEL_DIAMETER = 4.0 / 12.0;
+      public static final double DRIVETRAIN_MAX_VELOCITY = 10.0;
+      //PID
+      public static final double DRIVETRAIN_P = 1.0;
+      public static final double DRIVETRAIN_I = 0.0;
+      public static final double DRIVETRAIN_D = 0.0;
+      public static final double DRIVETRAIN_V = 1 / DRIVETRAIN_MAX_VELOCITY;
+      public static final double DRIVETRAIN_A = 0.0;
+
+    //Elevator PID Constants//
+      //Mechanical Constants
+      public static final int ELEVATOR_ENCODER_TICK_PER_REV = 42;
+      public static final double ELEVATOR_MAX_VELOCITY = 10.0;
+      //PID
+      public static final double ELEVATOR_P = 1.0;
+      public static final double ELEVATOR_I = 0.0;
+      public static final double ELEVATOR_D = 0.0;
+      public static final double ELEVATOR_V = 1 / ELEVATOR_MAX_VELOCITY;
+      public static final double ELEVATOR_A = 0.0;
 
     //Drivetrain Speed Constants//
     /**
@@ -328,6 +356,8 @@ public class RobotMap {
    */
   public static boolean ballInIntake = true;
 
+  public static boolean hatchHolderHasHatch = false;
+
   //Non-constant speed modifiers//
   /**
    * The value which the speed sent to the elevator is multiplied by
@@ -386,7 +416,7 @@ public class RobotMap {
 
     //Servos//
 
-    //Micro Switches
+    //Micro Switches//
       //Manipulator//
         //Ball Intake
         /**
@@ -396,19 +426,15 @@ public class RobotMap {
 
         //Hatch Holder
         /**
-         * Limit for the hatch in the upper position
+         * Limit for the hatch when grabbing a hatch
          */
-        public static DigitalInput upperPositionHatchHolderLimitSwitch;
+        public static DigitalInput grabbedHatchLimitSwitch;
         /**
-         * Limit for the hatch in the middle position
+         * Limit for the hatch when releasing a hatch
          */
-        public static DigitalInput middlePositionHatchHolderLimitSwitch;
-        /**
-         * Limit for the hatch in the lower position
-         */
-        public static DigitalInput lowerPositionHatchHolderLimitSwitch;
+        public static DigitalInput releasedHatchLimitSwitch;
 
-      //Elevator
+      //Elevator//
       /**
        * Limit of the lower position of the elevator
        */
@@ -418,11 +444,37 @@ public class RobotMap {
        */
       public static DigitalInput upperElevatorLimitSwitch;
 
-    //Sensors
+    //Sensors//
     /**
      * Gyro. The purple thingy on the rio
      */
     public static AHRS navX;
+
+    public static ADIS16448_IMU gyro;
+
+    //Pathweaver//
+      //Drivetrain//
+        //Followers
+        public static EncoderFollower leftSideDrivetrainPathFollower;
+        public static EncoderFollower rightSideDrivetrainPathFollower;
+
+        //Trajectories
+        public static Trajectory leftDrivetrainTrajectory;
+        public static Trajectory rightDrivetrainTrajectory;
+
+        //Notifier
+        public static Notifier drivetrainNotifier;
+    
+    //Autonomous//
+      //Pathweaver
+      public static String autonomousPath;
+
+      //ShuffleBoard
+      public static SendableChooser<String> startingPositionChooser;
+      public static SendableChooser<String> gamePieceChooser;
+      public static SendableChooser<String> targetChooser;
+      public static SendableChooser<String> gamePiecePosition;
+      public static SendableChooser<String> gamePiecePositionPart2;
 
     //Joysticks//
     /**
@@ -434,7 +486,7 @@ public class RobotMap {
      */
     public static Joystick rightDriverJoystick;
 
-    //Cameras
+    //Cameras//
     /**
      * The camera mounted on the manipulator
      */
@@ -476,6 +528,13 @@ public class RobotMap {
 
   public static void init()
   {
+    //Instantiating Autonomous path choosers
+    startingPositionChooser = new SendableChooser<>();
+    gamePieceChooser = new SendableChooser<>();
+    targetChooser = new SendableChooser<>();
+    gamePiecePosition = new SendableChooser<>();
+    gamePiecePositionPart2 = new SendableChooser<>();
+
     //Instantiating subsystems
     driveTrainSubsystem = new DriveTrainSubsystem();
     elevatorSubsystem = new ElevatorSubsystem();
@@ -504,9 +563,8 @@ public class RobotMap {
     ballIntakeStopSwitch = new DigitalInput(BALL_INTAKE_STOP_PORT);
 
     //Instantiating hatch position limit switches
-    upperPositionHatchHolderLimitSwitch = new DigitalInput(HATCH_HOLDER_UPPER_POSITION_LIMIT_SWITCH_PORT);
-    middlePositionHatchHolderLimitSwitch = new DigitalInput(HATCH_HOLDER_MIDDLE_POSITION_LIMIT_SWITCH_PORT);
-    lowerPositionHatchHolderLimitSwitch = new DigitalInput(HATCH_HOLDER_LOWER_POSITION_LIMIT_SWITCH_PORT);
+    grabbedHatchLimitSwitch = new DigitalInput(HATCH_HOLDER_GRABBING_LIMIT_SWITCH_PORT);
+    releasedHatchLimitSwitch = new DigitalInput(HATCH_HOLDER_RELEASING_LIMIT_SWITCH_PORT);
     lowerElevatorLimitSwitch = new DigitalInput(LOWER_ELEVATOR_LIMIT_SWTICH_PORT);
     upperElevatorLimitSwitch = new DigitalInput(UPPER_ELEVATOR_LIMIT_SWTICH_PORT);
 
@@ -518,7 +576,8 @@ public class RobotMap {
     manipulatorCamera =  CameraServer.getInstance().startAutomaticCapture();
 
     //Instantiates gyro
-    navX = new AHRS(SPI.Port.kMXP);
+    //navX = new AHRS(SPI.Port.kMXP);
+    gyro = new ADIS16448_IMU();
     
     //Instantiates arduino to control pixycam and other functions
     //arduino = new SerialPort(115200, SerialPort.Port.kUSB);
