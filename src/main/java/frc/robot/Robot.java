@@ -257,7 +257,7 @@ public class Robot extends TimedRobot
   @Override
   public void teleopPeriodic() 
   {  
-    System.out.println(RobotMap.elevatorEncoder.getPosition());
+    //System.out.println(RobotMap.elevatorEncoder.getPosition());
     Scheduler.getInstance().run();
   }
 
