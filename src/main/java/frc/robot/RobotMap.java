@@ -188,6 +188,7 @@ public class RobotMap {
       public static final double ELEVATOR_D = 0.0;
       public static final double ELEVATOR_V = 1 / ELEVATOR_MAX_VELOCITY;
       public static final double ELEVATOR_A = 0.0;
+      public static final double ELEVATOR_PID_ABSOLUTE_TOLERANCE = 0.05;
 
     //Drivetrain Speed Constants//
     /**
@@ -337,10 +338,12 @@ public class RobotMap {
 
     //Misc Constants//
     /**
+     * @deprecated Replaced by subsystem-specific values
      * maximum velocity to be applied to any motor
      */
     public static final double MAX_VELOCITY = 17.5;
     /**
+     * @deprecated Replaced by subsystem-specific values
      * The inverse of the maximum velocity to be applied to any motor
      */
     public static final double kV = 1.0 / MAX_VELOCITY;

@@ -8,7 +8,6 @@
 package frc.robot.subsystems;
 import frc.robot.commandgroups.TargetingCommandGroup;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
-import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 

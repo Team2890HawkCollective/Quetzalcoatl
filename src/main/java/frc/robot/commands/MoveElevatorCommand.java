@@ -16,7 +16,7 @@ public class MoveElevatorCommand extends Command
   /**
    * The value which when the motor reaches, will stop
    */
-  private boolean goingDown = true;
+  //private boolean goingDown = true;
   private double encoderTarget;
 
   /**
@@ -60,18 +60,23 @@ public class MoveElevatorCommand extends Command
           encoderTarget = RobotMap.ELEVATOR_LEVEL_3_HATCH_VALUE;
       }
     }
+
+    RobotMap.elevatorSubsystem.setSetpoint(encoderTarget);
     
-    if (RobotMap.elevatorSubsystem.getEncoderPosition() < encoderTarget)
+    /*if (RobotMap.elevatorSubsystem.getEncoderPosition() < encoderTarget)
     {
       goingDown = false;
-    }
+    }*/
   }
 
   /**
    *  Called just before this Command runs the first time
    */
   @Override
-  protected void initialize() {}
+  protected void initialize() 
+  {
+    RobotMap.elevatorSubsystem.enable();
+  }
 
   /**
    * Moves elevator according to whether or not the encoder is higher or lower than the target.
@@ -79,7 +84,7 @@ public class MoveElevatorCommand extends Command
   @Override
   protected void execute() 
   {
-    if (RobotMap.elevatorSubsystem.getEncoderPosition() > encoderTarget)
+    /*if (RobotMap.elevatorSubsystem.getEncoderPosition() > encoderTarget)
     {
       RobotMap.elevatorSubsystem.elevatorDown();
     }
@@ -88,6 +93,7 @@ public class MoveElevatorCommand extends Command
       RobotMap.elevatorSubsystem.elevatorUp();
     }
 
+    System.out.println("Executing move elevator command: " + encoderTarget);*/
   }
 
   /**
@@ -96,14 +102,16 @@ public class MoveElevatorCommand extends Command
   @Override
   protected boolean isFinished() 
   {
-    if (goingDown)
+    /*if (goingDown)
     {
       return RobotMap.elevatorSubsystem.getEncoderPosition() <= encoderTarget;
     }
     else
     {
       return RobotMap.elevatorSubsystem.getEncoderPosition() >= encoderTarget;
-    }
+    }*/
+
+    return RobotMap.elevatorSubsystem.onTarget();
   }
 
   // Called once after isFinished returns true
