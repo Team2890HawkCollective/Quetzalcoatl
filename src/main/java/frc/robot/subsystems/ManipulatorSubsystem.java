@@ -87,46 +87,23 @@ public class ManipulatorSubsystem extends Subsystem
    */
   public void xboxHatchControl()
   {
-    if (RobotMap.assistantDriverController.getPOV(RobotMap.DPAD_ID) != RobotMap.DPAD_NOT_PRESSED)
+    if (RobotMap.assistantDriverController.getBumperPressed(Hand.kLeft))
     {
-      switch (RobotMap.assistantDriverController.getPOV(RobotMap.DPAD_ID))
-      {
-        case RobotMap.DPAD_UP:
-          Scheduler.getInstance().add(new GoToUpperHatchPositionCommand());
-          break;
-        case RobotMap.DPAD_RIGHT:
-          Scheduler.getInstance().add(new GoToMiddleHatchPositionCommand());
-          break;
-        case RobotMap.DPAD_BOTTOM:
-          Scheduler.getInstance().add(new GoToLowerHatchPositionCommand());
-      }
+      if (RobotMap.hatchHolderHasHatch)
+        new ReleaseHatchCommand().start();
+      else
+        new GrabHatchCommand().start();
+      RobotMap.hatchHolderHasHatch = !RobotMap.hatchHolderHasHatch;
     }
   }
 
-  /**
-   * Moves hatch mechanism to the upper position
-   */
-  public void goToUpperHatchPosition()
-  {
-    RobotMap.hatchHolderTalon.set(RobotMap.MOTOR_FULL_SPEED * RobotMap.HATCH_HOLDER_SPEED_MODIFIER);
-  }
+ public void grabHatch()
+ {
+   RobotMap.hatchHolderTalon.set(RobotMap.MOTOR_FULL_SPEED);
+ }
 
-  /**
-   * Moves hatch mechanism to the middle position
-   */
-  public void goToMiddleHatchPosition()
-  {
-    if (RobotMap.lowerPositionHatchHolderLimitSwitch.get())
-      RobotMap.hatchHolderTalon.set(RobotMap.MOTOR_FULL_SPEED * RobotMap.HATCH_HOLDER_SPEED_MODIFIER);
-    else  
-      RobotMap.hatchHolderTalon.set(-RobotMap.MOTOR_FULL_SPEED * RobotMap.HATCH_HOLDER_SPEED_MODIFIER);
-  }
-
-  /**
-   * MMMMMMoves hatch mechanism to the lower position
-   */
-  public void goToLowerHatchPosition()
-  {
-    RobotMap.hatchHolderTalon.set(-RobotMap.MOTOR_FULL_SPEED * RobotMap.HATCH_HOLDER_SPEED_MODIFIER);
-  }
+ public void releaseHatch()
+ {
+   RobotMap.hatchHolderTalon.set(-RobotMap.MOTOR_FULL_SPEED);
+ }
 }
