@@ -40,11 +40,11 @@ public class RobotMap {
     /**
      * The number assigned to the driver xbox controller when it's plugged in
      */
-    public static final int DRIVER_CONTROLLER_PORT = 0;
+    public static final int DRIVER_CONTROLLER_PORT = 2;
     /**
      * The number assigned to the assistant driver xbox controller when it's plugged into the computer
      */
-    public static final int ASSISTANT_DRIVER_CONTROLLER_PORT = 2;
+    public static final int ASSISTANT_DRIVER_CONTROLLER_PORT = 3;
     /**
      * The number assigned to the driver's left joystick when using joystick driver
      */
@@ -521,7 +521,7 @@ public class RobotMap {
     navX = new AHRS(SPI.Port.kMXP);
     
     //Instantiates arduino to control pixycam and other functions
-    arduino = new SerialPort(115200, SerialPort.Port.kUSB);
+    //arduino = new SerialPort(115200, SerialPort.Port.kUSB);
 
     //Sets motors to inverted
     leftFrontTalon.setInverted(true);

@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commandgroups.TargetingCommandGroup;
-import frc.robot.commands.JoystickDriveCommand;
+import frc.robot.commands.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -133,7 +133,7 @@ public class Robot extends TimedRobot
 
     RobotMap.elevatorEncoder.setPosition(RobotMap.ELEVATOR_ENCODER_DEFAULT_POSITION);
 
-    new JoystickDriveCommand().start();
+    new XboxDriveCommand().start();
   }
 
   /**
@@ -142,7 +142,6 @@ public class Robot extends TimedRobot
   @Override
   public void teleopPeriodic() 
   {  
-    System.out.println(RobotMap.elevatorEncoder.getPosition());
     Scheduler.getInstance().run();
   }
 
