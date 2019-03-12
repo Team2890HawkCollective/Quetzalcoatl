@@ -75,7 +75,10 @@ public class RobotMap {
      * The CAN ID assigned to the center talon
      */
     public static final int CENTER_TALON_ID = 5;
-
+    /**
+     * The CAN ID assigned to move to center motor up and down
+     */
+    public static final int CENTER_TALON_MOVE_ID = 10;
     //Elevator//
     /**
      * The CAN ID assigned to the elevator spark max
@@ -245,9 +248,9 @@ public class RobotMap {
      * Encoder value for the level two hatch
      */
     public static final double ELEVATOR_LEVEL_2_HATCH_VALUE = 79.0;
-        /**
+    /**
      * Encoder value for the level three hatch
-                           */
+     */
     public static final double ELEVATOR_LEVEL_3_HATCH_VALUE = 142.0;
     /**
      * Encoder value for the level one cargo
@@ -360,7 +363,10 @@ public class RobotMap {
      * Motor for the center wheel/strafe
      */
     public static WPI_TalonSRX centralTalon;
-
+    /**
+     * Motor to move strafe wheel up and down
+     */
+    public static WPI_TalonSRX centerMoveTalon;
     //Manipulator//
       //Cargo Intake
       /**
@@ -492,6 +498,7 @@ public class RobotMap {
     leftBackTalon = new WPI_TalonSRX(LEFT_BACK_TALON_ID);
     rightBackTalon = new WPI_TalonSRX(RIGHT_BACK_TALON_ID);
     centralTalon = new WPI_TalonSRX(CENTER_TALON_ID);
+    centerMoveTalon = new WPI_TalonSRX(CENTER_TALON_MOVE_ID);
 
     intakeTalon = new WPI_TalonSRX(INATKE_TALON_ID);
 
