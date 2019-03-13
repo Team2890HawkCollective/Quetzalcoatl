@@ -28,7 +28,7 @@
 #define driverNotifierPin 5
 #define cameraLightPin 4
 
-#define numberOfDriverNotifierLeds 150
+#define numberOfDriverNotifierLeds 58
 #define numberOfCameraLeds 12
 
 Adafruit_VL6180X vl = Adafruit_VL6180X();
@@ -63,9 +63,9 @@ void setup()
   cameraLight.begin();
 
   //Set the lights to their initial colors
-  for (int i = 0; i < 12; i++)
+  for (int i = 0; i < numberOfDriverNotifierLeds; i++)
     driverNotifier.setPixelColor(i, pink);
-  for (int i = 0; i < 12; i++)
+  for (int i = 0; i < numberOfCameraLeds; i++)
     cameraLight.setPixelColor(i, white);
   
   //Set the lights to show. This must be done whenever the colour is changed
