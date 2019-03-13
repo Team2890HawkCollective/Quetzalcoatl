@@ -28,7 +28,7 @@
 #define driverNotifierPin 5
 #define cameraLightPin 4
 
-#define numberOfDriverNotifierLeds 58
+#define numberOfDriverNotifierLeds 150
 #define numberOfCameraLeds 12
 
 Adafruit_VL6180X vl = Adafruit_VL6180X();
@@ -85,7 +85,7 @@ void loop()
   if (pixy.ccc.numBlocks >= 2)
   {
     //Set the driverNotifierCamera to teal to notify the driver we are ready
-    for (int i = 0; i < 12; i++)
+    for (int i = 0; i < numberOfDriverNotifierLeds; i++)
       driverNotifier.setPixelColor(i, teal);
     driverNotifier.show();
     
@@ -100,7 +100,7 @@ void loop()
   }
   else
   {
-    for (int i = 0; i < 12; i++)
+    for (int i = 0; i < numberOfDriverNotifierLeds; i++)
       driverNotifier.setPixelColor(i, pink);
     driverNotifier.show();
   }
