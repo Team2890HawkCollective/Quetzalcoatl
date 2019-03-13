@@ -119,6 +119,7 @@ public class RobotMap {
          */
         public static final int HATCH_HOLDER_TALON_ID = 8;
 
+
         //Hatch Holder Micro Switches
         /**
          * The DIO port on the roborio into which the hatch holder's upper position limit is to be plugged into
@@ -586,8 +587,8 @@ public class RobotMap {
     manipulatorCamera =  CameraServer.getInstance().startAutomaticCapture();
 
     //Instantiates gyro
-    //navX = new AHRS(SPI.Port.kMXP);
-    gyro = new ADIS16448_IMU();
+    navX = new AHRS(SPI.Port.kMXP);
+    //gyro = new ADIS16448_IMU();
     
     //Instantiates arduino to control pixycam and other functions
     //arduino = new SerialPort(115200, SerialPort.Port.kUSB);
