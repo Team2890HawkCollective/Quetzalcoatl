@@ -210,7 +210,7 @@ public class Robot extends TimedRobot
     {
       double leftSpeed = RobotMap.leftSideDrivetrainPathFollower.calculate(RobotMap.leftFrontTalon.getSelectedSensorPosition());
       double rightSpeed = RobotMap.rightSideDrivetrainPathFollower.calculate(RobotMap.rightFrontTalon.getSelectedSensorPosition());
-      double heading = RobotMap.gyro.getAngle();
+      double heading = RobotMap.navX.getAngle();
       double desiredHeading = Pathfinder.r2d(RobotMap.leftSideDrivetrainPathFollower.getHeading());
       double headingDifference = Pathfinder.boundHalfDegrees(desiredHeading - heading);
       double turn = 0.8 * (-1.0/80.0) * headingDifference;
@@ -245,9 +245,11 @@ public class Robot extends TimedRobot
     RobotMap.elevatorEncoder.setPosition(RobotMap.ELEVATOR_ENCODER_DEFAULT_POSITION);
     new JoystickDriveCommand().start();
 
-    RobotMap.drivetrainNotifier.stop();
-    RobotMap.leftFrontTalon.set(RobotMap.MOTOR_FULL_STOP);
-    RobotMap.rightFrontTalon.set(RobotMap.MOTOR_FULL_STOP);
+    
+
+    //RobotMap.drivetrainNotifier.stop();
+    //RobotMap.leftFrontTalon.set(RobotMap.MOTOR_FULL_STOP);
+    //RobotMap.rightFrontTalon.set(RobotMap.MOTOR_FULL_STOP);
   }
 
   /**
@@ -258,6 +260,9 @@ public class Robot extends TimedRobot
   {  
     //System.out.println(RobotMap.elevatorEncoder.getPosition());
     Scheduler.getInstance().run();
+
+    System.out.println("Grabbed: " + RobotMap.grabbedHatchLimitSwitch.get());
+    //System.out.println("Released: " + RobotMap.releasedHatchLimitSwitch.get());  // works after re-wire limit switch.
   }
 
   /**
