@@ -143,13 +143,13 @@ public class Robot extends TimedRobot
     //new TargetingCommandGroup(2, true).start();
 
     //Sets the flags for the hatch holder and ball intake.
-    if (RobotMap.gamePieceChooser.getSelected().equals("hatch "))
+    /*if (RobotMap.gamePieceChooser.getSelected().equals("hatch "))
     {
       RobotMap.ballInIntake = false;
       RobotMap.hatchHolderHasHatch = true;
     }
 
-    determinePath();
+    //determinePath();
 
     try
     {
@@ -162,7 +162,7 @@ public class Robot extends TimedRobot
       System.out.println(e.getMessage());
     }
 
-    configureMotorsForPathWeaver();
+    //configureMotorsForPathWeaver();
   }
 
   private void determinePath()
@@ -218,7 +218,7 @@ public class Robot extends TimedRobot
       RobotMap.leftFrontTalon.set(leftSpeed + turn);
       RobotMap.rightFrontTalon.set(rightSpeed - turn);
     }
-  }
+  }*/
 
   /**
    * This function is called periodically during autonomous.
@@ -226,7 +226,7 @@ public class Robot extends TimedRobot
   @Override
   public void autonomousPeriodic() 
   {
-    Scheduler.getInstance().run();
+    //Scheduler.getInstance().run();
     //System.out.println(RobotMap.autonomousPath);
   }
 
