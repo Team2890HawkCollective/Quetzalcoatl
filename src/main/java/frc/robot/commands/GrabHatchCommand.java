@@ -36,12 +36,13 @@ public class GrabHatchCommand extends Command
   @Override
   protected boolean isFinished() 
   {
-    return RobotMap.grabbedHatchLimitSwitch.get();
+    return !RobotMap.grabbedHatchLimitSwitch.get();
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    RobotMap.hatchHolderTalon.set(RobotMap.MOTOR_FULL_STOP);
   }
 
   // Called when another command which requires one or more of the same

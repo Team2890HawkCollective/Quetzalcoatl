@@ -599,6 +599,7 @@ public class RobotMap {
     centralTalon.setInverted(true);
     intakeTalon.setInverted(true);
     elevatorSparkMax.setInverted(true);
+    hatchHolderTalon.setInverted(true);
 
     leftBackTalon.follow(leftFrontTalon);
     rightBackTalon.follow(rightFrontTalon);

@@ -261,8 +261,8 @@ public class Robot extends TimedRobot
     //System.out.println(RobotMap.elevatorEncoder.getPosition());
     Scheduler.getInstance().run();
 
-    System.out.println("Grabbed: " + RobotMap.grabbedHatchLimitSwitch.get());
-    //System.out.println("Released: " + RobotMap.releasedHatchLimitSwitch.get());  // works after re-wire limit switch.
+    //System.out.println("Grabbed: " + RobotMap.grabbedHatchLimitSwitch.get());
+    System.out.println("Released: " + RobotMap.releasedHatchLimitSwitch.get());  // works after re-wire limit switch.
   }
 
   /**

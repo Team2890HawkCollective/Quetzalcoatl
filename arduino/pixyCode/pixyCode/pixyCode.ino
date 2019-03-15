@@ -1,4 +1,4 @@
-  //
+//
 // begin license header
 //
 // This file is part of Pixy CMUcam5 or "Pixy" for short
@@ -28,7 +28,7 @@
 #define driverNotifierPin 5
 #define cameraLightPin 4
 
-#define numberOfDriverNotifierLeds 58
+#define numberOfDriverNotifierLeds 150
 #define numberOfCameraLeds 12
 
 Adafruit_VL6180X vl = Adafruit_VL6180X();
@@ -63,9 +63,9 @@ void setup()
   cameraLight.begin();
 
   //Set the lights to their initial colors
-  for (int i = 0; i < numberOfDriverNotifierLeds; i++)
+  for (int i = 0; i < 12; i++)
     driverNotifier.setPixelColor(i, pink);
-  for (int i = 0; i < numberOfCameraLeds; i++)
+  for (int i = 0; i < 12; i++)
     cameraLight.setPixelColor(i, white);
   
   //Set the lights to show. This must be done whenever the colour is changed
@@ -97,12 +97,6 @@ void loop()
       stage2();
     else if (!stage3Done)
       stage3();
-  }
-  else
-  {
-    for (int i = 0; i < 12; i++)
-      driverNotifier.setPixelColor(i, pink);
-    driverNotifier.show();
   }
 }
 
