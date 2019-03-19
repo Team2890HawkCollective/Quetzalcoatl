@@ -31,6 +31,7 @@
 #define numberOfDriverNotifierLeds 150
 #define numberOfCameraLeds 12
 
+
 Adafruit_VL6180X vl = Adafruit_VL6180X();
 Adafruit_NeoPixel driverNotifier = Adafruit_NeoPixel(numberOfDriverNotifierLeds, driverNotifierPin);
 Adafruit_NeoPixel cameraLight = Adafruit_NeoPixel(numberOfCameraLeds, cameraLightPin);

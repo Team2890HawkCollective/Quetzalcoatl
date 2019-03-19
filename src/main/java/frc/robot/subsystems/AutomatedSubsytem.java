@@ -46,7 +46,8 @@ public class AutomatedSubsytem extends Subsystem {
     else if (RobotMap.assistantDriverController.getYButtonPressed())
     {
       new TargetingCommandGroup(RocketLevel.LEVEL3, RobotMap.assistantDriverController.getBumper(Hand.kRight)).start();
-    }
+    } //Blocked level three due to inability to reach that level
+
   }
 
   public static enum RocketLevel

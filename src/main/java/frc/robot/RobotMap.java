@@ -195,7 +195,7 @@ public class RobotMap {
     /**
      * The value by which any speed being sent to the drivetrain will be multiplied by
      */
-    public static final double DRIVETRAIN_SPEED_MODIFIER = 0.5;
+    public static final double DRIVETRAIN_SPEED_MODIFIER = 1.0;
     /**
      * The value by which any speed being sent to the center wheel will be multiplied by
      */
@@ -501,6 +501,7 @@ public class RobotMap {
      * The camera mounted on the manipulator
      */
     public static UsbCamera manipulatorCamera;
+    public static UsbCamera driveCamera;
 
     //Controllers//
     /**
@@ -585,6 +586,7 @@ public class RobotMap {
 
     //Instantiates Cameras
     manipulatorCamera =  CameraServer.getInstance().startAutomaticCapture();
+    driveCamera = CameraServer.getInstance().startAutomaticCapture();
 
     //Instantiates gyro
     navX = new AHRS(SPI.Port.kMXP);

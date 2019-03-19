@@ -11,7 +11,8 @@ import java.io.IOException;
 
 import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.command.Scheduler;//
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import frc.robot.commands.JoystickDriveCommand;
 import jaci.pathfinder.Pathfinder;
@@ -43,7 +44,13 @@ public class Robot extends TimedRobot
 
     RobotMap.init();
 
+    Scheduler.getInstance().removeAll();
+
+    new JoystickDriveCommand().start();
+
     shuffleboardInit();
+
+    RobotMap.elevatorEncoder.setPosition(RobotMap.ELEVATOR_LOWER_ENCODER_LIMIT);
   }
 
   /**
@@ -75,6 +82,14 @@ public class Robot extends TimedRobot
     Shuffleboard.getTab("Robot Configuration").add("Target", RobotMap.targetChooser);
     Shuffleboard.getTab("Robot Configuration").add("Game Piece Position", RobotMap.gamePiecePosition);
     Shuffleboard.getTab("Robot Configuration").add("Cargo Ship Side", RobotMap.gamePiecePositionPart2);
+
+    Shuffleboard.getTab("Main").add(RobotMap.manipulatorCamera);
+
+    Shuffleboard.getTab("Main").add(RobotMap.driveCamera);
+
+    Shuffleboard.getTab("Main").add("Hatch", RobotMap.grabbedHatchLimitSwitch.get()).withWidget(BuiltInWidgets.kBooleanBox);
+
+    Shuffleboard.getTab("Main").add("Lower Limit", RobotMap.lowerElevatorLimitSwitch.get()).withWidget(BuiltInWidgets.kBooleanBox);
   }
 
   /**
@@ -87,6 +102,7 @@ public class Robot extends TimedRobot
    */
   @Override
   public void robotPeriodic() {
+    
   }
 
   /**
@@ -120,6 +136,8 @@ public class Robot extends TimedRobot
   {
     //m_autonomousCommand = m_chooser.getSelected();
 
+    new JoystickDriveCommand().start();
+
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector",
      * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
@@ -137,17 +155,18 @@ public class Robot extends TimedRobot
 
     //RobotMap.arduino.enableTermination();
 
-    //RobotMap.elevatorEncoder.setPosition(RobotMap.ELEVATOR_LOWER_ENCODER_LIMIT);
+    RobotMap.elevatorEncoder.setPosition(RobotMap.ELEVATOR_LOWER_ENCODER_LIMIT);
 
     //new TargetingCommandGroup(1, true).start();
     //new TargetingCommandGroup(2, true).start();
 
     //Sets the flags for the hatch holder and ball intake.
-    /*if (RobotMap.gamePieceChooser.getSelected().equals("hatch "))
+    if (RobotMap.gamePieceChooser.getSelected().equals("hatch "))
     {
       RobotMap.ballInIntake = false;
       RobotMap.hatchHolderHasHatch = true;
     }
+    /*
 
     //determinePath();
 
@@ -217,8 +236,8 @@ public class Robot extends TimedRobot
 
       RobotMap.leftFrontTalon.set(leftSpeed + turn);
       RobotMap.rightFrontTalon.set(rightSpeed - turn);
-    }
-  }*/
+    }*/
+  }
 
   /**
    * This function is called periodically during autonomous.
@@ -228,6 +247,7 @@ public class Robot extends TimedRobot
   {
     //Scheduler.getInstance().run();
     //System.out.println(RobotMap.autonomousPath);
+    Scheduler.getInstance().run();
   }
 
   @Override
@@ -245,8 +265,6 @@ public class Robot extends TimedRobot
     RobotMap.elevatorEncoder.setPosition(RobotMap.ELEVATOR_ENCODER_DEFAULT_POSITION);
     new JoystickDriveCommand().start();
 
-    
-
     //RobotMap.drivetrainNotifier.stop();
     //RobotMap.leftFrontTalon.set(RobotMap.MOTOR_FULL_STOP);
     //RobotMap.rightFrontTalon.set(RobotMap.MOTOR_FULL_STOP);
@@ -261,8 +279,9 @@ public class Robot extends TimedRobot
     //System.out.println(RobotMap.elevatorEncoder.getPosition());
     Scheduler.getInstance().run();
 
-    //System.out.println("Grabbed: " + RobotMap.grabbedHatchLimitSwitch.get());
+    System.out.println("Grabbed: " + RobotMap.grabbedHatchLimitSwitch.get());
     System.out.println("Released: " + RobotMap.releasedHatchLimitSwitch.get());  // works after re-wire limit switch.
+    System.out.println(RobotMap.elevatorEncoder.getPosition());
   }
 
   /**
