@@ -68,7 +68,7 @@ public class ElevatorSubsystem extends PIDSubsystem
    */
   public void moveElevator(double speed)
   {
-    RobotMap.elevatorSparkMax.set(speed);
+    RobotMap.leftElevatorTalon.set(speed);
   }
 
   /**
@@ -107,7 +107,7 @@ public class ElevatorSubsystem extends PIDSubsystem
 
     //Make sure the encoder is reset when we reach the bottom
     if (getLowerLimitSwitchState())
-      RobotMap.elevatorEncoder.setPosition(0.0);
+      RobotMap.leftElevatorTalon.setSelectedSensorPosition(0);
   }
 
   /**
@@ -133,7 +133,7 @@ public class ElevatorSubsystem extends PIDSubsystem
    */
   public double getEncoderPosition()
   {
-    return RobotMap.elevatorEncoder.getPosition();
+    return RobotMap.leftElevatorTalon.getSelectedSensorPosition();
   }
 
   /**
@@ -159,6 +159,6 @@ public class ElevatorSubsystem extends PIDSubsystem
 
   protected void usePIDOutput(double output)
   {
-    RobotMap.elevatorSparkMax.pidWrite(output);
+    RobotMap.leftElevatorTalon.pidWrite(output);
   }
 }

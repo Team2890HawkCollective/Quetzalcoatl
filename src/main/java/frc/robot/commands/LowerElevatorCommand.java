@@ -61,7 +61,7 @@ public class LowerElevatorCommand extends Command
   protected void end() 
   {
     //RobotMap.elevatorEncoder.setPosition(RobotMap.ELEVATOR_LOWER_ENCODER_LIMIT);
-    RobotMap.elevatorSparkMax.stopMotor();
+    RobotMap.leftElevatorTalon.stopMotor();
   }
 
   // Called when another command which requires one or more of the same

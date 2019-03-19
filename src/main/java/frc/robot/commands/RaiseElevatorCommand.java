@@ -98,7 +98,7 @@ public class RaiseElevatorCommand extends Command
   protected void end() 
   {
     //RobotMap.elevatorEncoder.setPosition(encoderTarget);
-    RobotMap.elevatorSparkMax.stopMotor();
+    RobotMap.leftElevatorTalon.stopMotor();
   }
 
   // Called when another command which requires one or more of the same

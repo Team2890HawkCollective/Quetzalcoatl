@@ -8,6 +8,7 @@
 package frc.robot;
 
 import com.analog.adis16448.frc.ADIS16448_IMU;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANEncoder;
@@ -85,18 +86,24 @@ public class RobotMap {
      */
     public static final int RIGHT_BACK_TALON_ID = 4;
     /**
+     * @deprecated Strafe removed
      * The CAN ID assigned to the center talon
      */
     public static final int CENTER_TALON_ID = 5;
     /**
+     * @deprecated Not being implemented
      * The CAN ID assigned to move to center motor up and down
      */
     public static final int CENTER_TALON_MOVE_ID = 10;
     //Elevator//
     /**
+     * @deprecated replaced with Mini cims
      * The CAN ID assigned to the elevator spark max
      */
     public static final int ELEVATOR_SPARK_MAX_ID = 6;
+
+    public static final int LEFT_ELEVATOR_TALON_ID = 5;
+    public static final int RIGHT_ELEVATOR_TALON_ID = 6;
 
     //Manipulator//
       //Cargo Intake
@@ -394,10 +401,12 @@ public class RobotMap {
      */
     public static WPI_TalonSRX rightBackTalon;
     /**
+     * @deprecated strafe wheel removed
      * Motor for the center wheel/strafe
      */
     public static WPI_TalonSRX centralTalon;
     /**
+     * @deprecated Not being implemented
      * Motor to move strafe wheel up and down
      */
     public static WPI_TalonSRX centerMoveTalon;
@@ -416,10 +425,14 @@ public class RobotMap {
 
     //Elevator//
     /**
+     * @deprecated Switched to Mini Cims
      * Motor for the elevator
      */
     public static CANSparkMax elevatorSparkMax;
+    public static WPI_TalonSRX leftElevatorTalon;
+    public static WPI_TalonSRX rightElevatorTalon;
     /**
+     * @deprecated Switched to Mini Cims
      * The encoder used to preset the heights for autonomous 
      */
     public static CANEncoder elevatorEncoder;
@@ -561,15 +574,17 @@ public class RobotMap {
     rightFrontTalon = new WPI_TalonSRX(RIGHT_FRONT_TALON_ID);
     leftBackTalon = new WPI_TalonSRX(LEFT_BACK_TALON_ID);
     rightBackTalon = new WPI_TalonSRX(RIGHT_BACK_TALON_ID);
-    centralTalon = new WPI_TalonSRX(CENTER_TALON_ID);
-    centerMoveTalon = new WPI_TalonSRX(CENTER_TALON_MOVE_ID);
+    //centralTalon = new WPI_TalonSRX(CENTER_TALON_ID);
+    //centerMoveTalon = new WPI_TalonSRX(CENTER_TALON_MOVE_ID);
 
     intakeTalon = new WPI_TalonSRX(INATKE_TALON_ID);
 
     hatchHolderTalon = new WPI_TalonSRX(HATCH_HOLDER_TALON_ID);
 
-    elevatorSparkMax = new CANSparkMax(ELEVATOR_SPARK_MAX_ID, MotorType.kBrushless);
-    elevatorEncoder = elevatorSparkMax.getEncoder();
+    //elevatorSparkMax = new CANSparkMax(ELEVATOR_SPARK_MAX_ID, MotorType.kBrushless);
+    //elevatorEncoder = elevatorSparkMax.getEncoder();
+    leftElevatorTalon = new WPI_TalonSRX(LEFT_ELEVATOR_TALON_ID);
+    rightElevatorTalon = new WPI_TalonSRX(RIGHT_ELEVATOR_TALON_ID);
 
     //Instantiate intake stop switch
     ballIntakeStopSwitch = new DigitalInput(BALL_INTAKE_STOP_PORT);
@@ -598,7 +613,7 @@ public class RobotMap {
     //Sets motors to inverted
     leftFrontTalon.setInverted(true);
     leftBackTalon.setInverted(true);
-    centralTalon.setInverted(true);
+    //centralTalon.setInverted(true);
     intakeTalon.setInverted(true);
     elevatorSparkMax.setInverted(true);
     hatchHolderTalon.setInverted(true);
@@ -608,6 +623,10 @@ public class RobotMap {
 
     elevatorSparkMax.setClosedLoopRampRate(ELEVATOR_RAMP_TIME);
     elevatorSparkMax.setIdleMode(IdleMode.kBrake);
+
+    rightElevatorTalon.follow(leftElevatorTalon);
+
+    leftElevatorTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
     
     //Set names and subsystems
     //Subsystems
@@ -620,7 +639,7 @@ public class RobotMap {
     rightFrontTalon.setName(driveTrainSubsystem.getSubsystem(), "RightFrontTalon");
     leftBackTalon.setName(driveTrainSubsystem.getSubsystem(), "LeftBackTalon");
     rightBackTalon.setName(driveTrainSubsystem.getSubsystem(), "RightBackTalon");
-    centralTalon.setName(driveTrainSubsystem.getSubsystem(), "CentralTalon");
+    //centralTalon.setName(driveTrainSubsystem.getSubsystem(), "CentralTalon");
 
     //Manipulator
     intakeTalon.setName(manipulatorSubsystem.getSubsystem(), "IntakeTalon");
