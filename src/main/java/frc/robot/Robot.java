@@ -291,9 +291,11 @@ public class Robot extends TimedRobot
   @Override
   public void testPeriodic() 
   {
-    if (RobotMap.leftElevatorTalon.getSelectedSensorPosition() >= 4096 * 20)
+    if (RobotMap.leftElevatorTalon.getSelectedSensorPosition() <= -4096 * 200)
       RobotMap.leftElevatorTalon.set(0.0);
     else
       RobotMap.leftElevatorTalon.set(1.0);
+
+    System.out.println(RobotMap.leftElevatorTalon.getSelectedSensorPosition());
   }
 }

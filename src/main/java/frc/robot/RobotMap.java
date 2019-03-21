@@ -615,14 +615,14 @@ public class RobotMap {
     leftBackTalon.setInverted(true);
     //centralTalon.setInverted(true);
     intakeTalon.setInverted(true);
-    elevatorSparkMax.setInverted(true);
+    //elevatorSparkMax.setInverted(true);
     hatchHolderTalon.setInverted(true);
 
     leftBackTalon.follow(leftFrontTalon);
     rightBackTalon.follow(rightFrontTalon);
 
-    elevatorSparkMax.setClosedLoopRampRate(ELEVATOR_RAMP_TIME);
-    elevatorSparkMax.setIdleMode(IdleMode.kBrake);
+    //elevatorSparkMax.setClosedLoopRampRate(ELEVATOR_RAMP_TIME);
+    //elevatorSparkMax.setIdleMode(IdleMode.kBrake);
 
     rightElevatorTalon.follow(leftElevatorTalon);
 
