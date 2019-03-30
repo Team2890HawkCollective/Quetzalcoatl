@@ -97,6 +97,10 @@ public class RobotMap {
      * The CAN ID assigned to the elevator spark max
      */
     public static final int ELEVATOR_SPARK_MAX_ID = 6;
+    /**
+     * 
+     */
+    public static final int ELEVATOR_TALON_ID = 5;
 
     //Manipulator//
       //Cargo Intake
@@ -423,6 +427,10 @@ public class RobotMap {
      * The encoder used to preset the heights for autonomous 
      */
     public static CANEncoder elevatorEncoder;
+    /**
+     * Talon for elevator lift
+     */
+    public static WPI_TalonSRX elevatorTalon;
 
     //Servos//
 
@@ -570,6 +578,8 @@ public class RobotMap {
 
     elevatorSparkMax = new CANSparkMax(ELEVATOR_SPARK_MAX_ID, MotorType.kBrushless);
     elevatorEncoder = elevatorSparkMax.getEncoder();
+
+    elevatorTalon = new WPI_TalonSRX(ELEVATOR_TALON_ID);
 
     //Instantiate intake stop switch
     ballIntakeStopSwitch = new DigitalInput(BALL_INTAKE_STOP_PORT);
