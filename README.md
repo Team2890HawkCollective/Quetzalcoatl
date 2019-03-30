@@ -1,5 +1,5 @@
 
-# Robot name
+# Quetzalcoatl
 
 This is the codebase for FRC Team 2890 in the 2019 competition, Destination: Deep Space
 
@@ -9,7 +9,10 @@ This is the codebase for FRC Team 2890 in the 2019 competition, Destination: Dee
 
 ## About the Game
 
-Link to kickoff video, rules, and a brief explanation of the game
+Kickoff: https://www.youtube.com/watch?v=Mew6G_og-PI
+Rules: https://firstfrc.blob.core.windows.net/frc2019/Manual/2019FRCGameSeasonManual.pdf
+
+The game consists of two teams of three, red and blue, each placing hatchets (disks with velcro) and cargo (kick balls) 
 
 ## About our Robot
 
