@@ -83,7 +83,7 @@ public class RobotMap {
     /**
      * The CAN ID assigned to the right back talon
      */
-    public static final int RIGHT_BACK_TALON_ID = 4;
+    public static final int RIGHT_BACK_TALON_ID = 7;
     /**
      * The CAN ID assigned to the center talon
      */
@@ -100,7 +100,9 @@ public class RobotMap {
     /**
      * 
      */
-    public static final int ELEVATOR_TALON_ID = 5;
+    // public static final int ELEVATOR_TALON_ID = 5;
+    public static final int ELEVATOR_TALON_ID = 4;  // 10/01/2019 test
+    //switched 4 and seven for testing
 
     //Manipulator//
       //Cargo Intake
@@ -186,7 +188,7 @@ public class RobotMap {
     //Elevator PID Constants//
       //Mechanical Constants
       public static final int ELEVATOR_ENCODER_TICK_PER_REV = 42;
-      public static final double ELEVATOR_MAX_VELOCITY = 10.0;
+      public static final double ELEVATOR_MAX_VELOCITY = 15.0;
       //PID
       public static final double ELEVATOR_P = 1.0;
       public static final double ELEVATOR_I = 0.0;
@@ -249,7 +251,7 @@ public class RobotMap {
     /**
      * Time elevator take to go from 0 speed to full speed
      */
-    public static final double ELEVATOR_RAMP_TIME = 0.2;
+    public static final double ELEVATOR_RAMP_TIME = 0.6;
     /**
      * Value that makes the elevator not move
      */
@@ -257,7 +259,7 @@ public class RobotMap {
     /**
      * The value assigned to the speed at which the elevator moves during autonomous
      */
-    public static final double ELEVATOR_AUTONOMOUS_SPEED = 0.5;
+    public static final double ELEVATOR_AUTONOMOUS_SPEED = 1;
     /**
      * Slows the elevator when it is close to the limit
      */
@@ -265,7 +267,7 @@ public class RobotMap {
     /**
      * 
      */
-    public static final double ELEVATOR_SPEED_BASE_VALUE = 0.5;
+    public static final double ELEVATOR_SPEED_BASE_VALUE = 1;
     /**
      * The lowest encoder value for the elevator
      */
@@ -373,7 +375,7 @@ public class RobotMap {
   /**
    * The value which the speed sent to the elevator is multiplied by
    */
-  public static double elevatorSpeedModifier = 0.7;
+  public static double elevatorSpeedModifier = 1;
   /**
    * The value the the speed is divided by in manipulator
    */

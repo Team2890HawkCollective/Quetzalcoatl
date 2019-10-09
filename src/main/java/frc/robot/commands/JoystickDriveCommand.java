@@ -37,9 +37,9 @@ public class JoystickDriveCommand extends Command
    */
   @Override
   protected void execute() {
+    RobotMap.elevatorSubsystem.xboxElevatorControl();
     RobotMap.driveTrainSubsystem.joystickArcadeDrive();
     RobotMap.manipulatorSubsystem.xboxIntakeOuttake();
-    RobotMap.elevatorSubsystem.xboxElevatorControl();
     RobotMap.manipulatorSubsystem.xboxHatchControl();
     RobotMap.automatedSubsystem.xboxAutonomousControl();
   }

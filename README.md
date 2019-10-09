@@ -5,21 +5,25 @@ This is the codebase for FRC Team 2890 in the 2019 competition, Destination: Dee
 
 ## What is FRC
 
-> Combining the excitement of sport with the rigors of science and technology. We call FIRST Robotics Competition the ultimate Sport for the Mind. High-school student participants call it “the hardest fun you’ll ever have. Under strict rules, limited resources, and an intense six-week time limit, teams of students are challenged to raise funds, design a team "brand," hone teamwork skills, and build and program industrial-size robots to play a difficult field game against like-minded competitors. It’s as close to real-world engineering as a student can get. Volunteer professional mentors lend their time and talents to guide each team. Each season ends with an exciting FIRST Championship.
+> Combining the excitement of sports with the rigors of science and technology, we call FIRST Robotics Competition the ultimate Sport for the Mind. High-school student participants call it, “the hardest fun you’ll ever have. Under strict rules, limited resources, and an intense six-week time limit, teams of students are challenged to raise funds, design a team "brand," hone teamwork skills, and build and program industrial-size robots to compete in a difficult field game against like-minded competitors. It’s as close to real-world engineering as a student can get. Volunteer professional mentors lend their time and talents to guide each team. Each season ends with an exciting FIRST Championship.
 
 ## About the Game
-
-Link to kickoff video, rules, and a brief explanation of the game
+Destination: Deep Space is an innovative game based off the idea of a rocket ship launching into DEEP SPACE. The way FIRST has designed it is that both teams are on a mission to fuel and supply their rocket before the clock runs out. Attaching disks to probes on the ship, also known as hatches, and shooting round balls, referred to as cargo, are the primary objectives in this mission. Three levels are seperated by height on a metal spacecraft located on each side of the field display the climbing level of difficulty in hatch placement and cargo alignment. A ship placed respectively in the center field allows for the manipulation and shooting of cargo. This task may seem easy, but FIRST presents a new challange to the table in the form of a sandstorm. In the beginning of each match, wind blinds operators, obstructing any possible view of the robot.
+Link to kickoff video, rules, and a brief explanation of the game.  
 
 ## About our Robot
 
-Picture of robot
+Picture of robot 
 
 Link to CAD model
 
 What does our robot do?
 
+Our bot has many functions, including a grabber that functions by picking up the ball with spinning wheels. The grabber is composed of a pair of unmoving wheels and a net that help keep the ball in place. Another function is a lift that works by a motor spinning a chain. This lift helps move the grabber to the correct height to deposit the ball into the cargo spot. A hook works by holding the hatch, and releases it by rotating.
+
 Breakdown of hardware
+
+The chasis is a u-style frame which is ideal for our grabber system. This style frees up space in the center of the robot to make room for cargo. The back of the chasis is reserved for the electrical board. Our lift system is very light, therefore we have a very low center of gravity. This makes our robot stable when the lift activates. The lift is composed of chain
 
 Wiring Diagram
 
@@ -52,7 +56,7 @@ Link to javadocs
 ## About our Team
 
 How is it structured?
-
+our team is structured with 
 Link to team website
 
 link to TeamDocumentation repo
