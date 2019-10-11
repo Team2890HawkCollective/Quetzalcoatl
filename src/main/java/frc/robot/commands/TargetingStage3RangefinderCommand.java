@@ -35,7 +35,7 @@ public class TargetingStage3RangefinderCommand extends Command
   @Override
   protected void initialize() 
   {
-    data = RobotMap.arduino.readString();
+    //data = RobotMap.arduino.readString();
   }
 
   //Called repeatedly when this Command is scheduled to run
@@ -45,12 +45,13 @@ public class TargetingStage3RangefinderCommand extends Command
   @Override
   protected void execute() 
   {
-    if (data.length() > 0)
+    /*if (data.length() > 0)
       if (FormatChecker.canParseDouble(data))
         RobotMap.driveTrainSubsystem.arcadeDrive(
           Double.parseDouble(data) / RobotMap.DRIVETRAIN_RANGEFINDER_TARGETING_SPEED_MODIFIER,
            RobotMap.MOTOR_FULL_STOP, 
            RobotMap.MOTOR_FULL_STOP);
+           */
   }
 
   /**
@@ -59,10 +60,12 @@ public class TargetingStage3RangefinderCommand extends Command
   @Override
   protected boolean isFinished() 
   {
-    data = RobotMap.arduino.readString();
+    /*data = RobotMap.arduino.readString();
     if (data.length() > 0)
       if (data.substring(0, 1).equals("D"))
         return true;
+    return false;
+    */
     return false;
   }
 

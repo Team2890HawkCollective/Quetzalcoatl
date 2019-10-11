@@ -107,7 +107,7 @@ public class DriveTrainSubsystem extends Subsystem
   {
     RobotMap.leftFrontTalon.set(leftSpeed);
     RobotMap.rightFrontTalon.set(rightSpeed);
-    RobotMap.centralTalon.set(strafeSpeed);
+    //RobotMap.centralTalon.set(strafeSpeed);
   }
 
   /**

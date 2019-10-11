@@ -32,6 +32,7 @@ public class MoveElevatorCommand extends Command
     requires(RobotMap.elevatorSubsystem);
     
     //If we are carrying cargo
+    /*
     if (cargo)
     {
       switch (level) 
@@ -60,13 +61,15 @@ public class MoveElevatorCommand extends Command
           encoderTarget = RobotMap.ELEVATOR_LEVEL_3_HATCH_VALUE;
       }
     }
+    */
 
     //RobotMap.elevatorSubsystem.setSetpoint(encoderTarget);
     
-    if (RobotMap.elevatorSubsystem.getEncoderPosition() < encoderTarget)
+    /*if (RobotMap.elevatorSubsystem.getEncoderPosition() < encoderTarget)
     {
       goingDown = false;
     }
+    */
   }
 
   /**
@@ -84,7 +87,7 @@ public class MoveElevatorCommand extends Command
   @Override
   protected void execute() 
   {
-    if (RobotMap.elevatorSubsystem.getEncoderPosition() > encoderTarget)
+    /*if (RobotMap.elevatorSubsystem.getEncoderPosition() > encoderTarget)
     {
       RobotMap.elevatorSubsystem.elevatorDown();
     }
@@ -92,6 +95,7 @@ public class MoveElevatorCommand extends Command
     {
       RobotMap.elevatorSubsystem.elevatorUp();
     }
+    */
   }
 
   /**
@@ -100,6 +104,7 @@ public class MoveElevatorCommand extends Command
   @Override
   protected boolean isFinished() 
   {
+    /*
     if (goingDown)
     {
       return RobotMap.elevatorSubsystem.getEncoderPosition() <= encoderTarget;
@@ -108,8 +113,9 @@ public class MoveElevatorCommand extends Command
     {
       return RobotMap.elevatorSubsystem.getEncoderPosition() >= encoderTarget;
     }
-
+    */
     //return RobotMap.elevatorSubsystem.onTarget();
+    return false;
   }
 
   // Called once after isFinished returns true
@@ -120,7 +126,7 @@ public class MoveElevatorCommand extends Command
   protected void end() 
   {
     //RobotMap.elevatorEncoder.setPosition(encoderTarget);
-    RobotMap.elevatorSparkMax.stopMotor();
+    //RobotMap.elevatorSparkMax.stopMotor();
   }
 
   // Called when another command which requires one or more of the same

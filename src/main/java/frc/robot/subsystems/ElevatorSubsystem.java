@@ -8,14 +8,14 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
-import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
 /**
  * Implements the methods to move the elevator and get the current position
  * of the elevator.
  */
-public class ElevatorSubsystem extends PIDSubsystem 
+public class ElevatorSubsystem extends Subsystem 
 {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
@@ -30,11 +30,12 @@ public class ElevatorSubsystem extends PIDSubsystem
     // setDefaultCommand(new MySpecialCommand());
   }
 
+  
   public ElevatorSubsystem()
   {
-    super("Elevator", RobotMap.ELEVATOR_P, RobotMap.ELEVATOR_I, RobotMap.ELEVATOR_D);
+    /*super("Elevator", RobotMap.ELEVATOR_P, RobotMap.ELEVATOR_I, RobotMap.ELEVATOR_D);
     setAbsoluteTolerance(RobotMap.ELEVATOR_PID_ABSOLUTE_TOLERANCE);
-    getPIDController().setContinuous(false);
+    getPIDController().setContinuous(false);*/
   }
 
   /**
@@ -43,7 +44,7 @@ public class ElevatorSubsystem extends PIDSubsystem
   public void elevatorUp()
   {
 
-    moveElevator(RobotMap.ELEVATOR_AUTONOMOUS_SPEED);
+    moveElevator(RobotMap.ELEVATOR_SPEED_BASE_VALUE_UP);
     //if (getUpperLimitSwitchState())
     //{
       //moveElevator(RobotMap.MOTOR_FULL_STOP);
@@ -55,7 +56,7 @@ public class ElevatorSubsystem extends PIDSubsystem
    */
   public void elevatorDown()
   {
-    moveElevator(-RobotMap.ELEVATOR_AUTONOMOUS_SPEED);
+    moveElevator(-RobotMap.ELEVATOR_SPEED_BASE_VALUE_DOWN);
     if (getLowerLimitSwitchState())
     {
       moveElevator(RobotMap.MOTOR_FULL_STOP);
@@ -68,7 +69,7 @@ public class ElevatorSubsystem extends PIDSubsystem
    */
   public void moveElevator(double speed)
   {
-    RobotMap.elevatorSparkMax.set(speed);
+    RobotMap.elevatorTalon.set(speed);
   }
 
   /**
@@ -106,8 +107,9 @@ public class ElevatorSubsystem extends PIDSubsystem
       moveElevator(RobotMap.MOTOR_FULL_STOP);
 
     //Make sure the encoder is reset when we reach the bottom
-    if (getLowerLimitSwitchState())
+    /*if (getLowerLimitSwitchState())
       RobotMap.elevatorEncoder.setPosition(0.0);
+      */
   }
 
   /**
@@ -131,11 +133,12 @@ public class ElevatorSubsystem extends PIDSubsystem
   /**
    * @return The current position of the encoder
    */
+  /*
   public double getEncoderPosition()
   {
     return RobotMap.elevatorEncoder.getPosition();
   }
-
+  */
   /**
    * @return True if the limit switch is triggered, false if not
    */
@@ -149,16 +152,19 @@ public class ElevatorSubsystem extends PIDSubsystem
    */
   public boolean getLowerLimitSwitchState()
   {
-    return RobotMap.lowerElevatorLimitSwitch.get();
+    return false;//RobotMap.lowerElevatorLimitSwitch.get();
   }
 
+  /*
   protected double returnPIDInput()
   {
     return getEncoderPosition();
   }
+  
 
   protected void usePIDOutput(double output)
   {
     RobotMap.elevatorSparkMax.pidWrite(output);
   }
+  */
 }

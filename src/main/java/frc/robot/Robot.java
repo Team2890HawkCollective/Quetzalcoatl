@@ -50,19 +50,21 @@ public class Robot extends TimedRobot
 
     shuffleboardInit();
 
-    RobotMap.elevatorEncoder.setPosition(RobotMap.ELEVATOR_LOWER_ENCODER_LIMIT);
+    //RobotMap.elevatorEncoder.setPosition(RobotMap.ELEVATOR_LOWER_ENCODER_LIMIT);
   }
 
   /**
    * Add all choosers, values, subsystems, and tabs to shuffleboard here.
    */
+  
   private void shuffleboardInit()
   {
+    /*
     //Pathweaver
     RobotMap.startingPositionChooser.addOption("Left", "Left-side ");
     RobotMap.startingPositionChooser.addOption("Center", "Center ");
     RobotMap.startingPositionChooser.addOption("Right", "Right-side ");
-
+    
     RobotMap.gamePieceChooser.addOption("Cargo", "Cargo ");
     RobotMap.gamePieceChooser.addOption("Hatch", "hatch ");
 
@@ -82,7 +84,7 @@ public class Robot extends TimedRobot
     Shuffleboard.getTab("Robot Configuration").add("Target", RobotMap.targetChooser);
     Shuffleboard.getTab("Robot Configuration").add("Game Piece Position", RobotMap.gamePiecePosition);
     Shuffleboard.getTab("Robot Configuration").add("Cargo Ship Side", RobotMap.gamePiecePositionPart2);
-
+    */
     Shuffleboard.getTab("Main").add(RobotMap.manipulatorCamera);
 
     Shuffleboard.getTab("Main").add(RobotMap.driveCamera);
@@ -155,17 +157,17 @@ public class Robot extends TimedRobot
 
     //RobotMap.arduino.enableTermination();
 
-    RobotMap.elevatorEncoder.setPosition(RobotMap.ELEVATOR_LOWER_ENCODER_LIMIT);
+    //RobotMap.elevatorEncoder.setPosition(RobotMap.ELEVATOR_LOWER_ENCODER_LIMIT);
 
     //new TargetingCommandGroup(1, true).start();
     //new TargetingCommandGroup(2, true).start();
 
     //Sets the flags for the hatch holder and ball intake.
-    if (RobotMap.gamePieceChooser.getSelected().equals("hatch "))
+    /*if (RobotMap.gamePieceChooser.getSelected().equals("hatch "))
     {
       RobotMap.ballInIntake = false;
       RobotMap.hatchHolderHasHatch = true;
-    }
+    }*/
     /*
 
     //determinePath();
@@ -262,7 +264,7 @@ public class Robot extends TimedRobot
     //}
     Scheduler.getInstance().removeAll();
 
-    RobotMap.elevatorEncoder.setPosition(RobotMap.ELEVATOR_ENCODER_DEFAULT_POSITION);
+    //RobotMap.elevatorEncoder.setPosition(RobotMap.ELEVATOR_ENCODER_DEFAULT_POSITION);
     new JoystickDriveCommand().start();
 
     //RobotMap.drivetrainNotifier.stop();
@@ -279,9 +281,9 @@ public class Robot extends TimedRobot
     //System.out.println(RobotMap.elevatorEncoder.getPosition());
     Scheduler.getInstance().run();
 
-    System.out.println("Grabbed: " + RobotMap.grabbedHatchLimitSwitch.get());
-    System.out.println("Released: " + RobotMap.releasedHatchLimitSwitch.get());  // works after re-wire limit switch.
-    System.out.println(RobotMap.elevatorEncoder.getPosition());
+    //System.out.println("Grabbed: " + RobotMap.grabbedHatchLimitSwitch.get());
+    //System.out.println("Released: " + RobotMap.releasedHatchLimitSwitch.get());  // works after re-wire limit switch.
+    //System.out.println(RobotMap.elevatorEncoder.getPosition());
   }
 
   /**

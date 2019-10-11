@@ -8,16 +8,11 @@ This is the codebase for FRC Team 2890 in the 2019 competition, Destination: Dee
 > Combining the excitement of sports with the rigors of science and technology, we call FIRST Robotics Competition the ultimate Sport for the Mind. High-school student participants call it, “the hardest fun you’ll ever have. Under strict rules, limited resources, and an intense six-week time limit, teams of students are challenged to raise funds, design a team "brand," hone teamwork skills, and build and program industrial-size robots to compete in a difficult field game against like-minded competitors. It’s as close to real-world engineering as a student can get. Volunteer professional mentors lend their time and talents to guide each team. Each season ends with an exciting FIRST Championship.
 
 ## About the Game
-<<<<<<< HEAD
-Destination: Deep Space is an innovative game based off the idea of a rocket ship launching into DEEP SPACE. The way FIRST has designed it is that both teams are on a mission to fuel and supply their rocket before the clock runs out. Attaching disks to probes on the ship, also known as hatches, and shooting round balls, referred to as cargo, are the primary objectives in this mission. Three levels are seperated by height on a metal spacecraft located on each side of the field display the climbing level of difficulty in hatch placement and cargo alignment. A ship placed respectively in the center field allows for the manipulation and shooting of cargo. This task may seem easy, but FIRST presents a new challange to the table in the form of a sandstorm. In the beginning of each match, wind blinds operators, obstructing any possible view of the robot.
-Link to kickoff video, rules, and a brief explanation of the game.  
-=======
 
 Kickoff: https://www.youtube.com/watch?v=Mew6G_og-PI
 Rules: https://firstfrc.blob.core.windows.net/frc2019/Manual/2019FRCGameSeasonManual.pdf
 
 The game consists of two teams of three, red and blue, each placing hatchets (disks with velcro) and cargo (kick balls) 
->>>>>>> 6a8fd84ab410232fd7ab73ca03521ee825d1c4a7
 
 ## About our Robot
 
