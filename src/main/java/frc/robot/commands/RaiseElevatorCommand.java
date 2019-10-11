@@ -17,10 +17,6 @@ import frc.robot.subsystems.AutomatedSubsytem;
  */
 public class RaiseElevatorCommand extends Command 
 {
-  /**
-   * The value which when the motor reaches, will stop
-   */
-  private double encoderTarget;
 
   /**
    * Claims elevator subsystem so other classes can't use it
@@ -33,38 +29,6 @@ public class RaiseElevatorCommand extends Command
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(RobotMap.elevatorSubsystem);
-
-    //If we are carrying cargo
-    /*
-    if (cargo)
-    {
-      switch (level) 
-      {
-        case LEVEL1:
-          encoderTarget = RobotMap.ELEVATOR_LEVEL_1_CARGO_VALUE;
-          break;
-        case LEVEL2:
-          encoderTarget = RobotMap.ELEVATOR_LEVEL_2_CARGO_VALUE;
-          break;
-        case LEVEL3:
-          encoderTarget = RobotMap.ELEVATOR_LEVEL_3_CARGO_VALUE;
-      }
-    }
-    else
-    {
-      switch (level)
-      {
-        case LEVEL1:
-          encoderTarget = RobotMap.ELEVATOR_LEVEL_1_HATCH_VALUE;
-          break;
-        case LEVEL2:
-          encoderTarget = RobotMap.ELEVATOR_LEVEL_2_HATCH_VALUE;
-          break;
-        case LEVEL3:
-          encoderTarget = RobotMap.ELEVATOR_LEVEL_3_HATCH_VALUE;
-      }
-    }
-    */
   }
 
   /**
@@ -80,7 +44,6 @@ public class RaiseElevatorCommand extends Command
   protected void execute() 
   {
     RobotMap.elevatorSubsystem.elevatorUp();
-    //System.out.println(RobotMap.elevatorEncoder.getPosition());
   }
 
   /**
@@ -89,7 +52,7 @@ public class RaiseElevatorCommand extends Command
   @Override
   protected boolean isFinished() 
   {
-    return false; //RobotMap.elevatorSubsystem.getEncoderPosition() >= encoderTarget;
+    return false;
   }
 
   // Called once after isFinished returns true
@@ -99,8 +62,6 @@ public class RaiseElevatorCommand extends Command
   @Override
   protected void end() 
   {
-    //RobotMap.elevatorEncoder.setPosition(encoderTarget);
-    //RobotMap.elevatorSparkMax.stopMotor();
   }
 
   // Called when another command which requires one or more of the same

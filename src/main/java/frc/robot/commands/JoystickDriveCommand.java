@@ -41,7 +41,6 @@ public class JoystickDriveCommand extends Command
     RobotMap.driveTrainSubsystem.joystickArcadeDrive();
     RobotMap.manipulatorSubsystem.xboxIntakeOuttake();
     RobotMap.manipulatorSubsystem.xboxHatchControl();
-   // RobotMap.automatedSubsystem.xboxAutonomousControl();
   }
 
   // Make this return true when this Command no longer needs to run execute()

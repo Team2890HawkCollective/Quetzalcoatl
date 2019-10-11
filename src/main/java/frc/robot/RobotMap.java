@@ -94,15 +94,9 @@ public class RobotMap {
     public static final int CENTER_TALON_MOVE_ID = 10;
     //Elevator//
     /**
-     * The CAN ID assigned to the elevator spark max
+     * Talon ID assigned to lift the elevator
      */
-    //public static final int ELEVATOR_SPARK_MAX_ID = 6;
-    /**
-     * 
-     */
-    // public static final int ELEVATOR_TALON_ID = 5;
-    public static final int ELEVATOR_TALON_ID = 7;  // 10/01/2019 test
-    //switched 4 and seven for testing
+    public static final int ELEVATOR_TALON_ID = 7;
 
     //Manipulator//
       //Cargo Intake
@@ -173,31 +167,6 @@ public class RobotMap {
      */
     public static final int DPAD_LEFT = 270;
 
-    //Drivetrain PID/Pathweaver Constants//
-      //Pathweaver
-      /*
-      public static final int DRIVETRAIN_ENCODER_TICKS_PER_REVOLUTION = 4096;
-      public static final double DRIVETRAIN_WHEEL_DIAMETER = 4.0 / 12.0;
-      public static final double DRIVETRAIN_MAX_VELOCITY = 10.0;
-      //PID
-      public static final double DRIVETRAIN_P = 1.0;
-      public static final double DRIVETRAIN_I = 0.0;
-      public static final double DRIVETRAIN_D = 0.0;
-      public static final double DRIVETRAIN_V = 1 / DRIVETRAIN_MAX_VELOCITY;
-      public static final double DRIVETRAIN_A = 0.0;
-
-    //Elevator PID Constants//
-      //Mechanical Constants
-      public static final int ELEVATOR_ENCODER_TICK_PER_REV = 42;
-      public static final double ELEVATOR_MAX_VELOCITY = 15.0;
-      //PID
-      public static final double ELEVATOR_P = 1.0;
-      public static final double ELEVATOR_I = 0.0;
-      public static final double ELEVATOR_D = 0.0;
-      public static final double ELEVATOR_V = 1 / ELEVATOR_MAX_VELOCITY;
-      public static final double ELEVATOR_A = 0.0;
-      public static final double ELEVATOR_PID_ABSOLUTE_TOLERANCE = 0.05;
-      */
     //Drivetrain Speed Constants//
     /**
      * The value by which any speed being sent to the drivetrain will be multiplied by
@@ -217,29 +186,8 @@ public class RobotMap {
      * stop speed assigned to drive train
      */
     public static final double DRIVETRAIN_STOP_SPEED = 0.0;
-    /**
-     * What the value returned by the arduino will be divided by to determine speed
-     */
-    /*
-    public static final double DRIVETRAIN_CAMERA_TARGETING_SPEED_MODIFIER = 10.0;
-    /**
-     * What the value returned by the arduino will be divided by to determine strafe speed
-     */
-    //public static final double DRIVETRAIN_CAMERA_TARGETING_STRAFE_SPEED_MODIFIER = 100.0;
-    /**
-     * The modifier that the rangefinder value will be divided by to determine speed
-     */
-    //public static final double DRIVETRAIN_RANGEFINDER_TARGETING_SPEED_MODIFIER = 100.0; 
     
     //Elevator Constants//
-    /**
-     * The value set to the elevator encoder
-     */
-    //public static final double ELEVATOR_ENCODER_DEFAULT_POSITION = 4.0;
-    /**
-     * What the difference between the elevator target and current elevator position will be divided by to determine speed
-     */
-    //public static final double ELEVATOR_ENCODER_TARGET_SPEED_MODIFIER = 100.0;
     /**
      * @deprecated replaced by general full speed modifier |
      * full speed assigned to elevator
@@ -258,54 +206,23 @@ public class RobotMap {
      * Value that makes the elevator not move
      */
     public static final double ELEVATOR_CONTROLLER_DEADZONE = 0.05;
-    /**
-     * The value assigned to the speed at which the elevator moves during autonomous
-     */
-    //public static final double ELEVATOR_AUTONOMOUS_SPEED = 1;
+
     /**
      * Slows the elevator when it is close to the limit
      */
     public static final double ELEVATOR_APPROACHING_LOWER_LIMIT_SPEED_MODIFIER = 0.025;
     /**
-     * 
+     * Base speed value for the elevator lift
      */
     public static final double ELEVATOR_SPEED_BASE_VALUE = 1;
-
+    /**
+     * Base speed value to move the values up
+     */
     public static final double ELEVATOR_SPEED_BASE_VALUE_UP = 1;
-
+    /**
+     * Base speed value to move down
+     */
     public static final double ELEVATOR_SPEED_BASE_VALUE_DOWN = 0.5;
-    /**
-     * The lowest encoder value for the elevator
-     */
-    //public static final double ELEVATOR_LOWER_ENCODER_LIMIT = 0.0;
-    /**
-     * The highest encoder value for the elevator
-     */
-    //public static final double ELEVATOR_UPPER_ENCODER_LIMIT = 10000;
-    /**
-     * Encoder value for the level one hatch
-     */
-    //public static final double ELEVATOR_LEVEL_1_HATCH_VALUE = 13.0;
-    /**
-     * Encoder value for the level two hatch
-     */
-    //public static final double ELEVATOR_LEVEL_2_HATCH_VALUE = 79.0;
-    /**
-     * Encoder value for the level three hatch
-     */
-    //public static final double ELEVATOR_LEVEL_3_HATCH_VALUE = 142.0;
-    /**
-     * Encoder value for the level one cargo
-     */
-    //public static final double ELEVATOR_LEVEL_1_CARGO_VALUE = 35.0;
-    /**
-     * Encoder value for the level two cargo
-     */
-    //public static final double ELEVATOR_LEVEL_2_CARGO_VALUE = 100.0;
-    /**
-     * Encoder value for the level three cargo
-     */
-    //public static final double ELEVATOR_LEVEL_3_CARGO_VALUE = 163.0;
 
     //Manipulator Constants//
       //Cargo Intake
@@ -405,14 +322,7 @@ public class RobotMap {
      * Motor for the right back wheel
      */
     public static WPI_TalonSRX rightBackTalon;
-    /**
-     * Motor for the center wheel/strafe
-     */
-    //public static WPI_TalonSRX centralTalon;
-    /**
-     * Motor to move strafe wheel up and down
-     */
-    //public static WPI_TalonSRX centerMoveTalon;
+    
     //Manipulator//
       //Cargo Intake
       /**
@@ -427,14 +337,6 @@ public class RobotMap {
       public static WPI_TalonSRX hatchHolderTalon;
 
     //Elevator//
-    /**
-     * Motor for the elevator
-     */
-    //public static CANSparkMax elevatorSparkMax;
-    /**
-     * The encoder used to preset the heights for autonomous 
-     */
-    //public static CANEncoder elevatorEncoder;
     /**
      * Talon for elevator lift
      */
@@ -470,39 +372,6 @@ public class RobotMap {
        */
       public static DigitalInput upperElevatorLimitSwitch;
 
-    //Sensors//
-    /**
-     * Gyro. The purple thingy on the rio
-     */
-    /*
-    public static AHRS navX;
-
-    public static ADIS16448_IMU gyro;
-
-    //Pathweaver//
-      //Drivetrain//
-        //Followers
-        public static EncoderFollower leftSideDrivetrainPathFollower;
-        public static EncoderFollower rightSideDrivetrainPathFollower;
-
-        //Trajectories
-        public static Trajectory leftDrivetrainTrajectory;
-        public static Trajectory rightDrivetrainTrajectory;
-
-        //Notifier
-        public static Notifier drivetrainNotifier;
-    
-    //Autonomous//
-      //Pathweaver
-      public static String autonomousPath;
-
-      //ShuffleBoard
-      public static SendableChooser<String> startingPositionChooser;
-      public static SendableChooser<String> gamePieceChooser;
-      public static SendableChooser<String> targetChooser;
-      public static SendableChooser<String> gamePiecePosition;
-      public static SendableChooser<String> gamePiecePositionPart2;
-    */
     //Joysticks//
     /**
      * The driver's left joystick used for joystick drive
@@ -543,33 +412,14 @@ public class RobotMap {
      * declaration of manipulatorSubsystem
      */
     public static ManipulatorSubsystem manipulatorSubsystem;
-    /**
-     * Declaration of automatedSubsystem
-     */
-    //public static AutomatedSubsytem automatedSubsystem;
-
-    //Arduino//
-    /**
-     * Microcontroller used for targeting
-     */
-    //public static SerialPort arduino;
 
   public static void init()
   {
-    //Instantiating Autonomous path choosers
-    /*
-    startingPositionChooser = new SendableChooser<>();
-    gamePieceChooser = new SendableChooser<>();
-    targetChooser = new SendableChooser<>();
-    gamePiecePosition = new SendableChooser<>();
-    gamePiecePositionPart2 = new SendableChooser<>();
-    */
-
+    
     //Instantiating subsystems
     driveTrainSubsystem = new DriveTrainSubsystem();
     elevatorSubsystem = new ElevatorSubsystem();
     manipulatorSubsystem = new ManipulatorSubsystem();
-    //automatedSubsystem = new AutomatedSubsytem();
 
     //Instantiate controllers
     driverController = new XboxController(DRIVER_CONTROLLER_PORT);
@@ -580,15 +430,10 @@ public class RobotMap {
     rightFrontTalon = new WPI_TalonSRX(RIGHT_FRONT_TALON_ID);
     leftBackTalon = new WPI_TalonSRX(LEFT_BACK_TALON_ID);
     rightBackTalon = new WPI_TalonSRX(RIGHT_BACK_TALON_ID);
-    //centralTalon = new WPI_TalonSRX(CENTER_TALON_ID);
-    //centerMoveTalon = new WPI_TalonSRX(CENTER_TALON_MOVE_ID);
 
     intakeTalon = new WPI_TalonSRX(INATKE_TALON_ID);
 
     hatchHolderTalon = new WPI_TalonSRX(HATCH_HOLDER_TALON_ID);
-
-    //elevatorSparkMax = new CANSparkMax(ELEVATOR_SPARK_MAX_ID, MotorType.kBrushless);
-    //elevatorEncoder = elevatorSparkMax.getEncoder();
 
     elevatorTalon = new WPI_TalonSRX(ELEVATOR_TALON_ID);
 
@@ -609,13 +454,6 @@ public class RobotMap {
     manipulatorCamera =  CameraServer.getInstance().startAutomaticCapture();
     driveCamera = CameraServer.getInstance().startAutomaticCapture();
 
-    //Instantiates gyro
-    //navX = new AHRS(SPI.Port.kMXP);
-    //gyro = new ADIS16448_IMU();
-    
-    //Instantiates arduino to control pixycam and other functions
-    //arduino = new SerialPort(115200, SerialPort.Port.kUSB);
-
     //Sets motors to inverted
     leftFrontTalon.setInverted(true);
     leftBackTalon.setInverted(true);
@@ -626,9 +464,6 @@ public class RobotMap {
 
     leftBackTalon.follow(leftFrontTalon);
     rightBackTalon.follow(rightFrontTalon);
-
-    //elevatorSparkMax.setClosedLoopRampRate(ELEVATOR_RAMP_TIME);
-    //elevatorSparkMax.setIdleMode(IdleMode.kBrake);
     
     //Set names and subsystems
     //Subsystems
@@ -641,7 +476,6 @@ public class RobotMap {
     rightFrontTalon.setName(driveTrainSubsystem.getSubsystem(), "RightFrontTalon");
     leftBackTalon.setName(driveTrainSubsystem.getSubsystem(), "LeftBackTalon");
     rightBackTalon.setName(driveTrainSubsystem.getSubsystem(), "RightBackTalon");
-    //centralTalon.setName(driveTrainSubsystem.getSubsystem(), "CentralTalon");
 
     //Manipulator
     intakeTalon.setName(manipulatorSubsystem.getSubsystem(), "IntakeTalon");

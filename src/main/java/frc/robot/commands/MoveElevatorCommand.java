@@ -30,46 +30,6 @@ public class MoveElevatorCommand extends Command
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(RobotMap.elevatorSubsystem);
-    
-    //If we are carrying cargo
-    /*
-    if (cargo)
-    {
-      switch (level) 
-      {
-        case LEVEL1:
-          encoderTarget = RobotMap.ELEVATOR_LEVEL_1_CARGO_VALUE;
-          break;
-        case LEVEL2:
-          encoderTarget = RobotMap.ELEVATOR_LEVEL_2_CARGO_VALUE;
-          break;
-        case LEVEL3:
-          encoderTarget = RobotMap.ELEVATOR_LEVEL_3_CARGO_VALUE;
-      }
-    }
-    else
-    {
-      switch (level)
-      {
-        case LEVEL1:
-          encoderTarget = RobotMap.ELEVATOR_LEVEL_1_HATCH_VALUE;
-          break;
-        case LEVEL2:
-          encoderTarget = RobotMap.ELEVATOR_LEVEL_2_HATCH_VALUE;
-          break;
-        case LEVEL3:
-          encoderTarget = RobotMap.ELEVATOR_LEVEL_3_HATCH_VALUE;
-      }
-    }
-    */
-
-    //RobotMap.elevatorSubsystem.setSetpoint(encoderTarget);
-    
-    /*if (RobotMap.elevatorSubsystem.getEncoderPosition() < encoderTarget)
-    {
-      goingDown = false;
-    }
-    */
   }
 
   /**
@@ -78,7 +38,7 @@ public class MoveElevatorCommand extends Command
   @Override
   protected void initialize() 
   {
-    //RobotMap.elevatorSubsystem.enable();
+
   }
 
   /**
@@ -87,15 +47,7 @@ public class MoveElevatorCommand extends Command
   @Override
   protected void execute() 
   {
-    /*if (RobotMap.elevatorSubsystem.getEncoderPosition() > encoderTarget)
-    {
-      RobotMap.elevatorSubsystem.elevatorDown();
-    }
-    else
-    {
-      RobotMap.elevatorSubsystem.elevatorUp();
-    }
-    */
+  
   }
 
   /**
@@ -104,17 +56,6 @@ public class MoveElevatorCommand extends Command
   @Override
   protected boolean isFinished() 
   {
-    /*
-    if (goingDown)
-    {
-      return RobotMap.elevatorSubsystem.getEncoderPosition() <= encoderTarget;
-    }
-    else
-    {
-      return RobotMap.elevatorSubsystem.getEncoderPosition() >= encoderTarget;
-    }
-    */
-    //return RobotMap.elevatorSubsystem.onTarget();
     return false;
   }
 
@@ -125,8 +66,7 @@ public class MoveElevatorCommand extends Command
   @Override
   protected void end() 
   {
-    //RobotMap.elevatorEncoder.setPosition(encoderTarget);
-    //RobotMap.elevatorSparkMax.stopMotor();
+   
   }
 
   // Called when another command which requires one or more of the same

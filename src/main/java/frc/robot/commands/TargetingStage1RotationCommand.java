@@ -33,7 +33,6 @@ public class TargetingStage1RotationCommand extends Command
   @Override
   protected void initialize() 
   {
-    //data = RobotMap.arduino.readString();
   }
 
   //Called repeatedly when this Command is scheduled to run
@@ -43,15 +42,7 @@ public class TargetingStage1RotationCommand extends Command
   @Override
   protected void execute() 
   {
-    //System.out.print("Stage1\t");
-    //System.out.println("Data: " + data + "\tnewData: " + newData);4
-    /*if (data.length() > 0)
-      if (FormatChecker.canParseDouble(data))
-        RobotMap.driveTrainSubsystem.arcadeDrive(
-          RobotMap.MOTOR_FULL_SPEED, Double.parseDouble(data) / RobotMap.DRIVETRAIN_CAMERA_TARGETING_SPEED_MODIFIER,
-           RobotMap.MOTOR_FULL_STOP);
-           */
-    //System.out.println("Data: " + data + "\tnewData: " + newData);
+    
   }
 
   /**
@@ -60,11 +51,6 @@ public class TargetingStage1RotationCommand extends Command
   @Override
   protected boolean isFinished() 
   {
-    /*data = RobotMap.arduino.readString();
-    if (data.length() > 0)
-      if (data.substring(0, 1).equals("D"))
-        return true;
-        */
     return false;
   }
 

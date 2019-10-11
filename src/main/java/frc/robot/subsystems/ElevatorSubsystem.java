@@ -30,25 +30,12 @@ public class ElevatorSubsystem extends Subsystem
     // setDefaultCommand(new MySpecialCommand());
   }
 
-  
-  public ElevatorSubsystem()
-  {
-    /*super("Elevator", RobotMap.ELEVATOR_P, RobotMap.ELEVATOR_I, RobotMap.ELEVATOR_D);
-    setAbsoluteTolerance(RobotMap.ELEVATOR_PID_ABSOLUTE_TOLERANCE);
-    getPIDController().setContinuous(false);*/
-  }
-
   /**
    * Moves the elevator up at *full* speed
    */
   public void elevatorUp()
   {
-
     moveElevator(RobotMap.ELEVATOR_SPEED_BASE_VALUE_UP);
-    //if (getUpperLimitSwitchState())
-    //{
-      //moveElevator(RobotMap.MOTOR_FULL_STOP);
-    //}
   }
 
   /**
@@ -77,39 +64,19 @@ public class ElevatorSubsystem extends Subsystem
    */
   public void xboxElevatorControl()
   {
-    /*if(++printCounter % 8 == 0)
-    {
-      System.out.println(getEncoderPosition());
-    }
-    /*
-    if (getEncoderPosition() <= 20.0 && getEncoderPosition() > 0.0)
-    {
-      RobotMap.elevatorSpeedModifier = RobotMap.elevatorEncoder.getPosition() * 
-      RobotMap.ELEVATOR_APPROACHING_LOWER_LIMIT_SPEED_MODIFIER + RobotMap.ELEVATOR_SPEED_BASE_VALUE;
-    }
-    else
-      RobotMap.elevatorSpeedModifier = RobotMap.MOTOR_FULL_SPEED - 0.2;*/
-
     //Left Trigger goes down ONLY if we are above the lower limit
-    if (RobotMap.assistantDriverController.getTriggerAxis(Hand.kLeft) > RobotMap.ELEVATOR_CONTROLLER_DEADZONE && elevatorCanGoDown())
+    if (RobotMap.assistantDriverController.getTriggerAxis(Hand.kLeft) > RobotMap.ELEVATOR_CONTROLLER_DEADZONE)
     {
       moveElevator(-RobotMap.assistantDriverController.getTriggerAxis(Hand.kLeft) * RobotMap.elevatorSpeedModifier);
-      //System.out.println("Moving elevator down");
     }
     //Right Trigger goes up
     else if (RobotMap.assistantDriverController.getTriggerAxis(Hand.kRight) > RobotMap.ELEVATOR_CONTROLLER_DEADZONE && elevatorCanGoUp())
     {
       moveElevator(RobotMap.assistantDriverController.getTriggerAxis(Hand.kRight) * RobotMap.elevatorSpeedModifier);
-      //System.out.println("Moving elevator up");
     }
     //If we aren't pressing anything, stop
     else 
       moveElevator(RobotMap.MOTOR_FULL_STOP);
-
-    //Make sure the encoder is reset when we reach the bottom
-    /*if (getLowerLimitSwitchState())
-      RobotMap.elevatorEncoder.setPosition(0.0);
-      */
   }
 
   /**
@@ -131,15 +98,6 @@ public class ElevatorSubsystem extends Subsystem
   }
 
   /**
-   * @return The current position of the encoder
-   */
-  /*
-  public double getEncoderPosition()
-  {
-    return RobotMap.elevatorEncoder.getPosition();
-  }
-  */
-  /**
    * @return True if the limit switch is triggered, false if not
    */
   public boolean getUpperLimitSwitchState()
@@ -154,17 +112,4 @@ public class ElevatorSubsystem extends Subsystem
   {
     return false;//RobotMap.lowerElevatorLimitSwitch.get();
   }
-
-  /*
-  protected double returnPIDInput()
-  {
-    return getEncoderPosition();
-  }
-  
-
-  protected void usePIDOutput(double output)
-  {
-    RobotMap.elevatorSparkMax.pidWrite(output);
-  }
-  */
 }

@@ -40,7 +40,6 @@ public class XboxDriveCommand extends Command {
     RobotMap.manipulatorSubsystem.xboxIntakeOuttake();
     RobotMap.elevatorSubsystem.xboxElevatorControl();
     RobotMap.manipulatorSubsystem.xboxHatchControl();
-    //RobotMap.automatedSubsystem.xboxAutonomousControl();
     
   }
 
